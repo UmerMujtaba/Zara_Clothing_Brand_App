@@ -20,45 +20,50 @@ class ImageTextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(imagePath),
-                width: imageSize,
-                height: imageSize,
-              ),
-              const SizedBox(width: 8),  // Add some spacing between image and text
-              Text(
-                text,
-                style: textStyle ?? TextStyle(fontSize: 16,),  // Default text style if none provided
-              textAlign: TextAlign.center,),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Flexible(
+
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage(imagePath),
+                  width: imageSize,
+                  height: imageSize,
+                ),
+                const SizedBox(height: 8),  // Add some spacing between image and text
+                Text(
+                  text,
+                  style: textStyle ?? const TextStyle(fontSize: 16,fontFamily: 'TenorSans'),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(width: 20),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(imagePath2),
-                width: imageSize,
-                height: imageSize,
-              ),
-              const SizedBox(width: 8),  // Add some spacing between image and text
-              Text(
-                text2,
-                style: textStyle ?? TextStyle(fontSize: 16),  // Default text style if none provided
-              ),
-            ],
+          const SizedBox(width: 20),
+          Flexible(
+
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage(imagePath2),
+                  width: imageSize,
+                  height: imageSize,
+                ),
+                const SizedBox(height: 8),  // Add some spacing between image and text
+                Text(
+                  text2,
+                  style: textStyle ?? const TextStyle(fontSize: 16,fontFamily: 'TenorSans'),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
