@@ -13,13 +13,15 @@ class HashTagsContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(30), // Set
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          name,
-          style: TextStyle(
-            fontFamily: 'TenorSans',
-            color: Colors.black,
-            fontSize: 16,
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        child: Center(
+          child: Text(
+            name,
+            style: TextStyle(
+              fontFamily: 'TenorSans',
+              color: Colors.black,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
