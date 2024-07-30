@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/button.dart';
+import '../components/drawer.dart';
 import 'new_arrival.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -24,13 +25,14 @@ class MyHomePage extends StatelessWidget {
             ),),
           ],
         ),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+        // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         centerTitle: true,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined)),
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag_outlined)),
         ],
       ),
+
       body: Stack(
         children: <Widget>[
           SizedBox(

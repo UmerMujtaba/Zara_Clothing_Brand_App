@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:zaraclothingbrand/components/blog_container.dart';
 
+import '../components/button.dart';
+import '../components/drawer.dart';
 import '../components/footer.dart';
 import '../components/hash_tags_container.dart';
 import '../components/line.dart';
 
 class BlogList extends StatelessWidget {
+
+  BlogList({Key? key}) : super(key: key);
+
   final List<String> hashtags = [
     'Fashion',
     'Promo',
@@ -14,8 +19,6 @@ class BlogList extends StatelessWidget {
     'Year2021',
     'New'
   ];
-
-  BlogList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +38,14 @@ class BlogList extends StatelessWidget {
             ),
           ],
         ),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+
         centerTitle: true,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined)),
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag_outlined)),
         ],
       ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,22 +88,9 @@ class BlogList extends StatelessWidget {
             SizedBox(height: 5,),
             BlogContainerRow(date: '6 days ago', name2: '#Idea', name1: '#Style',),
 
-            Center(
-              child: Container(
-                decoration:BoxDecoration(
-                  border: Border.all(width: 1),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [Text('LOAD MORE'),
-                    SizedBox(width: 5),
-                      Icon(Icons.add,size: 15,color: Colors.black,)
-                    ]
-                  ),
-                )
-              ),
-            ),
+            SizedBox(height:30),
+
+            Mybutton2(text: 'LOAD MORE'),
 
             SizedBox(height:30),
             Footer(),
@@ -109,3 +100,4 @@ class BlogList extends StatelessWidget {
     );
   }
 }
+
