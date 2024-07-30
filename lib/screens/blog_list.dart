@@ -84,17 +84,21 @@ class BlogList extends StatelessWidget {
             SizedBox(height: 5,),
             BlogContainerRow(date: '6 days ago', name2: '#Idea', name1: '#Style',),
 
-            Container(
-              width: 30,
-              height: 30,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [Text('LOAD MORE'),
-                  SizedBox(width: 5)
-                  ]
+            Center(
+              child: Container(
+                decoration:BoxDecoration(
+                  border: Border.all(width: 1),
                 ),
-              )
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [Text('LOAD MORE'),
+                    SizedBox(width: 5),
+                      Icon(Icons.add,size: 15,color: Colors.black,)
+                    ]
+                  ),
+                )
+              ),
             ),
 
             SizedBox(height:30),
