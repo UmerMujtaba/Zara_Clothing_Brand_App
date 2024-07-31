@@ -7,99 +7,70 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    menuItem(String iconName, String title, VoidCallback onClick) {
-      return GestureDetector(
-        onTap: () {
-          onClick();
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.black),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const SizedBox(width: 20),
-
-                  const SizedBox(width: 10),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16,
-                     fontFamily: 'TenorSans'
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-
-                  const SizedBox(width: 15),
-                ],
-              ),
-            ],
+    expansionMenuItem(IconData icon, String title, List<String> subItems) {
+      return ExpansionTile(
+        leading: Icon(icon, color: Colors.black),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontStyle: FontStyle.normal,
+            fontSize: 16,
+            fontFamily: 'TenorSans',
           ),
         ),
+        children: subItems.map((subItem) {
+          return ListTile(
+            title: Text(subItem),
+            onTap: () {
+              // Handle subitem tap
+            },
+          );
+        }).toList(),
       );
     }
 
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0, top: 8),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_sharp, color: Colors.black),
+          ),
+        ),
+        expansionMenuItem(Icons.account_circle, 'Account Details', ['Profile', 'Settings']),
+        expansionMenuItem(Icons.people, 'Reader List', ['Friends', 'Followers']),
+      ],
+    );
+  }
+}
 
-    return Drawer(
-      child: Container(
-        color: Colors.red,
-        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
+class MyTabbedDrawer extends StatelessWidget {
+  const MyTabbedDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+         //leading: Icon(Icons.),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Man'),
+              Tab(text: 'Woman'),
+              Tab(text: 'Kids'),
+            ],
+          ),
+        ),
+        body: TabBarView(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:  const EdgeInsets.only(left: 0, top: 8),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(Icons.arrow_back_ios_sharp,color: Colors.black,),
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-                menuItem('ic-account', 'accountDetailsLabel',() {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const ListenerProfile(),
-                  //   ),
-                  // );
-                }),
-                menuItem('ic-people', 'accountDetailsLabel', () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const ListenerReaderList(),
-                  //   ),
-                  // );
-                }),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 50),
-              child: MyButton(text: 'LOGOUT', onTap: (){ Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  MyHomePage()),
-              );},),
-
-            ),
+            MyDrawer(), // Drawer for 'Man'
+            MyDrawer(), // Drawer for 'Woman'
+            MyDrawer(), // Drawer for 'Kids'
           ],
         ),
       ),

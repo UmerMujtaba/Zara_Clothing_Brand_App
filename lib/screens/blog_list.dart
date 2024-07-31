@@ -45,7 +45,7 @@ class BlogList extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag_outlined)),
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

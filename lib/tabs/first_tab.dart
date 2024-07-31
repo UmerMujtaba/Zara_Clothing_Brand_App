@@ -35,7 +35,7 @@ class FirstTabContent extends StatelessWidget {
               return ItemContainer(item: items[index]);
             },
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            //physics: const NeverScrollableScrollPhysics(),
           ),
         ),
       ),
