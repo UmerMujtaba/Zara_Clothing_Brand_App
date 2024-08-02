@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:zaraclothingbrand/components/button.dart';
-import 'package:zaraclothingbrand/screens/homepage.dart';
+
+import '../screens/cetegory_grid.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+  const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    expansionMenuItem(IconData icon, String title, List<String> subItems) {
+    expansionMenuItem(String title, List<String> subItems) {
       return ExpansionTile(
-        leading: Icon(icon, color: Colors.black),
         title: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             fontSize: 16,
@@ -21,35 +20,32 @@ class MyDrawer extends StatelessWidget {
         ),
         children: subItems.map((subItem) {
           return ListTile(
-            title: Text(subItem),
+            title: Text(subItem, style: const TextStyle(fontFamily: 'TenorSans'),),
             onTap: () {
-              // Handle subitem tap
+             Navigator.push(context,  MaterialPageRoute(
+                 builder: (context) => const CetegoryGrid()));
             },
           );
         }).toList(),
+
       );
     }
 
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 0, top: 8),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back_ios_sharp, color: Colors.black),
-          ),
-        ),
-        expansionMenuItem(Icons.account_circle, 'Account Details', ['Profile', 'Settings']),
-        expansionMenuItem(Icons.people, 'Reader List', ['Friends', 'Followers']),
+        expansionMenuItem( 'New', []),
+        expansionMenuItem( 'Appeal', ['All','Outer', 'Dress', 'Blouse', 'T-Shirt', 'Knitwear', 'Skirt', 'Pant', 'Denim',]),
+        expansionMenuItem( 'Bag', ['Leather', 'Fancy', 'Elegant',]),
+        expansionMenuItem( 'Shoes', ['Heals', 'Comfy','Sandals']),
+        expansionMenuItem( 'Beauty', ['Cream', 'Kit']),
+        expansionMenuItem( 'Accessories', ['Glasses', 'Hats', 'Scarfs']),
       ],
     );
   }
 }
 
 class MyTabbedDrawer extends StatelessWidget {
-  const MyTabbedDrawer({Key? key}) : super(key: key);
+  const MyTabbedDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +53,19 @@ class MyTabbedDrawer extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-         //leading: Icon(Icons.),
-          bottom: TabBar(
+         leading: IconButton(onPressed: (){
+           Navigator.pop(context);
+         }, icon: const Icon(Icons.cancel_outlined)),
+          bottom: const TabBar(
+            labelStyle: TextStyle(fontFamily: 'TenorSans'),
             tabs: [
-              Tab(text: 'Man'),
-              Tab(text: 'Woman'),
-              Tab(text: 'Kids'),
+              Tab(text: 'WOMEN'),
+              Tab(text: 'MAN'),
+              Tab(text: 'KIDS'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             MyDrawer(), // Drawer for 'Man'
             MyDrawer(), // Drawer for 'Woman'
