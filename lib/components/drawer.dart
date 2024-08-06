@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-
-import '../screens/cetegory_grid.dart';
+import 'package:zaraclothingbrand/screens/drawer_screens/bag_screens/bag_fancy_screen.dart';
+import '../screens/drawer_screens/accessories_screens/acc_glasses_screen.dart';
+import '../screens/drawer_screens/accessories_screens/acc_hats_screen.dart';
+import '../screens/drawer_screens/apparel_screens/apparel_all_grid.dart';
+import '../screens/drawer_screens/apparel_screens/apparel_dress_grid.dart';
+import '../screens/drawer_screens/apparel_screens/apparel_outer_grid.dart';
+import '../screens/drawer_screens/apparel_screens/apparel_skirt_grid.dart';
+import '../screens/drawer_screens/apparel_screens/apparel_tshirt_grid.dart';
+import '../screens/drawer_screens/bag_screens/bag_leather_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    expansionMenuItem(String title, List<String> subItems) {
+    expansionMenuItem(String title, List<Map<String, Widget>> subItems) {
       return ExpansionTile(
         title: Text(
           title,
@@ -20,10 +27,17 @@ class MyDrawer extends StatelessWidget {
         ),
         children: subItems.map((subItem) {
           return ListTile(
-            title: Text(subItem, style: const TextStyle(fontFamily: 'TenorSans'),),
+            title: Text(
+              subItem.keys.first,
+              style: const TextStyle(fontFamily: 'TenorSans'),
+            ),
             onTap: () {
-             Navigator.push(context,  MaterialPageRoute(
-                 builder: (context) => const CetegoryGrid()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => subItem.values.first,
+                ),
+              );
             },
           );
         }).toList(),
@@ -34,11 +48,25 @@ class MyDrawer extends StatelessWidget {
     return ListView(
       children: [
         expansionMenuItem( 'New', []),
-        expansionMenuItem( 'Appeal', ['All','Outer', 'Dress', 'Blouse', 'T-Shirt', 'Knitwear', 'Skirt', 'Pant', 'Denim',]),
-        expansionMenuItem( 'Bag', ['Leather', 'Fancy', 'Elegant',]),
-        expansionMenuItem( 'Shoes', ['Heals', 'Comfy','Sandals']),
-        expansionMenuItem( 'Beauty', ['Cream', 'Kit']),
-        expansionMenuItem( 'Accessories', ['Glasses', 'Hats', 'Scarfs']),
+        expansionMenuItem('Apparel', [
+          {'All': const ApparelAllGridPage()},
+          {'Outer': const ApparelOuterGridPage()},
+          {'Dress': const ApparelDressPage()},
+          {'T-Shirt': const ApparelTshirtGridPage()},
+          {'Skirt': const ApparelSkirtGridPage()},
+          // Add more mappings for other sub-items and screens
+        ]),
+  // Add more mappings for other sub-items and screens]),
+        expansionMenuItem( 'Bag', [
+          {'Leather': const BagLeatherGridPage()},
+          {'Fancy': const BagFancyGridPage()},
+        ]),
+        expansionMenuItem( 'Shoes', []),
+        expansionMenuItem( 'Beauty', []),
+        expansionMenuItem( 'Accessories', [
+          {'Glasses': const AccGlassesGridPage()},
+          {'Hats': const AccHatsGridPage()}
+        ]),
       ],
     );
   }
