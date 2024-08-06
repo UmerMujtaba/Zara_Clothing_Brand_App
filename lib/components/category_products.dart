@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 class ProductGrid extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +50,14 @@ class ProductGrid extends StatelessWidget {
                     ),
                   ],
                 ),
-
-
+                Text(
+                  '21WN',
+                  style: TextStyle(
+                      fontFamily: 'TenorSans', fontWeight: FontWeight.w500),
+                ),
+                Text('ok'),
+                Text('ok'),
+                Text('ok'),
               ],
             ),
           );
