@@ -4,7 +4,7 @@ import '../model/item_model.dart';
 class ItemContainer extends StatelessWidget {
   final ItemModel item;
 
-  const ItemContainer({Key? key, required this.item}) : super(key: key);
+  const ItemContainer({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

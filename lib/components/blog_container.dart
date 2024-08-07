@@ -5,24 +5,24 @@ class BlogContainer extends StatelessWidget {
   final String bgImage;
   final String name;
 
-  const BlogContainer({Key? key, required this.bgImage, required this.name}) : super(key: key);
+  const BlogContainer({super.key, required this.bgImage, required this.name});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return  SizedBox(
       height: 250,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0,vertical: 12.0), // Adjust the horizontal padding as needed
+        padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 12.0), // Adjust the horizontal padding as needed
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Image(
                 image: AssetImage(bgImage),
                 fit: BoxFit.cover,
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 10.0,
               right: 10.0,
               child: Icon(Icons.favorite_border, size: 30,color: Colors.white,),
@@ -32,7 +32,7 @@ class BlogContainer extends StatelessWidget {
               left: 10.0,
               child: Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'TenorSans',
                   fontSize: 22,
                   color: Colors.white, // Optional: Add color for better visibility
@@ -49,26 +49,26 @@ class BlogContainer extends StatelessWidget {
 
 
 class BlogContainerRow extends StatelessWidget {
-  const BlogContainerRow({Key? key, required this.date, required this.name2, required this.name1}) : super(key: key);
+  const BlogContainerRow({super.key, required this.date, required this.name2, required this.name1});
   final String date;
 final String name1;
 final String name2;
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0,),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0,),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               HashTagsContainer(name: name1),
-              SizedBox(width: 15,),
+              const SizedBox(width: 15,),
               HashTagsContainer(name: name2),
             ],
           ),
         Text(date,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'TenorSans',
             fontSize: 14,
             color: Colors.grey, // Optional: Add color for better visibility

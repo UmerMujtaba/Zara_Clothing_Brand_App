@@ -28,7 +28,7 @@ class ProductGrid extends StatelessWidget {
           onTap: (){
             Navigator.push(context,
                 MaterialPageRoute(
-                builder: (context) => ProductPage()));
+                builder: (context) => const ProductPage()));
           },
           child: Container(
             decoration: BoxDecoration(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TabbarExample extends StatelessWidget implements PreferredSizeWidget {
-  const TabbarExample({Key? key}) : super(key: key);
+  const TabbarExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TabBar(
+    return const TabBar(
       labelStyle: TextStyle(fontFamily : 'TenorSans'),
       labelColor: Colors.black,
       tabs: [

@@ -9,7 +9,7 @@ import '../components/line.dart';
 
 class BlogList extends StatelessWidget {
 
-  BlogList({Key? key}) : super(key: key);
+  BlogList({super.key});
 
   final List<String> hashtags = [
     'Fashion',
@@ -24,14 +24,14 @@ class BlogList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
+        title: const Column(
           children: [
-            const Text(
+            Text(
               'Open',
               style: TextStyle(
                   fontFamily: 'TenorSans', color: Colors.black, fontSize: 22),
             ),
-            const Text(
+            Text(
               'Fashion',
               style: TextStyle(
                   fontFamily: 'TenorSans', color: Colors.black, fontSize: 24),
@@ -41,16 +41,16 @@ class BlogList extends StatelessWidget {
 
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag_outlined)),
         ],
       ),
-      drawer: MyTabbedDrawer(),
+      drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             const Text(
               'BLOG',
               style: TextStyle(
@@ -63,7 +63,7 @@ class BlogList extends StatelessWidget {
               size: const Size(250, 50), // Adjust size as needed
               painter: LineWithDiamondPainter(),
             ),
-            Container(
+            SizedBox(
               height: 30, // Adjust height as needed
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -76,24 +76,24 @@ class BlogList extends StatelessWidget {
                 },
               ),
             ),
-           BlogContainer(bgImage: 'lib/images/blog3.jpg', name: '2021 STYLE GUIDE:\nTHE BIGGEST FALL TRENDS'),
-            SizedBox(height: 5,),
-            BlogContainerRow(date: '4 days ago', name2: '#Fashion', name1: '#Tips',),
-            SizedBox(height: 20,),
-            BlogContainer(bgImage: 'lib/images/blog4.jpg', name: '2022 STYLE GUIDE:\nTHE BIGGEST TRENDS'),
-            SizedBox(height: 5,),
-            BlogContainerRow(date: '3 days ago', name2: '#Guide', name1: '#Trends',),
-            SizedBox(height: 20,),
-            BlogContainer(bgImage: 'lib/images/blog5.jpg', name: '2020 GUIDE:\nTHE BIGGEST TRENDS'),
-            SizedBox(height: 5,),
-            BlogContainerRow(date: '6 days ago', name2: '#Idea', name1: '#Style',),
+           const BlogContainer(bgImage: 'lib/images/blog3.jpg', name: '2021 STYLE GUIDE:\nTHE BIGGEST FALL TRENDS'),
+            const SizedBox(height: 5,),
+            const BlogContainerRow(date: '4 days ago', name2: '#Fashion', name1: '#Tips',),
+            const SizedBox(height: 20,),
+            const BlogContainer(bgImage: 'lib/images/blog4.jpg', name: '2022 STYLE GUIDE:\nTHE BIGGEST TRENDS'),
+            const SizedBox(height: 5,),
+            const BlogContainerRow(date: '3 days ago', name2: '#Guide', name1: '#Trends',),
+            const SizedBox(height: 20,),
+            const BlogContainer(bgImage: 'lib/images/blog5.jpg', name: '2020 GUIDE:\nTHE BIGGEST TRENDS'),
+            const SizedBox(height: 5,),
+            const BlogContainerRow(date: '6 days ago', name2: '#Idea', name1: '#Style',),
 
-            SizedBox(height:30),
+            const SizedBox(height:30),
 
-            Mybutton2(text: 'LOAD MORE'),
+            const Mybutton2(text: 'LOAD MORE'),
 
-            SizedBox(height:30),
-            Footer(),
+            const SizedBox(height:30),
+            const Footer(),
           ],
         ),
       ),

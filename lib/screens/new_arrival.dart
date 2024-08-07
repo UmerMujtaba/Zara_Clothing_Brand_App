@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import '../components/footer.dart';
 import '../components/image_text_stack.dart';
-import '../components/line.dart';
 import '../components/tabbar.dart';
 
 import '../tabs/first_tab.dart';
-import 'blog_list.dart';
 
 class NewArrival extends StatelessWidget {
   const NewArrival({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _controller = PageController();
+    final controller = PageController();
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -37,7 +35,7 @@ class NewArrival extends StatelessWidget {
                     0.6, // Adjust height as needed
                 child: TabBarView(
                   children: [
-                    FirstTabContent(controller: _controller),
+                    FirstTabContent(controller: controller),
                     const Center(child: Text("Apparel")),
                     const Center(child: Text("Dress")),
                     const Center(child: Text("Bag")),
@@ -78,7 +76,7 @@ class NewArrival extends StatelessWidget {
                   ),
                 ],
               ),
-              Footer(),
+              const Footer(),
             ],
           ),
         ),

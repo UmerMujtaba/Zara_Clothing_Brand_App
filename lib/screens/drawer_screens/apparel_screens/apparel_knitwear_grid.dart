@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 
 import '../../../components/category_products.dart';
@@ -11,7 +12,7 @@ class ApparelKnitWearGridPage  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios_new,
           color: Colors.black,
         ),

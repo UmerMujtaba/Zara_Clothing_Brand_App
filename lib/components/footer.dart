@@ -1,4 +1,7 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:flutter/material.dart';
+import 'package:zaraclothingbrand/screens/contact_screen.dart';
 
 import '../screens/blog_list.dart';
 import 'line.dart';
@@ -56,15 +59,25 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
+            const Text(
               'About',
               style: TextStyle(
                   color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),
             ),
-            Text(
-              'Contact',
-              style: TextStyle(
-                  color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ContactScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Contact',
+                style: TextStyle(
+                    color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),
+              ),
             ),
             GestureDetector(
               onTap: () {
@@ -75,7 +88,7 @@ class Footer extends StatelessWidget {
                   ),
                 );
               },
-              child: Text(
+              child: const Text(
                 'Blog',
                 style: TextStyle(
                     color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),

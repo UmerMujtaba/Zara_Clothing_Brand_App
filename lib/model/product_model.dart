@@ -1,5 +1,7 @@
 // Define product lists for each category
-import '../components/category_products.dart';
+// ignore: unused_import
+// ignore_for_file: non_constant_identifier_names
+
 class Product {
   final String image;
   final String name;

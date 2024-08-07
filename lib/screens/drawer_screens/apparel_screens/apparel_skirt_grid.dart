@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zaraclothingbrand/model/product_model.dart';
 
 import '../../../components/category_products.dart';
-import '../../../model/product_model.dart';
 
 class ApparelSkirtGridPage  extends StatelessWidget {
   const ApparelSkirtGridPage ({super.key});
@@ -12,7 +10,7 @@ class ApparelSkirtGridPage  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios_new,
           color: Colors.black,
         ),

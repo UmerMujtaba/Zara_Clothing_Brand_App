@@ -8,6 +8,7 @@ class ImageTextRow extends StatelessWidget {
   final double imageSize;
   final TextStyle? textStyle;
 
+  // ignore: use_super_parameters
   const ImageTextRow({
     Key? key,
     required this.imagePath,

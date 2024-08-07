@@ -1,11 +1,15 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 import '../components/button.dart';
-import '../components/drawer.dart';
 import 'new_arrival.dart';
 
+// ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
   var size, height, width;
+
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +19,12 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(
+        title: const Column(
           children: [
-            const Text('Open',style: TextStyle(
+            Text('Open',style: TextStyle(
               fontFamily: 'TenorSans',color: Colors.black,fontSize: 22
             ),),
-            const Text('Fashion',style: TextStyle(
+            Text('Fashion',style: TextStyle(
                 fontFamily: 'TenorSans',color: Colors.black,fontSize: 24
             ),),
           ],
@@ -28,8 +32,8 @@ class MyHomePage extends StatelessWidget {
         // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag_outlined)),
         ],
       ),
 
@@ -37,7 +41,7 @@ class MyHomePage extends StatelessWidget {
         children: <Widget>[
           SizedBox(
             height: height,
-            child: Image(
+            child: const Image(
               image: AssetImage('lib/images/backgroundimage.png'),
               filterQuality: FilterQuality.high,
               fit: BoxFit.fitHeight,
@@ -71,7 +75,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           )
         ],

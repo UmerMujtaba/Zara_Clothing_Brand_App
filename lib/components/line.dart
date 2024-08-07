@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LineWithDiamondPainter extends CustomPainter {
@@ -18,9 +17,10 @@ class LineWithDiamondPainter extends CustomPainter {
     );
 
     // Calculate the diamond's size and position
-    final double diamondSize = 20.0; // Size of the diamond
-    final double halfDiamondSize = diamondSize / 2;
+    const double diamondSize = 20.0; // Size of the diamond
+    const double halfDiamondSize = diamondSize / 2;
 
+    // ignore: unused_local_variable
     final Path diamondPath = Path()
       ..moveTo(size.width / 2, lineY - halfDiamondSize) // Top
       ..lineTo(size.width / 2 + halfDiamondSize, lineY) // Right

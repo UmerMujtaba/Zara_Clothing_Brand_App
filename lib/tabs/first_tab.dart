@@ -11,7 +11,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class FirstTabContent extends StatelessWidget {
   final PageController controller;
 
-  const FirstTabContent({Key? key, required this.controller}) : super(key: key);
+  const FirstTabContent({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -157,13 +157,14 @@ class FirstTabContent extends StatelessWidget {
       ),
       const SizedBox(height: 20.0), //
       const Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      // ignore: unnecessary_const
       const HashTagsContainer(name: '#2021'),
         HashTagsContainer(name: '#spring'),
         HashTagsContainer(name: '#collection'),
         HashTagsContainer(name: '#Falls')
       ]),
       const SizedBox(height: 20.0), //
-      Row(
+      const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           HashTagsContainer(name: '#dress'),

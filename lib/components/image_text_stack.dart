@@ -8,13 +8,13 @@ class ImageTextStack extends StatelessWidget {
   final double height;
 
   const ImageTextStack({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.text,
     required this.imagePath2,
     required this.text2,
     this.height = 200.0, // Default height
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ImageTextStack extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: height,
               child: Stack(
                 children: [
@@ -46,7 +46,7 @@ class ImageTextStack extends StatelessWidget {
                     left: 5,
                     child: Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,fontFamily: 'TenorSans',fontSize: 16),
                     ),
                   ),
@@ -54,9 +54,9 @@ class ImageTextStack extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 10), // Add spacing between the two columns
+          const SizedBox(width: 10), // Add spacing between the two columns
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: height,
               child: Stack(
                 children: [
@@ -78,7 +78,7 @@ class ImageTextStack extends StatelessWidget {
                     left: 5,
                     child: Text(
                       text2,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,fontFamily: 'TenorSans',fontSize: 16),
                     ),
                   ),

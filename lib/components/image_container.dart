@@ -4,7 +4,7 @@ class ImageContainer extends StatelessWidget {
 
   final String imagePath;
 
-  const ImageContainer({Key? key, required this.imagePath}) : super(key: key);
+  const ImageContainer({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

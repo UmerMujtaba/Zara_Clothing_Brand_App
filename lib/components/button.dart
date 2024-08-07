@@ -19,7 +19,7 @@ class MyButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 3,
@@ -33,7 +33,7 @@ class MyButton extends StatelessWidget {
 }
 
 class Mybutton2 extends StatelessWidget {
-  const Mybutton2({Key? key, this.onTap, required this.text}) : super(key: key);
+  const Mybutton2({super.key, this.onTap, required this.text});
   final Function()? onTap;
   final String text;
 
@@ -52,10 +52,10 @@ class Mybutton2 extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: TextStyle(fontFamily: 'TenorSans'),
+                style: const TextStyle(fontFamily: 'TenorSans'),
               ),
-              SizedBox(width: 5),
-              Icon(
+              const SizedBox(width: 5),
+              const Icon(
                 Icons.add,
                 size: 15,
                 color: Colors.black,
@@ -67,3 +67,33 @@ class Mybutton2 extends StatelessWidget {
     );
   }
 }
+
+
+class Button3 extends StatelessWidget {
+  final String text;
+  const Button3({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return  ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.black,
+        // Set the background color to black
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+              0), // Set border radius to 0 for a rectangle
+        ),
+        padding: const EdgeInsets.symmetric(
+            horizontal: 16, vertical: 12), // Adjust padding as needed
+      ),
+      child: Text(text,
+        style: const TextStyle(
+          fontFamily: 'TenorSans',
+          color: Colors.white, // Set text color to white for contrast
+        ),
+      ),
+    );
+  }
+}
+
