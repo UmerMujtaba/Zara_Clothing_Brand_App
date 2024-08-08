@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:zaraclothingbrand/screens/registeration_screen.dart';
 import 'package:zaraclothingbrand/web_admin_panel/admin_panel.dart';
@@ -25,15 +26,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: (Platform.isAndroid || Platform.isIOS)
-          ? const RegistrationScreen()
-          : const AdminPanel(
-              mobileScaffold: MobileScaffold(),
-              tabletScaffold: TabletScaffold(),
-              desktopScaffold: DesktopScaffold(),
-            ),
+      home: kIsWeb
+          ? AdminPanel(
+        mobileScaffold: MobileScaffold(),
+        tabletScaffold: TabletScaffold(),
+        desktopScaffold: DesktopScaffold(),
+      )
+          : RegistrationScreen(),
     );
   }
 }
