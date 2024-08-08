@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458461277010",
+    "project_id": "zara-f1a26",
+    "storage_bucket": "zara-f1a26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458461277010:android:6c425d0c7d98010cffa88b",
+        "android_client_info": {
+          "package_name": "com.example.zaraclothingbrand"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGPArDVinR_OYOVl92UQ7f60igv5sBCxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

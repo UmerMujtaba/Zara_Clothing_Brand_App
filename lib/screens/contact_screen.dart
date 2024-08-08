@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zaraclothingbrand/screens/404_screen.dart';
 
 import '../components/button.dart';
 import '../components/drawer.dart';
@@ -29,7 +30,8 @@ class ContactScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag_outlined)),
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.shopping_bag_outlined)),
         ],
       ),
       drawer: const MyTabbedDrawer(),
@@ -40,7 +42,7 @@ class ContactScreen extends StatelessWidget {
             child: Column(children: [
               const SizedBox(height: 40),
               const Text(
-                'BLOG',
+                'CONTACT US',
                 style: TextStyle(
                     fontFamily: 'TenorSans',
                     color: Colors.black,
@@ -60,8 +62,15 @@ class ContactScreen extends StatelessWidget {
                 style: TextStyle(fontFamily: 'TenorSans'),
               ),
               const SizedBox(height: 20),
-              const Button3(text: 'CHAT WITH US',),
-
+              Button3(
+                text: 'CHAT WITH US',
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ErrorScreen()));
+                },
+              ),
               const SizedBox(height: 20),
               const Image(
                 image: AssetImage('lib/icons/email.png'),
@@ -72,10 +81,15 @@ class ContactScreen extends StatelessWidget {
                 style: TextStyle(fontFamily: 'TenorSans'),
               ),
               const SizedBox(height: 20),
-              const Button3(text: 'TEXT US'),
-
-
-
+              Button3(
+                text: 'TEXT US',
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ErrorScreen()));
+                },
+              ),
               const SizedBox(height: 20),
               const Image(
                 image: AssetImage('lib/icons/twitter.png'),
@@ -85,9 +99,7 @@ class ContactScreen extends StatelessWidget {
                 'To send us a private or direct message, like @open Fashion on Facebook or follow us on Twitter. We\'ll get back to you ASAP. Please include your name, order number, and email address for faster response.',
                 style: TextStyle(fontFamily: 'TenorSans'),
               ),
-
               const SizedBox(height: 40),
-
               const Footer(),
             ]),
           ),

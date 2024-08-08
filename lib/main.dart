@@ -1,7 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:zaraclothingbrand/screens/homepage.dart';
+import 'dart:io';
 
-void main() {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:zaraclothingbrand/screens/registeration_screen.dart';
+import 'package:zaraclothingbrand/web_admin_panel/admin_panel.dart';
+import 'package:zaraclothingbrand/web_admin_panel/desktop_scaffold.dart';
+import 'package:zaraclothingbrand/web_admin_panel/mobile_scaffold.dart';
+import 'package:zaraclothingbrand/web_admin_panel/tablet_scaffold.dart';
+
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -12,7 +27,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: (Platform.isAndroid || Platform.isIOS)
+          ? const RegistrationScreen()
+          : const AdminPanel(
+              mobileScaffold: MobileScaffold(),
+              tabletScaffold: TabletScaffold(),
+              desktopScaffold: DesktopScaffold(),
+            ),
     );
   }
 }

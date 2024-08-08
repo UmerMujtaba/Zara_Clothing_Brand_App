@@ -1,6 +1,7 @@
 // ignore_for_file: use_super_parameters
 
 import 'package:flutter/material.dart';
+import 'package:zaraclothingbrand/screens/about_us.dart';
 import 'package:zaraclothingbrand/screens/contact_screen.dart';
 
 import '../screens/blog_list.dart';
@@ -59,10 +60,20 @@ class Footer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
-              'About',
-              style: TextStyle(
-                  color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutUs(),
+                  ),
+                );
+              },
+              child: const Text(
+                'About',
+                style: TextStyle(
+                    color: Colors.black, fontFamily: 'TenorSans', fontSize: 20),
+              ),
             ),
             GestureDetector(
               onTap: (){

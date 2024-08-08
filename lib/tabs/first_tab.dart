@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zaraclothingbrand/components/hash_tags_container.dart';
 
 import '../components/footer_row.dart';
@@ -6,7 +7,6 @@ import '../components/image_container.dart';
 import '../components/item_container.dart';
 import '../components/line.dart';
 import '../model/item_model.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FirstTabContent extends StatelessWidget {
   final PageController controller;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zaraclothingbrand/screens/drawer_screens/bag_screens/bag_fancy_screen.dart';
 import '../screens/drawer_screens/accessories_screens/acc_glasses_screen.dart';
 import '../screens/drawer_screens/accessories_screens/acc_hats_screen.dart';
@@ -8,6 +9,7 @@ import '../screens/drawer_screens/apparel_screens/apparel_outer_grid.dart';
 import '../screens/drawer_screens/apparel_screens/apparel_skirt_grid.dart';
 import '../screens/drawer_screens/apparel_screens/apparel_tshirt_grid.dart';
 import '../screens/drawer_screens/bag_screens/bag_leather_screen.dart';
+import '../screens/login_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -67,6 +69,30 @@ class MyDrawer extends StatelessWidget {
           {'Glasses': const AccGlassesGridPage()},
           {'Hats': const AccHatsGridPage()}
         ]),
+
+        ListTile(
+          leading: const Icon(Icons.logout,
+              size: 30, color: Colors.blueAccent),
+          title: const Text(
+            'Log Out',
+            style: TextStyle(fontSize: 16, color: Colors.white),
+          ),
+          onTap: () async {
+            final SharedPreferences sharedpreferences =
+            await SharedPreferences.getInstance();
+            sharedpreferences.remove('email');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(
+                  verificationId: '',
+
+                ),
+              ),
+            );
+          },
+        ),
+
       ],
     );
   }
