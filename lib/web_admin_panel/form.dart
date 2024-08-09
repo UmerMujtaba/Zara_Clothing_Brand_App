@@ -12,7 +12,6 @@ import 'dart:io';
 
 import 'constants.dart';
 
-
 class FormUpload extends StatefulWidget {
   final String itemName;
 
@@ -33,14 +32,13 @@ class _FormUploadState extends State<FormUpload> {
   bool _isSubmitting = false;
   String id = Uuid().v4();
 
-
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> _pickImage() async {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? pickedImage =
-      await picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
         if (kIsWeb) {
           // For web, read image as bytes
@@ -76,7 +74,7 @@ class _FormUploadState extends State<FormUpload> {
           // Upload bytes to Firebase Storage for web
           final storageRef = FirebaseStorage.instance
               .ref()
-              .child('products')
+              .child(widget.itemName)
               .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
           await storageRef.putData(_imageBytes!);
           imageUrl = await storageRef.getDownloadURL();
@@ -84,12 +82,11 @@ class _FormUploadState extends State<FormUpload> {
           // Upload file to Firebase Storage for mobile
           final storageRef = FirebaseStorage.instance
               .ref()
-              .child('products')
+              .child(widget.itemName)
               .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
           await storageRef.putFile(_image!);
           imageUrl = await storageRef.getDownloadURL();
         }
-
 
         AddProduct product = AddProduct(
           id: id,
@@ -101,8 +98,7 @@ class _FormUploadState extends State<FormUpload> {
           timestamp: FieldValue.serverTimestamp().toString(),
         );
 
-        addProduct("leather", product);
-
+        addProduct(widget.itemName, product);
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Product added successfully')),
@@ -132,6 +128,18 @@ class _FormUploadState extends State<FormUpload> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _nameController.dispose();
+    _priceController.dispose();
+    _descriptionController.dispose();
+    _tagController.dispose();
+    _image = null;
+    _imageBytes = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -139,8 +147,7 @@ class _FormUploadState extends State<FormUpload> {
         children: [
           TextFormField(
             controller: _nameController,
-            decoration:
-            const InputDecoration(labelText: 'Product Name'),
+            decoration: const InputDecoration(labelText: 'Product Name'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter a product name';
@@ -161,8 +168,7 @@ class _FormUploadState extends State<FormUpload> {
           ),
           TextFormField(
             controller: _descriptionController,
-            decoration:
-            const InputDecoration(labelText: 'Description'),
+            decoration: const InputDecoration(labelText: 'Description'),
             maxLines: 3,
             validator: (value) {
               if (value == null || value.isEmpty) {
