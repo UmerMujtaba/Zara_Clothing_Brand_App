@@ -12,31 +12,32 @@ class ItemContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
+          flex: 4,
           child: Image(
-              image:
-                 AssetImage(item.imageUrl),  // Using AssetImage
-                fit: BoxFit.fitHeight,
-
-            ),
+            image: AssetImage(item.imageUrl), // Using AssetImage
+            fit: BoxFit.fitHeight,
           ),
-        const SizedBox(height: 8),  // Add some spacing
-        // Wrap text in a Flexible widget if needed
-        SizedBox(
-          width: double.infinity,
-          child: Text(
+        ),
 
-            item.name,
-            style: const TextStyle(),
-            textAlign: TextAlign.center,
+        Text(
+          item.tag!,
+          style: const TextStyle(),
+          textAlign: TextAlign.center,
 
-            // Handle overflow
-          ),
+          // Handle overflow
+        ),
+        Text(
+          item.name,
+          style: const TextStyle(),
+          textAlign: TextAlign.center,
+
+          // Handle overflow
         ),
         Text(
           item.price,
-          style: const TextStyle(fontWeight: FontWeight.w400,color: Colors.red),
+          style:
+              const TextStyle(fontWeight: FontWeight.w400, color: Colors.red),
         ),
-
       ],
     );
   }

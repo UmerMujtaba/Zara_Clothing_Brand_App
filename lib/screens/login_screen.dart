@@ -25,54 +25,48 @@ class LoginScreen extends StatefulWidget {
 final _auth = FirebaseAuth.instance;
 
 class _LoginScreenState extends State<LoginScreen> {
-  late String email;
-  String password = '';
   bool showSpinner = false;
   bool _obscureText = true;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
   Future<void> login() async {
+    setState(() {
+      showSpinner = true;
+    });
+
     try {
       // Sign in the user with email and password
       final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
       if (userCredential.user != null) {
         final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString('email', email);
+        await SharedPreferences.getInstance();
+        sharedPreferences.setString('email', _emailController.text.trim());
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MyHomePage(), // Replace with your home screen
           ),
         );
-        // Login successful, navigate to the home screen or desired page
       }
     } on FirebaseAuthException catch (e) {
       print(e);
+      String errorMessage = 'An unexpected error occurred.';
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No user found for that email.')),
-        );
+        errorMessage = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Wrong password provided for that user.')),
-        );
+        errorMessage = 'Wrong password provided for that user.';
       } else if (e.code == 'invalid-email') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('The email address is invalid.')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An error occurred: ${e.message}')),
-        );
+        errorMessage = 'The email address is invalid.';
       }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
     } catch (e) {
       debugPrint(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(
@@ -94,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SizedBox(
-          // color: Colors.red,
           height: screenHeight * 0.9,
           width: screenWidth * 1,
           child: Column(
@@ -103,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text(
                 'HELLO AGAIN!',
                 style: TextStyle(
-                    color: Colors.black, fontSize: 32, fontFamily: 'TenorSans',letterSpacing: 2),
+                    color: Colors.black, fontSize: 32, fontFamily: 'TenorSans', letterSpacing: 2),
               ),
               const SizedBox(height: 20),
               const Row(
@@ -116,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                      fontFamily: 'TenorSans'),
+                          fontFamily: 'TenorSans'),
                     ),
                   ),
                 ],
@@ -124,18 +117,16 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: const Icon(Icons.email, size: 24),
                       border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
+                        borderSide: const BorderSide(color: Colors.black, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      //labelText: '',
                       hintText: 'Phone number, email or user name'),
                   style: const TextStyle(color: Colors.black, fontSize: 14),
                 ),
@@ -159,15 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  obscureText: _obscureText,
                   controller: _passwordController,
+                  obscureText: _obscureText,
                   decoration: InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 2.0),
+                      borderSide: const BorderSide(color: Colors.black, width: 2.0),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     hintText: 'Password',
@@ -198,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const ForgotPasswordScreen(), // Replace with your home screen
+                            const ForgotPasswordScreen(),
                           ),
                         );
                       },
@@ -214,16 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomButton(
                 text: 'LOGIN',
                 height: 44.0,
-                onPressed: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  login();
-
-                  setState(() {
-                    showSpinner = false;
-                  });
-                },
+                onPressed: login,
               ),
               const SizedBox(height: 15),
               Row(
