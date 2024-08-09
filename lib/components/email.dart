@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class EmailForm extends StatefulWidget {
+  const EmailForm({super.key});
+
   @override
   _EmailFormState createState() => _EmailFormState();
 }

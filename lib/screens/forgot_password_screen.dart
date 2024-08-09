@@ -26,7 +26,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         builder: (context) {
           return AlertDialog(
             title: const Text('Error'),
-            content: Text('Password reset link send! Check your email address'),
+            content: const Text('Password reset link send! Check your email address'),
             actions: <Widget>[
               TextButton(
                 child: const Text('OK'),

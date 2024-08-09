@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zaraclothingbrand/screens/registeration_screen.dart';
 
 import '../components/button.dart';
 import 'forgot_password_screen.dart';
 import 'homepage.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatefulWidget {
   String verificationId;
 
@@ -89,7 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final Orientation orientation = MediaQuery.of(context).orientation;
 
     return SafeArea(
       child: Scaffold(
@@ -101,12 +100,12 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'HELLO AGAIN!',
                 style: TextStyle(
                     color: Colors.black, fontSize: 32, fontFamily: 'TenorSans',letterSpacing: 2),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Row(
                 children: [
                   Padding(
@@ -130,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.email, size: 24),
+                      prefixIcon: const Icon(Icons.email, size: 24),
                       border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: Colors.black, width: 2.0),
@@ -172,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     hintText: 'Password',
-                    prefixIcon: Icon(Icons.lock_rounded, size: 24),
+                    prefixIcon: const Icon(Icons.lock_rounded, size: 24),
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscureText ? Icons.visibility : Icons.visibility_off,
@@ -199,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                ForgotPasswordScreen(), // Replace with your home screen
+                                const ForgotPasswordScreen(), // Replace with your home screen
                           ),
                         );
                       },

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:zaraclothingbrand/web_admin_panel/model/product.dart';
 import 'package:zaraclothingbrand/web_admin_panel/services/firebase_service.dart';
-import 'dart:typed_data'; // Import for Uint8List
+// Import for Uint8List
 import 'dart:io';
 
-import 'constants.dart';
+
 
 class FormUpload extends StatefulWidget {
   final String itemName;
@@ -30,7 +29,7 @@ class _FormUploadState extends State<FormUpload> {
   File? _image; // For mobile platforms
   Uint8List? _imageBytes; // For web platforms
   bool _isSubmitting = false;
-  String id = Uuid().v4();
+  String id = const Uuid().v4();
 
   final _firestore = FirebaseFirestore.instance;
 
@@ -193,8 +192,8 @@ class _FormUploadState extends State<FormUpload> {
           else if (_imageBytes != null && kIsWeb)
             Image.memory(_imageBytes!, height: 150),
           TextButton.icon(
-            icon: Icon(Icons.photo),
-            label: Text('Select Image'),
+            icon: const Icon(Icons.photo),
+            label: const Text('Select Image'),
             onPressed: _pickImage,
           ),
           const SizedBox(height: 20),

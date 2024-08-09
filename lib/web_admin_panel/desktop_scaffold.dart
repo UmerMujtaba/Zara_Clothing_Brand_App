@@ -33,7 +33,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
       case AdminPanelScreen.welcome:
       default:
-        return Center(
+        return const Center(
           child: Text(
             'W E L C O M E \n T O \n A D M I N PANEL\n',
             style: TextStyle(fontFamily: 'TenorSans', fontSize: 38),

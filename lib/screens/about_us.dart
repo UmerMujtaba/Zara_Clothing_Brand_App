@@ -76,7 +76,7 @@ class _AboutUsState extends State<AboutUs> {
                 size: const Size(250, 50), // Adjust size as needed
                 painter: LineWithDiamondPainter(),
               ),
-              EmailForm(),
+              const EmailForm(),
             ]),
           ),
         ),

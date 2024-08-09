@@ -97,9 +97,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Text(
+                  const Padding(
+                    padding: EdgeInsets.only(top: 40),
+                    child: const Text(
                       'WELCOME!',
                       style: TextStyle(
                           color: Colors.black,
