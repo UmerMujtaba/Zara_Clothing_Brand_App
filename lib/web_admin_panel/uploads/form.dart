@@ -202,12 +202,38 @@ class _FormUploadState extends State<FormUpload> {
                   onPressed: _pickImage,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _isSubmitting ? null : _submitForm,
-                  child: _isSubmitting
-                      ? const CircularProgressIndicator()
-                      : const Text('Submit'),
-                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all<Color>(Colors.blue), // Set background color
+                        foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Set text color
+                        padding: WidgetStateProperty.all<EdgeInsets>(
+                          const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                        ), // Set padding
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0), // Set border radius
+                          ),
+                        ),
+                        elevation: WidgetStateProperty.all<double>(4.0), // Set elevation
+                      ),
+                      onPressed: _isSubmitting ? null : _submitForm,
+                      child: _isSubmitting
+                          ? const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      )
+                          : const Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

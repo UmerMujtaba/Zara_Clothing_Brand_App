@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zaraclothingbrand/web_admin_panel/uploads/blog.dart';
 import 'constants.dart';
-import 'form.dart';
+import 'uploads/form.dart';
 
 enum AdminPanelScreen {
   welcome,
   formUpload,
+  blogUpload
 }
 
 class DesktopScaffold extends StatefulWidget {
@@ -30,6 +32,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     switch (_currentScreen) {
       case AdminPanelScreen.formUpload:
         return FormUpload(itemName: _selectedItemName);
+
+      case AdminPanelScreen.blogUpload:
+        return BlogUpload(itemName: _selectedItemName);
 
       case AdminPanelScreen.welcome:
       default:
@@ -99,8 +104,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           'F A N C Y',
                           style: TextStyle(fontFamily: 'TenorSans'),
                         ),
-                        onTap: () => _selectScreen(
-                            AdminPanelScreen.formUpload, 'Fancy'),
+                        onTap: () =>
+                            _selectScreen(AdminPanelScreen.formUpload, 'Fancy'),
                       ),
                     ],
                   ),
@@ -123,8 +128,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           'H A T',
                           style: TextStyle(fontFamily: 'TenorSans'),
                         ),
-                        onTap: () => _selectScreen(
-                            AdminPanelScreen.formUpload, 'Hat'),
+                        onTap: () =>
+                            _selectScreen(AdminPanelScreen.formUpload, 'Hat'),
                       ),
                     ],
                   ),
@@ -139,8 +144,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           'O U T E R',
                           style: TextStyle(fontFamily: 'TenorSans'),
                         ),
-                        onTap: () => _selectScreen(
-                            AdminPanelScreen.formUpload, 'Outer'),
+                        onTap: () =>
+                            _selectScreen(AdminPanelScreen.formUpload, 'Outer'),
                       ),
                       ListTile(
                         title: const Text(
@@ -155,8 +160,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           'D R E S S',
                           style: TextStyle(fontFamily: 'TenorSans'),
                         ),
-                        onTap: () => _selectScreen(
-                            AdminPanelScreen.formUpload, 'Dress'),
+                        onTap: () =>
+                            _selectScreen(AdminPanelScreen.formUpload, 'Dress'),
                       ),
                     ],
                   ),
@@ -176,12 +181,14 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                   style: TextStyle(fontFamily: 'TenorSans'),
                 ),
               ),
-              const ListTile(
-                leading: Icon(Icons.settings),
-                title: Text(
-                  'S E T T I N G S',
+              ListTile(
+                leading: const Icon(Icons.post_add_outlined),
+                title: const Text(
+                  'A D D B L O G',
                   style: TextStyle(fontFamily: 'TenorSans'),
                 ),
+                onTap: () =>
+                    _selectScreen(AdminPanelScreen.blogUpload, 'Blog'),
               ),
               const ListTile(
                 leading: Icon(Icons.logout),
