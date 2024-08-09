@@ -140,71 +140,76 @@ class _FormUploadState extends State<FormUpload> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: ListView(
-        children: [
-          TextFormField(
-            controller: _nameController,
-            decoration: const InputDecoration(labelText: 'Product Name'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a product name';
-              }
-              return null;
-            },
+    return Column(
+      children: [
+        const Text('A D D T O C A R T',style: TextStyle(fontFamily: 'TenorSans',fontSize: 26),),
+        Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Product Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a product name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _priceController,
+                decoration: const InputDecoration(labelText: 'Price'),
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a price';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(labelText: 'Description'),
+                maxLines: 3,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _tagController,
+                decoration: const InputDecoration(labelText: 'Tag'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a tag';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              if (_image != null && !kIsWeb)
+                Image.file(_image!, height: 150)
+              else if (_imageBytes != null && kIsWeb)
+                Image.memory(_imageBytes!, height: 150),
+              TextButton.icon(
+                icon: const Icon(Icons.photo),
+                label: const Text('Select Image'),
+                onPressed: _pickImage,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _isSubmitting ? null : _submitForm,
+                child: _isSubmitting
+                    ? const CircularProgressIndicator()
+                    : const Text('Submit'),
+              ),
+            ],
           ),
-          TextFormField(
-            controller: _priceController,
-            decoration: const InputDecoration(labelText: 'Price'),
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a price';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _descriptionController,
-            decoration: const InputDecoration(labelText: 'Description'),
-            maxLines: 3,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a description';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _tagController,
-            decoration: const InputDecoration(labelText: 'Tag'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a tag';
-              }
-              return null;
-            },
-          ),
-          const SizedBox(height: 20),
-          if (_image != null && !kIsWeb)
-            Image.file(_image!, height: 150)
-          else if (_imageBytes != null && kIsWeb)
-            Image.memory(_imageBytes!, height: 150),
-          TextButton.icon(
-            icon: const Icon(Icons.photo),
-            label: const Text('Select Image'),
-            onPressed: _pickImage,
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _isSubmitting ? null : _submitForm,
-            child: _isSubmitting
-                ? const CircularProgressIndicator()
-                : const Text('Submit'),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
