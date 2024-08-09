@@ -15,7 +15,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
     return Scaffold(
       backgroundColor: myDefaultBackground,
       appBar: myAppBar,
-      drawer: myDrawer,
+      //drawer: myDrawer,
     );
   }
 }

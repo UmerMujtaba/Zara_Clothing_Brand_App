@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 import 'constants.dart';
+import 'form.dart';
+
+enum AdminPanelScreen {
+  welcome,
+  formUpload,
+}
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
@@ -15,83 +15,31 @@ class DesktopScaffold extends StatefulWidget {
 }
 
 class _DesktopScaffoldState extends State<DesktopScaffold> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _priceController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _tagController = TextEditingController();
-  File? _image;
-  bool _isSubmitting = false;
+  AdminPanelScreen _currentScreen = AdminPanelScreen.welcome;
+  String _selectedItemName = '';
 
-  final _firestore = FirebaseFirestore.instance;
-
-  Future<void> _pickImage() async {
-    try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        setState(() {
-          _image = File(pickedImage.path);
-        });
-      }
-    } catch (e) {
-      print('Failed to pick image: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick image: $e')),
-      );
-    }
+  void _selectScreen(AdminPanelScreen screen, [String itemName = '']) {
+    setState(() {
+      _currentScreen = screen;
+      _selectedItemName = itemName;
+    });
+    print(_selectedItemName);
   }
 
-  Future<void> _submitForm() async {
-    if (_formKey.currentState!.validate() && _image != null) {
-      setState(() {
-        _isSubmitting = true;
-      });
+  Widget _buildCurrentScreen() {
+    switch (_currentScreen) {
+      case AdminPanelScreen.formUpload:
+        return FormUpload(itemName: _selectedItemName);
 
-      try {
-        // Upload image to Firebase Storage
-        String imageUrl = '';
-        if (_image != null) {
-          final storageRef = FirebaseStorage.instance
-              .ref()
-              .child('products')
-              .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
-          await storageRef.putFile(_image!);
-          imageUrl = await storageRef.getDownloadURL();
-        }
-
-        // Add product data to Firestore
-        await _firestore.collection('products').add({
-          'name': _nameController.text,
-          'price': double.parse(_priceController.text),
-          'description': _descriptionController.text,
-          'tag': _tagController.text,
-          'imageUrl': imageUrl,
-          'timestamp': FieldValue.serverTimestamp(),
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Product added successfully')),
+      case AdminPanelScreen.welcome:
+      default:
+        return Center(
+          child: Text(
+            'W E L C O M E \n T O \n A D M I N PANEL\n',
+            style: TextStyle(fontFamily: 'TenorSans', fontSize: 38),
+            textAlign: TextAlign.center,
+          ),
         );
-
-        // Clear the form
-        _formKey.currentState!.reset();
-        setState(() {
-          _image = null;
-        });
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to add product: $e')),
-        );
-      } finally {
-        setState(() {
-          _isSubmitting = false;
-        });
-      }
-    } else if (_image == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select an image')),
-      );
     }
   }
 
@@ -102,80 +50,148 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
       appBar: myAppBar,
       body: Row(
         children: [
-          myDrawer,
+          myDrawer, // Customize your drawer as needed
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: const InputDecoration(labelText: 'Product Name'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a product name';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _priceController,
-                      decoration: const InputDecoration(labelText: 'Price'),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a price';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _descriptionController,
-                      decoration: const InputDecoration(labelText: 'Description'),
-                      maxLines: 3,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a description';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _tagController,
-                      decoration: const InputDecoration(labelText: 'Tag'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a tag';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    if (_image != null && !kIsWeb)
-                      Image.file(_image!, height: 150)
-                    else if (_image != null && kIsWeb)
-                      Image.network(_image!.path, height: 150), // This might not work as expected, but placeholder for web
-                    TextButton.icon(
-                      icon: Icon(Icons.photo),
-                      label: Text('Select Image'),
-                      onPressed: _pickImage,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _isSubmitting ? null : _submitForm,
-                      child: _isSubmitting
-                          ? const CircularProgressIndicator()
-                          : const Text('Submit'),
-                    ),
-                  ],
-                ),
-              ),
+              child: _buildCurrentScreen(),
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget get myDrawer => Drawer(
+        backgroundColor: Colors.grey.shade500,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const DrawerHeader(
+                  child: Image(image: AssetImage('lib/images/logo.png'))),
+              ListTile(
+                title: const Text('Welcome'),
+                onTap: () => _selectScreen(AdminPanelScreen.welcome),
+              ),
+              ExpansionTile(
+                leading: const Icon(Icons.add_box_outlined),
+                title: const Text(
+                  'A D D',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+                children: [
+                  ExpansionTile(
+                    title: const Text(
+                      'B A G',
+                      style: TextStyle(fontFamily: 'TenorSans'),
+                    ),
+                    children: [
+                      ListTile(
+                        title: const Text(
+                          'L E A T H E R',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Leather'),
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'F A N C Y',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Fancy'),
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title: const Text(
+                      'A C C E S S O R I E S',
+                      style: TextStyle(fontFamily: 'TenorSans'),
+                    ),
+                    children: [
+                      ListTile(
+                        title: const Text(
+                          'G L A S S E S',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Glasses'),
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'H A T',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Hat'),
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title: const Text(
+                      'A P P A R E L',
+                      style: TextStyle(fontFamily: 'TenorSans'),
+                    ),
+                    children: [
+                      ListTile(
+                        title: const Text(
+                          'O U T E R',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Outer'),
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'T S H I R T S',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Tshirts'),
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'D R E S S',
+                          style: TextStyle(fontFamily: 'TenorSans'),
+                        ),
+                        onTap: () => _selectScreen(
+                            AdminPanelScreen.formUpload, 'Dress'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const ListTile(
+                leading: Icon(Icons.view_in_ar),
+                title: Text(
+                  'V I E W',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+              ),
+              const ListTile(
+                leading: Icon(Icons.update),
+                title: Text(
+                  'U P D A T E',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+              ),
+              const ListTile(
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'S E T T I N G S',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+              ),
+              const ListTile(
+                leading: Icon(Icons.logout),
+                title: Text(
+                  'L O G O U T',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
 }
