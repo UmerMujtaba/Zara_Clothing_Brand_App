@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:zara/user_side/components/textss.dart';
 
 import '../components/button.dart';
@@ -25,7 +26,21 @@ class _PaymentPageState extends State<PaymentPage> {
   bool isCvcFocused = false;
 
   //user wants to pay
+  Future<void> sendEmailToUser(String recipientEmail, String receiptContent) async {
+    final Email email = Email(
+      body: receiptContent,
+      subject: 'Your Receipt',
+      recipients: [recipientEmail],
+      isHTML: false,
+    );
 
+    try {
+      await FlutterEmailSender.send(email);
+      print('Email sent successfully');
+    } catch (error) {
+      print('Failed to send email: $error');
+    }
+  }
   void userTappedPay() {
     if (formKey.currentState!.validate()) {
       showDialog(
@@ -50,13 +65,17 @@ class _PaymentPageState extends State<PaymentPage> {
                 child: const Text('Cancel'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async{
                   Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
                           const DeliveryProgressPage()));
+                  String recipientEmail = 'umermujtaba16@gmail.com';
+                  String receiptContent = 'This is your receipt...';
+
+                  await sendEmailToUser(recipientEmail, receiptContent);
                 },
                 child: const Text('Yes'),
               ),
@@ -111,9 +130,13 @@ class _PaymentPageState extends State<PaymentPage> {
 
           const Spacer(),
 
-          MyButton(
+          MyButton (
             text: payNow,
-            onTap: userTappedPay,
+            onTap: () async{
+              userTappedPay();
+
+
+            },
           ),
 
           const SizedBox(height: 25),

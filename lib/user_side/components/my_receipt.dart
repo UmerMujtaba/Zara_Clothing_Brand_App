@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -87,6 +88,7 @@ class MyReceipt extends ConsumerWidget {
   String _formatPrice(double price) {
     return "${price.toStringAsFixed(2)}";
   }
+
 
 
   Future<void> saveReceiptToFirestore({
