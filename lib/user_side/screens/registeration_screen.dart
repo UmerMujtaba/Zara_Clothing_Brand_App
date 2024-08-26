@@ -79,8 +79,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           const SnackBar(content: Text('The email address is invalid.')),
         );
       } else {
+
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An error occurred: ${e.message}')),
+          SnackBar(content: Text('An new occurred: ${e.message}')),
         );
       }
     } catch (e) {
