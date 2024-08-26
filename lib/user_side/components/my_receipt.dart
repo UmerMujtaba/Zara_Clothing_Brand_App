@@ -89,7 +89,6 @@ class MyReceipt extends ConsumerWidget {
   }
 
 
-
   Future<void> saveReceiptToFirestore({
     required List<CartItem> cartItems,
     required double totalAmount,
