@@ -80,7 +80,7 @@ class _BlogListState extends State<BlogList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppbar,
+      appBar: myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Column(

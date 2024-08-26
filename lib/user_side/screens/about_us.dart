@@ -19,7 +19,7 @@ class _AboutUsState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppbar,
+      appBar: myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Center(

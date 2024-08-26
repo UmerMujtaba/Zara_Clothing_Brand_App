@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../../user_side/components/app_bar.dart';
 import '../constants.dart';
 import '../uploads/blog.dart';
 import '../uploads/form.dart';
@@ -212,7 +213,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
-      appBar: myAppBar,
+      appBar: myAppbar(),
       drawer: myDrawer,
      body: Padding(
         padding: const EdgeInsets.all(16.0),

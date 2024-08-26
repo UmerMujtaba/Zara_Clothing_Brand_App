@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../model/cart.dart';
 import '../../model/product.dart';
 import '../screens/product_page.dart';
 
-class ItemContainer extends StatelessWidget {
+class ItemContainer extends ConsumerWidget {
   final Product item;
 
   const ItemContainer({Key? key, required this.item}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -50,7 +50,7 @@ class ItemContainer extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
-                  fontFamily: 'TenorSans'
+                  fontFamily: 'TenorSans',
                 ),
               ),
             ),
@@ -61,10 +61,11 @@ class ItemContainer extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.red,
                   fontSize: 14,
-                    fontFamily: 'TenorSans'
+                  fontFamily: 'TenorSans',
                 ),
               ),
             ),
+
           ],
         ),
       ),

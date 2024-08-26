@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../user_side/components/app_bar.dart';
 import '../constants.dart';
 
 class MobileScaffold extends StatefulWidget {
@@ -14,7 +15,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
-      appBar: myAppBar,
+      appBar: myAppbar(),
       //drawer: myDrawer,
     );
   }

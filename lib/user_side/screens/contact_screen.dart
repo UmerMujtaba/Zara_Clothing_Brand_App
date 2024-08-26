@@ -15,7 +15,7 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppbar,
+      appBar: myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Center(

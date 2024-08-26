@@ -19,7 +19,7 @@ class ProductPerCollectionPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppbar,
+      appBar: myAppbar(),
       drawer: MyTabbedDrawer(),
       body: productsAsyncValue.when(
         data: (products) {

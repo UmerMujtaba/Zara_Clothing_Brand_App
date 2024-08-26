@@ -21,7 +21,7 @@ class MyHomePage extends ConsumerWidget {
     width = size.width;
 
     return Scaffold(
-      appBar: myAppbar,
+      appBar: myAppbar(),
       body: Stack(
         children: <Widget>[
           SizedBox(

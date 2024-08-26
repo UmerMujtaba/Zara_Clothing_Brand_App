@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppbar,
+      appBar: myAppbar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 0, 30, 25),
         child: Center(

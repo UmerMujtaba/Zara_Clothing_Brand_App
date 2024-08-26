@@ -24,6 +24,8 @@ const String supportContact = '+60 825 876';
 const String dateAndTime = '08:00 - 22:00 - Everyday';
 const String copyRight = 'Copyright \u00a9 OpenUI All Rights Reserved';
 const String pageNotFound = 'PAGE NOT FOUND';
+const String cancel='Cancel';
+const String yes='Yes';
 const String cantFindPageYouAreLookingFor =
     'We can\'t find the page you looking for, it will return to the ';
 const String ourStoryHeading = 'OUR STORY';
@@ -67,6 +69,7 @@ const String exploreMore = 'Explore More';
 const String collections = 'COLLECTIONS';
 const String justForYou = 'JUST FOR YOU';
 const String trending = '@ TRENDING';
+const String areYouSureYouWantToEmptyCart='Are you sure you want to clear the cart?';
 const String makingALuxuriousLifeStyle =
     'Making a luxurious lifestyle accessible \nfor a generous group of women is our \ndaily drive';
 const String fastShippingOverOrder = 'Fast shipping. Free on order over \$25';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../user_side/components/app_bar.dart';
 import '../constants.dart';
 import '../uploads/blog.dart';
 import '../uploads/form.dart';
@@ -67,7 +68,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
-      appBar: myAppBar,
+      appBar: myAppbar(),
       body: Row(
         children: [
           myDrawer, // Customize your drawer as needed

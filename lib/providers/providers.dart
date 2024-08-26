@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../classes/classes.dart';
+import '../model/cart.dart';
 import '../model/product.dart';
 import '../web_admin_panel/panels_scaffolds/desktop_scaffold.dart';
 import '../web_admin_panel/services/firebase_service.dart';
@@ -71,15 +72,6 @@ final productsProvider = StreamProvider.autoDispose.family<List<Product>, String
 });
 
 
-// final authProvider = StreamProvider<User?>((ref) {
-//   return FirebaseAuth.instance.authStateChanges();
-// });
-
-// //
-// final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>((ref) {
-//   return LoginNotifier();
-// });
-
 
 final productsCombinedProvider = StreamProvider.family<List<Product>, List<String>>((ref, collectionNames) {
   final firebaseService = FirebaseService();
@@ -114,3 +106,6 @@ final collectionCountsProvider = FutureProvider<Map<String, int>>((ref) async {
 
   return collectionCounts;
 });
+
+
+final isExpanded2Provider = StateProvider<bool>((ref) => false);

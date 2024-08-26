@@ -1,36 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:zara/providers/providers.dart';
+import '../../model/cart.dart';
 import '../../model/product.dart';
+import '../components/add_to_basket.dart';
 import '../components/app_bar.dart';
 import '../components/constants.dart';
 import '../components/drawer.dart';
 import '../components/footer.dart';
+import '../components/image_page_controller.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends ConsumerWidget {
   final Product product;
 
   const ProductPage({super.key, required this.product});
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartNotifier = ref.watch(cartProvider.notifier);
+    final _isExpanded2 = ref.watch(isExpanded2Provider);
+    final _selectedColor = ref.watch(selectedColorProvider);
+    final _selectedSize = ref.watch(selectedSizeProvider);
 
-class _ProductPageState extends State<ProductPage> {
-  String _selectedColor = 'Red';
-  String _selectedSize = 'Small';
-  bool _isExpanded1 = false;
-  bool _isExpanded2 = false;
-  bool _isExpanded3 = false;
+    bool _isExpanded1 = false;
 
-  @override
-  Widget build(BuildContext context) {
+    bool _isExpanded3 = false;
+
+    void _addToCart() {
+      final cartItem = CartItem(
+        product: product,
+        color: _selectedColor,
+        size: _selectedSize,
+      );
+      cartNotifier.addItem(cartItem);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to Basket')),
+      );
+    }
+
     // Variables for selected color and size
-
     final _controller = PageController();
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppbar,
+      appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
           child: Padding(
@@ -46,7 +60,7 @@ class _ProductPageState extends State<ProductPage> {
               return ImagePageControll(
                   imageHeight: imageHeight,
                   controller: _controller,
-                  widget: widget);
+                  widget: ProductPage(product: product));
             },
           ),
           const SizedBox(
@@ -70,7 +84,7 @@ class _ProductPageState extends State<ProductPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.product.name,
+                        product.name,
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
@@ -80,7 +94,7 @@ class _ProductPageState extends State<ProductPage> {
                         textAlign: TextAlign.start,
                       ),
                       Text(
-                        widget.product.description,
+                        product.description,
                         style: const TextStyle(
                           fontFamily: 'TenorSans',
                         ),
@@ -93,7 +107,7 @@ class _ProductPageState extends State<ProductPage> {
                         height: 5,
                       ),
                       Text(
-                        widget.product.price.toString(),
+                        product.price.toString(),
                         style: const TextStyle(
                             fontFamily: 'TenorSans',
                             color: Colors.red,
@@ -105,11 +119,11 @@ class _ProductPageState extends State<ProductPage> {
                             Row(
                               children: [
                                 const Text('Color: '),
-                                _buildColorRadioButton('Black', Colors.black),
+                                _buildColorRadioButton('Black', Colors.black,ref ),
                                 _buildColorRadioButton(
-                                    'Orange', Colors.orange.shade300),
+                                    'Orange', Colors.orange.shade300,ref  ),
                                 _buildColorRadioButton(
-                                    'Grey', Colors.grey.shade400),
+                                    'Grey', Colors.grey.shade400,ref ),
                               ],
                             ),
                             const SizedBox(
@@ -117,9 +131,9 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Row(children: [
                               const Text('Size: '),
-                              _buildSizeRadioButton('S'),
-                              _buildSizeRadioButton('M'),
-                              _buildSizeRadioButton('L'),
+                              _buildSizeRadioButton('S',ref),
+                              _buildSizeRadioButton('M',ref),
+                              _buildSizeRadioButton('L',ref),
                             ]),
                           ]),
                     ]),
@@ -129,7 +143,11 @@ class _ProductPageState extends State<ProductPage> {
           const SizedBox(
             height: 10,
           ),
-          const AddToBasket(),
+          GestureDetector(
+              onTap: () {
+                _addToCart();
+              },
+              child: const AddToBasket()),
           const SizedBox(
             height: 10,
           ),
@@ -170,7 +188,7 @@ class _ProductPageState extends State<ProductPage> {
           ),
           const SizedBox(height: 5),
           Text(
-            careDetail(widget.product.name),
+            careDetail(product.name),
             style: const TextStyle(
               fontFamily: 'TenorSans',
               // fontWeight: FontWeight.w600
@@ -253,12 +271,10 @@ class _ProductPageState extends State<ProductPage> {
               ),
               IconButton(
                 icon: Icon(
-                  _isExpanded1 ? Icons.expand_less : Icons.expand_more,
+                  _isExpanded2 ? Icons.expand_less : Icons.expand_more,
                 ),
                 onPressed: () {
-                  setState(() {
-                    _isExpanded1 = !_isExpanded1;
-                  });
+                  ref.read(isExpanded2Provider.notifier).state = !_isExpanded2;
                 },
               ),
             ],
@@ -290,9 +306,7 @@ class _ProductPageState extends State<ProductPage> {
                   _isExpanded2 ? Icons.expand_less : Icons.expand_more,
                 ),
                 onPressed: () {
-                  setState(() {
-                    _isExpanded2 = !_isExpanded2;
-                  });
+                  ref.read(isExpanded2Provider.notifier).state = !_isExpanded2;
                 },
               ),
             ],
@@ -321,12 +335,10 @@ class _ProductPageState extends State<ProductPage> {
               ),
               IconButton(
                 icon: Icon(
-                  _isExpanded3 ? Icons.expand_less : Icons.expand_more,
+                  _isExpanded2 ? Icons.expand_less : Icons.expand_more,
                 ),
                 onPressed: () {
-                  setState(() {
-                    _isExpanded3 = !_isExpanded3;
-                  });
+                  ref.read(isExpanded2Provider.notifier).state = !_isExpanded2;
                 },
               ),
             ],
@@ -347,12 +359,12 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   // Function to build custom color radio button
-  Widget _buildColorRadioButton(String color, Color buttonColor) {
+  Widget _buildColorRadioButton(String color, Color buttonColor, WidgetRef ref) {
+    final _selectedColor = ref.watch(selectedColorProvider);
+
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _selectedColor = color;
-        });
+        ref.read(selectedColorProvider.notifier).state = color;
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -370,13 +382,12 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  // Function to build custom size radio button
-  Widget _buildSizeRadioButton(String size) {
+  Widget _buildSizeRadioButton(String size, WidgetRef ref) {
+    final _selectedSize = ref.watch(selectedSizeProvider);
+
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _selectedSize = size;
-        });
+        ref.read(selectedSizeProvider.notifier).state = size;
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -400,90 +411,6 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class AddToBasket extends StatelessWidget {
-  const AddToBasket({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.black,
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
-                Text('ADD TO BASKET',
-                    style: TextStyle(
-                        fontFamily: 'TenorSans', color: Colors.white)),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class ImagePageControll extends StatelessWidget {
-  const ImagePageControll({
-    super.key,
-    required this.imageHeight,
-    required PageController controller,
-    required this.widget,
-  }) : _controller = controller;
-
-  final double imageHeight;
-  final PageController _controller;
-  final ProductPage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: imageHeight, // Dynamic height based on the aspect ratio
-      child: PageView(
-        controller: _controller,
-        scrollDirection: Axis.horizontal,
-        children: [
-          Image.network(
-            widget.product.imageUrl,
-            fit: BoxFit.contain,
-            width: double.infinity,
-          ),
-          Image.network(
-            widget.product.imageUrl,
-            fit: BoxFit.contain,
-            width: double.infinity,
-          ),
-          Image.network(
-            widget.product.imageUrl,
-            fit: BoxFit.contain,
-            width: double.infinity,
-          ),
-          Image.network(
-            widget.product.imageUrl,
-            fit: BoxFit.contain,
-            width: double.infinity,
-          ),
-        ],
       ),
     );
   }
