@@ -87,7 +87,7 @@ class _BlogListState extends State<BlogList> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 40),
-            TextWidget(size: 22, text: blog, color: Colors.black,letterSpacing: 2),
+            TextWidget(size: 22, text: blog, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
             CustomPaint(
               size: const Size(250, 50), // Adjust size as needed

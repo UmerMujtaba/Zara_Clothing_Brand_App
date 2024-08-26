@@ -28,7 +28,7 @@ class First_tab_content_after_Grid extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextWidget(size: 22, text: exploreMore, color: Colors.black),
+              TextWidget(size: 22, text: exploreMore, color: Colors.black,fontFamily: 'TenorSans',),
               const SizedBox(width: 5),
               IconButton(
                 onPressed: () {},
@@ -82,7 +82,7 @@ class First_tab_content_after_Grid extends StatelessWidget {
         //
 
         TextWidget(
-            size: 22, text: collections, color: Colors.black, letterSpacing: 2),
+            size: 22, text: collections, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
 
         const SizedBox(height: 10.0),
         //
@@ -98,7 +98,7 @@ class First_tab_content_after_Grid extends StatelessWidget {
         const SizedBox(height: 10.0),
         //
         TextWidget(
-            size: 22, text: justForYou, color: Colors.black, letterSpacing: 2),
+            size: 22, text: justForYou, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
 
         CustomPaint(
           size: const Size(300, 50), // Adjust size as needed
@@ -128,7 +128,7 @@ class First_tab_content_after_Grid extends StatelessWidget {
         const SizedBox(height: 20.0),
         //
         TextWidget(
-            size: 22, text: trending, color: Colors.black, letterSpacing: 2),
+            size: 22, text: trending, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
 
         const SizedBox(height: 20.0),
         //
@@ -164,7 +164,8 @@ class First_tab_content_after_Grid extends StatelessWidget {
             text: makingALuxuriousLifeStyle,
             color: Colors.black,
             letterSpacing: 2,
-            textAlign: TextAlign.center),
+            textAlign: TextAlign.center
+          ,fontFamily: 'TenorSans',),
 
         const SizedBox(height: 10),
         const ImageTextRow(

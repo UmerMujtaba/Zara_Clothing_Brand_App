@@ -84,13 +84,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     text: brandName,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 3),
+                    letterSpacing: 3,fontFamily: 'TenorSans',),
                 const SizedBox(height: 20),
                 TextWidget(
                     size: 16,
                     text: enterTheEmailAddress,
                     color: Colors.black,
-                    textAlign: TextAlign.center),
+                    textAlign: TextAlign.center,fontFamily: 'TenorSans',),
                 const SizedBox(height: 15),
                 Row(
                   children: [
@@ -98,7 +98,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         size: 14,
                         text: 'Email',
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color: Colors.black,fontFamily: 'TenorSans',),
                   ],
                 ),
                 Gap(20),

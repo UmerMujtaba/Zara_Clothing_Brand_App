@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zara/user_side/components/textss.dart';
 import 'package:zara/user_side/screens/registeration_screen.dart';
 
 import '../../model/user.dart';
@@ -123,37 +124,23 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                helloAgain,
-                style: TextStyle(
-                    color: Colors.black, fontSize: 32, fontFamily: 'TenorSans', letterSpacing: 2),
-              ),
+
+              TextWidget(size: 32, text: helloAgain, color: Colors.black,fontFamily: 'TenorSans',letterSpacing: 2,),
+
               const SizedBox(height: 20),
-              const Row(
+               Row(
                 children: [
-                  Text(
-                    'EMAIL',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'TenorSans'),
-                  ),
+                  TextWidget(text: email,color: Colors.black,size: 16,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
+
                 ],
               ),
               TextFields(emailController: _emailController, hintText: hintText,),
 
               const SizedBox(height: 10),
-              const Row(
+               Row(
                 children: [
-                  Text(
-                    'PASSWORD',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'TenorSans'),
-                  ),
+                  TextWidget(size: 16, text: 'PASSWORD',  color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
+
                 ],
               ),
               TextField(
@@ -180,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14),
+                style: const TextStyle(color: Colors.black, fontSize: 14,fontFamily: 'TenorSans'),
               ),
               const SizedBox(height: 10),
               Row(
@@ -196,10 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      forgotPassword,
-                      style: TextStyle(color: Colors.blueGrey, fontSize: 13),
-                    ),
+                    child: TextWidget(size: 12, text: forgotPassword, color: Colors.blueGrey,fontFamily: 'TenorSans',)
                   ),
                 ],
               ),
@@ -218,13 +202,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 80.0,
                     color: Colors.black,
                   ),
-                  const Text(
-                    socialLogin,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
+
+                  TextWidget(size: 16, text: socialLogin, color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
                   Container(
                     height: 1.0,
                     width: 80.0,
@@ -267,10 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Don\'t have an account?',
-                style: TextStyle(color: Colors.blueGrey, fontSize: 15),
-              ),
+              TextWidget(size: 15, text: donothaveanaccount, color: Colors.blueGrey,fontFamily: 'TenorSans',),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -279,14 +255,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 },
-                child: const Text(
-                  'REGISTER',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2),
-                ),
+                child:
+                TextWidget(size: 16,letterSpacing: 2,fontWeight: FontWeight.bold,text: 'REGISTER',color: Colors.black,fontFamily: 'TenorSans',),
+
               ),
             ],
           ),

@@ -83,7 +83,7 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.logout, size: 30, color: Colors.black),
               title: const Text(
                 'Log Out',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: Colors.black,fontFamily: 'TenorSans',),
               ),
               onTap: () async {
                 await _logout(context);

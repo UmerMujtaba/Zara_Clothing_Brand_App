@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zara/user_side/components/textss.dart';
 
 import 'image_text_stack.dart';
 
-class New_arrival_content_after_tabBarView extends ConsumerWidget {
+class New_arrival_content_after_tabBarView extends StatelessWidget {
   const New_arrival_content_after_tabBarView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 20.0),
         TextWidget(
-            size: 22, text: 'FOLLOW US', color: Colors.black, letterSpacing: 2),
+            size: 22, text: 'FOLLOW US', color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
         const SizedBox(height: 10.0),
         const Image(
           image: AssetImage('assets/images/instagram.png'),
@@ -36,7 +35,9 @@ class New_arrival_content_after_tabBarView extends ConsumerWidget {
               text2: '@_john',
             ),
           ],
+
         ),
+
       ],
     );
   }

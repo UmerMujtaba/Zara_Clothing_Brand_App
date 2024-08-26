@@ -20,7 +20,7 @@ class NewArrival extends ConsumerWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: TextWidget(size: 22, text: newArrival, color: Colors.black,),
+          title: TextWidget(size: 22, text: newArrival, color: Colors.black,fontFamily: 'TenorSans',),
 
           centerTitle: true,
           bottom: const TabbarExample(),

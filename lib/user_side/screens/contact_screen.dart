@@ -14,6 +14,7 @@ class ContactScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: myAppbar,
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
@@ -23,7 +24,7 @@ class ContactScreen extends StatelessWidget {
             child: Column(children: [
               const SizedBox(height: 40),
 
-              TextWidget(size: 22, text: contactUs, color: Colors.black,letterSpacing: 2),
+              TextWidget(size: 22, text: contactUs, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
               CustomPaint(
                 size: const Size(250, 50), // Adjust size as needed
@@ -33,7 +34,7 @@ class ContactScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/messenger.png'),
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 14, text: contactUsViaChat, color: Colors.black),
+              TextWidget(size: 14, text: contactUsViaChat, color: Colors.black,fontFamily: 'TenorSans',),
               const SizedBox(height: 20),
               Button3(
                 text: chatWithUs,
@@ -49,7 +50,7 @@ class ContactScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/email.png'),
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 14, text: contactUsDetailText, color: Colors.black),
+              TextWidget(size: 14, text: contactUsDetailText, color: Colors.black,fontFamily: 'TenorSans',),
 
               const SizedBox(height: 20),
               Button3(
@@ -66,7 +67,7 @@ class ContactScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/twitter.png'),
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 14, text: contactUsPrivateDetailText, color: Colors.black),
+              TextWidget(size: 14, text: contactUsPrivateDetailText, color: Colors.black,fontFamily: 'TenorSans',),
 
               const SizedBox(height: 40),
               const Footer(),

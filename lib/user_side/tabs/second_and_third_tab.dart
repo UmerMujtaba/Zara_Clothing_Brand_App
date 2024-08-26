@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../providers/providers.dart';
 import '../components/constants.dart';
+import '../components/footer.dart';
 import '../components/footer_row.dart';
 import '../components/hash_tags_container.dart';
 import '../components/image_container.dart';
@@ -122,7 +123,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
 
-                      TextWidget(size: 22, text: exploreMore, color: Colors.black),
+                      TextWidget(size: 22, text: exploreMore, color: Colors.black,fontFamily: 'TenorSans',),
 
                       const SizedBox(width: 5),
                       IconButton(
@@ -170,7 +171,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                 ),
                 const SizedBox(height: 10.0), //
 
-                TextWidget(size: 22, text: collections, color: Colors.black,letterSpacing: 2),
+                TextWidget(size: 22, text: collections, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
                 const SizedBox(height: 10.0), //
                 const Image(image: AssetImage('assets/images/collection.jpg')),
@@ -184,7 +185,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                 ),
                 const SizedBox(height: 10.0), //
 
-                TextWidget(size: 22, text: justForYou, color: Colors.black,letterSpacing: 2),
+                TextWidget(size: 22, text: justForYou, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
                 CustomPaint(
                   size: const Size(300, 50), // Adjust size as needed
@@ -214,7 +215,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20.0), //
 
-                TextWidget(size: 22, text: trending, color: Colors.black,letterSpacing: 2),
+                TextWidget(size: 22, text: trending, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
                 const SizedBox(height: 20.0), //
                 const Row(
@@ -244,7 +245,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 20.0), //
-                TextWidget(size: 16, text: makingALuxuriousLifeStyle, color: Colors.black,textAlign: TextAlign.center),
+                TextWidget(size: 16, text: makingALuxuriousLifeStyle, color: Colors.black,textAlign: TextAlign.center,fontFamily: 'TenorSans',),
                 const SizedBox(height: 10),
                 const ImageTextRow(
                   imagePath: 'assets/images/fast.png',
@@ -260,6 +261,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                   text2: fastShippingOverOrder,
                 ),
                 New_arrival_content_after_tabBarView(),
+                SizedBox(height: 500, child: Footer()),
               ],
             ),
           ),

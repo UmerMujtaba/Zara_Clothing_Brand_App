@@ -14,6 +14,7 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: myAppbar,
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
@@ -23,8 +24,8 @@ class ErrorScreen extends StatelessWidget {
             child: Column(children: [
               const SizedBox(height: 40),
 
-              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2),
-              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2),
+              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
+              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
 
               CustomPaint(
                 size: const Size(250, 50), // Adjust size as needed
@@ -34,7 +35,7 @@ class ErrorScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/girl.png'),
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 14, text: cantFindPageYouAreLookingFor, color: Colors.black,textAlign: TextAlign.center),
+              TextWidget(size: 14, text: cantFindPageYouAreLookingFor, color: Colors.black,textAlign: TextAlign.center,fontFamily: 'TenorSans',),
 
               const SizedBox(height: 20),
               Button3(

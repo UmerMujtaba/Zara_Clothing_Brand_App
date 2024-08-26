@@ -43,6 +43,7 @@ class MyHomePage extends ConsumerWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'PTSerif',
+
                     fontStyle: FontStyle.italic),
               ),
             ),

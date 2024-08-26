@@ -231,7 +231,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
       child: Column(
         children: [
           const DrawerHeader(
-              child: Image(image: AssetImage('lib/images/logo.png'))),
+              child: Image(image: AssetImage('assets/images/logo.png'))),
           ListTile(
             title: const Text('Welcome'),
             onTap: () => _selectScreen(AdminPanelScreen.welcome),

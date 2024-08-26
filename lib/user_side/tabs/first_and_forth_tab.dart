@@ -106,7 +106,7 @@ class FirstAndForthTab extends ConsumerWidget {
                 First_tab_content_after_Grid(
                     controller: _controller, products: products),
                 New_arrival_content_after_tabBarView(),
-                Footer(),
+                SizedBox(height: 500, child: Footer()),
               ],
             ),
           ),

@@ -4,6 +4,7 @@ String careDetail(String name) {
 }
 
 const String loginText= 'Login';
+const String email='EMAIL';
 const String register='Register';
 const String socialLogin='Social Logins';
 const String forgotPassword='Forgot Password?';
@@ -15,6 +16,7 @@ const String hintText2 = 'Phone number, email or user name';
 const String hintText3 = 'Enter Password';
 const String hintText4 = 'Enter Name';
 const String failedToSendEmail = 'Failed to send email';
+const String donothaveanaccount= 'Don\'t have an account?';
 String emailSentSuccess = 'Email sent successfully';
 const String pleaseEnterAnEmail = 'Please enter an email address';
 const String supportEmail = 'support@openui.design';
