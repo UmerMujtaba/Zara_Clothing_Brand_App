@@ -6,6 +6,7 @@ import 'package:zara/user_side/screens/payment_screen.dart';
 import '../../providers/providers.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
+import '../components/quantity_selector.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({super.key});
@@ -19,11 +20,10 @@ class CartPage extends ConsumerWidget {
       appBar: AppBar(
         centerTitle: true,
         title: TextWidget(
-          size: 22,
-          text: 'C A R T',
-          color: Colors.black,
-          fontFamily: 'TenorSans',
-        ),
+            size: 22,
+            text: 'C A R T',
+            color: Colors.black,
+            fontFamily: 'TenorSans'),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         leading: IconButton(
@@ -93,8 +93,8 @@ class CartPage extends ConsumerWidget {
                     },
                   ),
           ),
-          MyButton4(
-            text: 'Go to checkout',
+          MyButton(
+            text: goToCheckout,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -131,15 +131,21 @@ class MyCartTile extends ConsumerWidget {
         fontFamily: 'TenorSans',
       ),
       subtitle: Text(
-        'Color: ${cartItem.color}\nSize: ${cartItem.size}\nQuantity: ${cartItem.quantity}\nPrice: ${cartItem.product.price}',
+        'Color: ${cartItem.color}\nSize: ${cartItem.size}\nQuantity: ${cartItem.quantity}\nPrice: ${cartItem.totalPrice}',
         // Assuming Product has price
         style: TextStyle(fontFamily: 'TenorSans', fontSize: 14),
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.remove_shopping_cart),
-        onPressed: () {
-          ref.read(cartProvider.notifier).removeItem(cartItem);
-        },
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          MyQuantitySelector(cartItem: cartItem),
+          IconButton(
+            icon: const Icon(Icons.remove_shopping_cart),
+            onPressed: () {
+              ref.read(cartProvider.notifier).removeItem(cartItem);
+            },
+          ),
+        ],
       ),
     );
   }

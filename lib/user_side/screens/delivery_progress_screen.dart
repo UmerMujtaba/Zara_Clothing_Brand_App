@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:zara/user_side/components/textss.dart';
 
+import '../components/constants.dart';
 import '../components/my_receipt.dart';
+
 class DeliveryProgressPage extends StatelessWidget {
   const DeliveryProgressPage({super.key});
+
+  get size => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Delivery is in progress..'),
+        title: TextWidget(
+          size: 21,
+          text: deliveryInProgress,
+          color: Colors.black,
+          fontFamily: 'TenorSans',
+        ),
         backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded),
+          icon: const Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Colors.black,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -22,89 +34,8 @@ class DeliveryProgressPage extends StatelessWidget {
       ),
       body: const Column(
         children: [
-          // MyReceipt(),
+          MyReceipt(),
         ],
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
-    );
-  }
-
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    return Container(
-      height: 100,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.person),
-                onPressed: () {},
-              ),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Mitch Koko',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                  ),
-                ),
-                Text(
-                  "Driver",
-                  style:
-                  TextStyle(color: Theme.of(context).colorScheme.primary),
-                )
-              ],
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                //message button
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.message,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                const SizedBox(width: 10),
-                //call button
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.call,
-                      color: Colors.green,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
       ),
     );
   }

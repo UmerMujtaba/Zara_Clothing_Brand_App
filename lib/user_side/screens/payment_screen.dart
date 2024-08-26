@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:zara/user_side/components/textss.dart';
 
 import '../components/button.dart';
+import '../components/constants.dart';
 import 'delivery_progress_screen.dart';
 
 
@@ -67,14 +69,14 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Checkout'),
+
+        title: TextWidget(size: 22, text: checkOut, color: Colors.black,fontFamily: 'TenorSans',),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded),
+          icon: const Icon(Icons.arrow_back_ios_rounded,color: Colors.black,),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -109,8 +111,8 @@ class _PaymentPageState extends State<PaymentPage> {
 
           const Spacer(),
 
-          MyButton4(
-            text: 'Pay Now',
+          MyButton(
+            text: payNow,
             onTap: userTappedPay,
           ),
 

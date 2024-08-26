@@ -26,6 +26,10 @@ const String copyRight = 'Copyright \u00a9 OpenUI All Rights Reserved';
 const String pageNotFound = 'PAGE NOT FOUND';
 const String cancel='Cancel';
 const String yes='Yes';
+const String goToCheckout='Go To Checkout';
+const String payNow='Pay Now';
+const String checkOut='CHECK OUT';
+const String deliveryInProgress='Delivery is in progress..';
 const String cantFindPageYouAreLookingFor =
     'We can\'t find the page you looking for, it will return to the ';
 const String ourStoryHeading = 'OUR STORY';
