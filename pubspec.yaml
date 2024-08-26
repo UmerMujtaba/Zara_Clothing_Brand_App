@@ -78,14 +78,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/images/
-    - lib/images/category/
-    - lib/images/tshirt/
-    - lib/images/bags/leather/
-    - lib/images/bags/fancy/
-    - lib/images/glasses/
-    - lib/images/hats/
-    - lib/icons/
+    - assets/images/
+    - assets/images/category/
+    - assets/images/tshirt/
+    - assets/images/bags/leather/
+    - assets/images/bags/fancy/
+    - assets/images/glasses/
+    - assets/images/hats/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -103,17 +103,17 @@ flutter:
     - family: PTSerif
       fonts:
 
-        - asset: lib/fonts/PTSerif-BoldItalic.ttf
-        - asset: lib/fonts/PTSerif-Italic.ttf
-        - asset: lib/fonts/PTSerif-Regular.ttf
+        - asset: assets/fonts/PTSerif-BoldItalic.ttf
+        - asset: assets/fonts/PTSerif-Italic.ttf
+        - asset: assets/fonts/PTSerif-Regular.ttf
 
     - family: StyleScript
       fonts:
-        - asset: lib/fonts/StyleScript-Regular.ttf
+        - asset: assets/fonts/StyleScript-Regular.ttf
 
     - family: TenorSans
       fonts:
-        - asset: lib/fonts/TenorSans-Regular.ttf
+        - asset: assets/fonts/TenorSans-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

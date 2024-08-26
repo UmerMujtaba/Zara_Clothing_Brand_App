@@ -40,7 +40,7 @@ class _AboutUsState extends State<AboutUs> {
                   text: ourStoryDetail,
                   color: Colors.grey,
                   textAlign: TextAlign.justify),
-              const BlogContainer(bgImage: 'lib/images/blog3.jpg', name: ''),
+              const BlogContainer(bgImage: 'assets/images/blog3.jpg', name: ''),
               const SizedBox(height: 40),
               TextWidget(
                   size: 22,

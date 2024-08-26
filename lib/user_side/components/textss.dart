@@ -9,8 +9,8 @@ class TextWidget extends StatelessWidget {
       required this.text,
       this.fontWeight,
       this.textAlign,
-        this.fontFamily,
-        this.fontStyle,
+      this.fontFamily,
+      this.fontStyle,
       this.letterSpacing,
       required this.color});
 
@@ -19,7 +19,7 @@ class TextWidget extends StatelessWidget {
   FontWeight? fontWeight;
   FontStyle? fontStyle;
   double? letterSpacing;
-String? fontFamily;
+  String? fontFamily;
   TextAlign? textAlign;
   final Color color;
 

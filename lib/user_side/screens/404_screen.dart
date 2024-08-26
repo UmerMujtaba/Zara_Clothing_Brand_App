@@ -31,7 +31,7 @@ class ErrorScreen extends StatelessWidget {
                 painter: LineWithDiamondPainter(),
               ),
               const Image(
-                image: AssetImage('lib/icons/girl.png'),
+                image: AssetImage('assets/icons/girl.png'),
               ),
               const SizedBox(height: 20),
               TextWidget(size: 14, text: cantFindPageYouAreLookingFor, color: Colors.black,textAlign: TextAlign.center),

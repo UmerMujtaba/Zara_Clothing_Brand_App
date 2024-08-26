@@ -181,7 +181,7 @@ class _ProductPageState extends State<ProductPage> {
           const Row(
             children: [
               Image(
-                image: AssetImage('lib/icons/not-bleach.png'),
+                image: AssetImage('assets/icons/not-bleach.png'),
                 width: 18,
                 height: 18,
               ),
@@ -196,7 +196,7 @@ class _ProductPageState extends State<ProductPage> {
           const Row(
             children: [
               Image(
-                image: AssetImage('lib/icons/quick-dry.png'),
+                image: AssetImage('assets/icons/quick-dry.png'),
                 width: 18,
                 height: 18,
               ),
@@ -211,7 +211,7 @@ class _ProductPageState extends State<ProductPage> {
           const Row(
             children: [
               Image(
-                image: AssetImage('lib/icons/towels.png'),
+                image: AssetImage('assets/icons/towels.png'),
                 width: 18,
                 height: 18,
               ),
@@ -226,7 +226,7 @@ class _ProductPageState extends State<ProductPage> {
           const Row(
             children: [
               Image(
-                image: AssetImage('lib/icons/ironing.png'),
+                image: AssetImage('assets/icons/ironing.png'),
                 width: 18,
                 height: 18,
               ),

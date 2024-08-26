@@ -30,7 +30,7 @@ class ContactScreen extends StatelessWidget {
                 painter: LineWithDiamondPainter(),
               ),
               const Image(
-                image: AssetImage('lib/icons/messenger.png'),
+                image: AssetImage('assets/icons/messenger.png'),
               ),
               const SizedBox(height: 20),
               TextWidget(size: 14, text: contactUsViaChat, color: Colors.black),
@@ -46,7 +46,7 @@ class ContactScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Image(
-                image: AssetImage('lib/icons/email.png'),
+                image: AssetImage('assets/icons/email.png'),
               ),
               const SizedBox(height: 20),
               TextWidget(size: 14, text: contactUsDetailText, color: Colors.black),
@@ -63,7 +63,7 @@ class ContactScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Image(
-                image: AssetImage('lib/icons/twitter.png'),
+                image: AssetImage('assets/icons/twitter.png'),
               ),
               const SizedBox(height: 20),
               TextWidget(size: 14, text: contactUsPrivateDetailText, color: Colors.black),

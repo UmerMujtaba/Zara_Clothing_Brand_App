@@ -4,7 +4,7 @@ import 'constants.dart';
 
 var myAppbar = AppBar(
   backgroundColor: Colors.transparent,
-  title: Image(image: AssetImage('lib/images/Logo (1).png'),filterQuality:FilterQuality.high),
+  title: Image(image: AssetImage('assets/images/Logo (1).png'),filterQuality:FilterQuality.high),
   centerTitle: true,
   actions: [
     IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined)),

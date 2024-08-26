@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zara/user_side/screens/registeration_screen.dart';
 
 import '../../model/user.dart';
 import '../components/button.dart';
@@ -272,7 +273,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                      builder: (context) => RegistrationScreen(), // Replace with your home screen
+                    ),
+                  );
                 },
                 child: const Text(
                   'REGISTER',

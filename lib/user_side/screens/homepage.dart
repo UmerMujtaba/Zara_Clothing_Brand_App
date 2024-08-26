@@ -27,7 +27,7 @@ class MyHomePage extends ConsumerWidget {
           SizedBox(
             height: height,
             child: const Image(
-              image: AssetImage('lib/images/backgroundimage.png'),
+              image: AssetImage('assets/images/backgroundimage.png'),
               filterQuality: FilterQuality.high,
               fit: BoxFit.fitHeight,
             ),

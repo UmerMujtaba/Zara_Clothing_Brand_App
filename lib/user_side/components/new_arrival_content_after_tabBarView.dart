@@ -16,7 +16,7 @@ class New_arrival_content_after_tabBarView extends ConsumerWidget {
             size: 22, text: 'FOLLOW US', color: Colors.black, letterSpacing: 2),
         const SizedBox(height: 10.0),
         const Image(
-          image: AssetImage('lib/images/instagram.png'),
+          image: AssetImage('assets/images/instagram.png'),
           height: 30,
           width: 30,
         ),
@@ -24,15 +24,15 @@ class New_arrival_content_after_tabBarView extends ConsumerWidget {
         const Column(
           children: [
             ImageTextStack(
-              imagePath: 'lib/images/5.jpg',
+              imagePath: 'assets/images/5.jpg',
               text: '@mia',
-              imagePath2: 'lib/images/6.jpg',
+              imagePath2: 'assets/images/6.jpg',
               text2: '@_john',
             ),
             ImageTextStack(
-              imagePath: 'lib/images/7.jpg',
+              imagePath: 'assets/images/7.jpg',
               text: '@mia',
-              imagePath2: 'lib/images/8.jpg',
+              imagePath2: 'assets/images/8.jpg',
               text2: '@_john',
             ),
           ],

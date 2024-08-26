@@ -146,9 +146,9 @@ class SecondAndThirdTab extends ConsumerWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: const [
-                    ImageContainer(imagePath: 'lib/images/bosslogo.png'),
-                    ImageContainer(imagePath: 'lib/images/burberry.png'),
-                    ImageContainer(imagePath: 'lib/images/guccilogo.png'),
+                    ImageContainer(imagePath: 'assets/images/bosslogo.png'),
+                    ImageContainer(imagePath: 'assets/images/burberry.png'),
+                    ImageContainer(imagePath: 'assets/images/guccilogo.png'),
                     // Add more images as needed
                   ],
                 ),
@@ -158,9 +158,9 @@ class SecondAndThirdTab extends ConsumerWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: const [
-                    ImageContainer(imagePath: 'lib/images/lacostelogo.png'),
-                    ImageContainer(imagePath: 'lib/images/pradalogo.png'),
-                    ImageContainer(imagePath: 'lib/images/triffanylogo.png'),
+                    ImageContainer(imagePath: 'assets/images/lacostelogo.png'),
+                    ImageContainer(imagePath: 'assets/images/pradalogo.png'),
+                    ImageContainer(imagePath: 'assets/images/triffanylogo.png'),
                     // Add more images as needed
                   ],
                 ),
@@ -173,12 +173,12 @@ class SecondAndThirdTab extends ConsumerWidget {
                 TextWidget(size: 22, text: collections, color: Colors.black,letterSpacing: 2),
 
                 const SizedBox(height: 10.0), //
-                const Image(image: AssetImage('lib/images/collection.jpg')),
+                const Image(image: AssetImage('assets/images/collection.jpg')),
 
                 const Padding(
                   padding: EdgeInsets.all(40.0),
                   child: Image(
-                    image: AssetImage('lib/images/summer.jpg'),
+                    image: AssetImage('assets/images/summer.jpg'),
                     height: 400,
                   ),
                 ),
@@ -239,7 +239,7 @@ class SecondAndThirdTab extends ConsumerWidget {
                 const Column(
                   children: [
                     Image(
-                        image: AssetImage('lib/images/Logo (1).png'),
+                        image: AssetImage('assets/images/Logo (1).png'),
                         filterQuality: FilterQuality.high),
                   ],
                 ),
@@ -247,16 +247,16 @@ class SecondAndThirdTab extends ConsumerWidget {
                 TextWidget(size: 16, text: makingALuxuriousLifeStyle, color: Colors.black,textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 const ImageTextRow(
-                  imagePath: 'lib/images/fast.png',
+                  imagePath: 'assets/images/fast.png',
                   text: fastShippingOverOrder,
-                  imagePath2: 'lib/images/process.png',
+                  imagePath2: 'assets/images/process.png',
                   text2: sustainableProcessFromStartToFinish,
                 ),
                 const SizedBox(height: 30),
                 const ImageTextRow(
-                  imagePath: 'lib/images/material.png',
+                  imagePath: 'assets/images/material.png',
                   text: uniqueDesignAndHighQualityMaterial,
-                  imagePath2: 'lib/images/love.png',
+                  imagePath2: 'assets/images/love.png',
                   text2: fastShippingOverOrder,
                 ),
                 New_arrival_content_after_tabBarView(),
