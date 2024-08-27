@@ -5,7 +5,7 @@ import '../components/constants.dart';
 import '../components/my_receipt.dart';
 
 class DeliveryProgressPage extends StatelessWidget {
-  const DeliveryProgressPage({super.key});
+  const DeliveryProgressPage({super.key,});
 
   get size => null;
 
@@ -32,7 +32,7 @@ class DeliveryProgressPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Column(
+      body:  Column(
         children: [
           MyReceipt(),
         ],
