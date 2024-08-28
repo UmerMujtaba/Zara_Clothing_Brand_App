@@ -1,92 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../model/cart.dart';
 
+
+String centerText(String text, int width) {
+  int totalPadding = width - text.length;
+  int padLeft = (totalPadding / 2).floor();
+  int padRight = totalPadding - padLeft;
+
+  return text.padLeft(text.length + padLeft).padRight(width);
+}
+
+
+String generateReceipt(List<CartItem> cartItems) {
+  double totalAmount = 0.0;
+  int totalItems = 0;
+
+  StringBuffer receipt = StringBuffer()
+
+    ..writeln(centerText("ORDER CONFIRMATION", 40))
+    ..writeln()
+    ..writeln("🕒 Date & Time: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())}")
+    ..writeln()
+    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    ..writeln()
+    ..writeln("🛒 𝓨𝓸𝓾𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝓢𝓾𝓶𝓶𝓪𝓻𝔂")
+    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+  for (var item in cartItems) {
+    totalAmount += item.totalPrice;
+    totalItems += item.quantity;
+
+    receipt
+      ..writeln("🛍️ ${item.quantity} x ${item.product.name}")
+      ..writeln("   - ${_formatPrice(item.product.price)} each")
+      ..writeln();
+  }
+
+  receipt
+    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    ..writeln("🔢 Total Items: $totalItems")
+    ..writeln("💵 Total Price: ${_formatPrice(totalAmount)}")
+    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    ..writeln()
+    ..writeln("🙏 𝓣𝓱𝓪𝓷𝓴 𝓨𝓸𝓾 𝓯𝓸𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝔀𝓲𝓽𝓱 𝓤𝓼!");
+
+  return receipt.toString();
+}
+
+String _formatPrice(double price) {
+  return "Rs ${price.toStringAsFixed(2)}";
+}
+
+
 class MyReceipt extends ConsumerWidget {
-
-
-
-  const MyReceipt({super.key,});
+  const MyReceipt({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final cartItems = ref.watch(cartProvider);
 
-    Future<void> saveReceiptToFirestore({
-      required List<CartItem> cartItems,
-      required double totalAmount,
-      required int totalItems,
-    }) async {
-      final firestore = FirebaseFirestore.instance;
-      final now = DateTime.now();
-      final formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+    // Generate receipt
+    final receiptContent = generateReceipt(cartItems);
 
-      // Prepare receipt data
-      final receiptData = {
-        'date': formattedDate,
-        'totalItems': totalItems,
-        'totalAmount': totalAmount,
-        'items': cartItems.map((item) {
-          return {
-            'name': item.product.name,
-            'quantity': item.quantity,
-            'price': item.product.price,
-
-          };
-        }).toList(),
-      };
-
-      try {
-        // Save receipt data to Firestore
-        await firestore.collection('receipts').add(receiptData);
-        print('Receipt saved successfully!');
-      } catch (e) {
-        print('Failed to save receipt: $e');
-      }
-    }
-
-    // Compute receipt data
-    double totalAmount = 0.0;
-    int totalItems = 0;
-
-    StringBuffer receipt = StringBuffer()
-      ..writeln(" Here's your receipt! ")
-      ..writeln()
-      ..writeln("🕒 ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())}")
-      ..writeln()
-      ..writeln("🛒 Your Shopping Summary ")
-      ..writeln("--------------------------------------------");
-
-    for (var item in cartItems) {
-      totalAmount += item.totalPrice;
-      totalItems += item.quantity;
-
-      receipt
-        ..writeln(" ${item.quantity} X ${item.product.name} - ${_formatPrice(item.product.price)}")
-        ..writeln();
-    }
-
-    receipt
-      ..writeln("-------------------------------------------")
-      ..writeln()
-      ..writeln("🔢 Total Items: $totalItems")
-      ..writeln("💵 Total Price: ${_formatPrice(totalAmount)}")
-      ..writeln()
-      ..writeln("🛍️ Thanks for shopping with us! ");
-
-// Save receipt to Firestore
+    // Save receipt to Firestore
     saveReceiptToFirestore(
       cartItems: cartItems,
-      totalAmount: totalAmount,
-      totalItems: totalItems,
+      receiptContent: receiptContent,
     );
-
-
 
     return Padding(
       padding: const EdgeInsets.all(25.0),
@@ -108,7 +92,7 @@ class MyReceipt extends ConsumerWidget {
               ),
               padding: const EdgeInsets.all(16),
               child: Text(
-                receipt.toString(),
+                receiptContent,
                 style: const TextStyle(
                   fontFamily: 'TenorSans',
                   fontSize: 14,
@@ -127,8 +111,43 @@ class MyReceipt extends ConsumerWidget {
     );
   }
 
-  String _formatPrice(double price) {
-    return "${price.toStringAsFixed(2)}";
-  }
+  Future<void> saveReceiptToFirestore({
+    required List<CartItem> cartItems,
+    required String receiptContent,
+  }) async {
+    final firestore = FirebaseFirestore.instance;
+    final now = DateTime.now();
+    final formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
 
+    final totalAmount = cartItems.fold<double>(
+      0.0,
+      (previousValue, item) => previousValue + item.totalPrice,
+    );
+    final totalItems = cartItems.fold<int>(
+      0,
+      (previousValue, item) => previousValue + item.quantity,
+    );
+
+    // Prepare receipt data
+    final receiptData = {
+      'date': formattedDate,
+      'totalItems': totalItems,
+      'totalAmount': totalAmount,
+      'items': cartItems.map((item) {
+        return {
+          'name': item.product.name,
+          'quantity': item.quantity,
+          'price': item.product.price,
+        };
+      }).toList(),
+    };
+
+    try {
+      // Save receipt data to Firestore
+      await firestore.collection('receipts').add(receiptData);
+      print('Receipt saved successfully!');
+    } catch (e) {
+      print('Failed to save receipt: $e');
+    }
+  }
 }

@@ -15,7 +15,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
-      appBar: myAppbar(),
+      //appBar: myAppbar(),
       //drawer: myDrawer,
     );
   }

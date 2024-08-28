@@ -68,7 +68,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
-      appBar: myAppbar(),
+      //appBar: myAppbar(),
       body: Row(
         children: [
           myDrawer, // Customize your drawer as needed
