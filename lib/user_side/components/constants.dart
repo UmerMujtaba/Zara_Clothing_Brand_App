@@ -11,10 +11,17 @@ const String forgotPassword='Forgot Password?';
 const String name1 = 'Open';
 const String name2 = 'Fashion';
 const String submit = 'SUBMIT';
-const String hintText = 'Enter email';
+const String save='SAVE';
+const String hintText = 'Enter Email';
 const String hintText2 = 'Phone number, email or user name';
 const String hintText3 = 'Enter Password';
 const String hintText4 = 'Enter Name';
+const String hintText5='Enter Phone';
+const String hintText6='Enter Address';
+const String hintText7='Enter City';
+const String hintText8='Enter Country';
+const String hintText9='Enter Postal Code';
+
 const String failedToSendEmail = 'Failed to send email';
 const String donothaveanaccount= 'Don\'t have an account?';
 String emailSentSuccess = 'Email sent successfully';
@@ -29,6 +36,7 @@ const String yes='Yes';
 const String goToCheckout='Go To Checkout';
 const String payNow='Pay Now';
 const String checkOut='CHECK OUT';
+const String settings= 'Settings';
 const String deliveryInProgress='Delivery is in progress..';
 const String cantFindPageYouAreLookingFor =
     'We can\'t find the page you looking for, it will return to the ';

@@ -2,34 +2,56 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-class TextFields extends StatelessWidget {
-  const TextFields({
-    super.key,
-    required TextEditingController emailController, required this.hintText,
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String? hintText;
+  final Icon? prefixIcon;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final Widget? suffixIcon;
+  final bool readOnly;
+  final TextCapitalization? textCapitalization;
 
-  }): _emailController = emailController;
-
-  final TextEditingController _emailController;
-  final String hintText;
+  const CustomTextField(
+      {Key? key,
+      required this.controller,
+      this.hintText,
+      this.prefixIcon,
+      this.keyboardType,
+      this.obscureText = false,
+      this.suffixIcon, // Default value is false
+      this.readOnly = false,
+      this.textCapitalization=TextCapitalization.none})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      keyboardType: TextInputType.emailAddress,
-      // obscureText: true,
-      enableSuggestions: true,
-      controller: _emailController,
+      keyboardType: keyboardType,
+      controller: controller,
+      obscureText: obscureText,
+      readOnly: readOnly,
+      textCapitalization: TextCapitalization.sentences,
+      // Use the obscureText parameter
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        prefixIcon: const Icon(Icons.email, size: 24),
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 2.0),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        border: UnderlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white, width: 1.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black, width: 1.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
         hintText: hintText,
       ),
-
       style: const TextStyle(color: Colors.black, fontSize: 14),
     );
   }

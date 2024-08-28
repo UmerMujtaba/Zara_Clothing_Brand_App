@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../model/cart.dart';
 
-
 String centerText(String text, int width) {
   int totalPadding = width - text.length;
   int padLeft = (totalPadding / 2).floor();
@@ -14,16 +13,15 @@ String centerText(String text, int width) {
   return text.padLeft(text.length + padLeft).padRight(width);
 }
 
-
 String generateReceipt(List<CartItem> cartItems) {
   double totalAmount = 0.0;
   int totalItems = 0;
 
   StringBuffer receipt = StringBuffer()
-
     ..writeln(centerText("ORDER CONFIRMATION", 40))
     ..writeln()
-    ..writeln("🕒 Date & Time: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())}")
+    ..writeln(
+        "🕒 Date & Time: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())}")
     ..writeln()
     ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     ..writeln()
@@ -54,7 +52,6 @@ String generateReceipt(List<CartItem> cartItems) {
 String _formatPrice(double price) {
   return "Rs ${price.toStringAsFixed(2)}";
 }
-
 
 class MyReceipt extends ConsumerWidget {
   const MyReceipt({super.key});

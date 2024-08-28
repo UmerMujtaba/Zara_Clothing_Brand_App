@@ -15,6 +15,7 @@ class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
     final cartItemCount = ref.watch(cartProvider).length;
 
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       title: Image.asset(
         'assets/images/Logo (1).png',

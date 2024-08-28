@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zara/user_side/components/textss.dart';
+import 'package:zara/user_side/screens/settings_screens.dart';
 import '../screens/drawer_screen/product_per_collection_screen.dart';
 import '../screens/login_screen.dart';
+import 'constants.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -73,22 +76,37 @@ class MyDrawer extends StatelessWidget {
         expansionMenuItem('Beauty', []),
         expansionMenuItem('Accessories', [
           {'Glasses': ProductPerCollectionPage(collectionName: 'Glasses')},
-          {'Hats': ProductPerCollectionPage(collectionName: 'Hat')}
+          {'Hats': ProductPerCollectionPage(collectionName: 'Hat')},
         ]),
-        Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 120,vertical: 40),
-            child: ListTile(
-              leading: const Icon(Icons.logout, size: 30, color: Colors.black),
-              title: const Text(
-                'Log Out',
-                style: TextStyle(fontSize: 16, color: Colors.black,fontFamily: 'TenorSans',),
+        ListTile(
+          title: TextWidget(
+            size: 16,
+            text: settings,
+            fontFamily: 'TenorSans',
+            color: Colors.black,
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreens()),
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 40),
+          child: ListTile(
+            leading: const Icon(Icons.logout, size: 30, color: Colors.black),
+            title: const Text(
+              'Log Out',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontFamily: 'TenorSans',
               ),
-              onTap: () async {
-                await _logout(context);
-              },
             ),
+            onTap: () async {
+              await _logout(context);
+            },
           ),
         ),
       ],

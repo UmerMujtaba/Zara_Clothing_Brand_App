@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/user.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
@@ -54,6 +55,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             .collection('users')
             .doc(userModel.id)
             .set(userModel.toMap());
+
+
+        //saving name in shared preferences
+        final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        sharedPreferences.setString('username', _nameController.text);
+
 
         // Registration successful, navigate to the login screen or show a success message
         Navigator.push(
@@ -174,7 +181,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ],
                         ),
-                        TextFields(emailController: _nameController, hintText: hintText4,),
+                        CustomTextField(
+                          controller: _nameController,
+                          hintText: hintText4,
+                          prefixIcon: const Icon(Icons.text_fields_outlined),
+                          obscureText: false,
+                          keyboardType: TextInputType.text,
+                        ),
                         Gap(20),
                         const Row(
                           children: [
@@ -189,7 +202,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ],
                         ),
-                        TextFields(emailController: _emailController, hintText: hintText,),
+                        CustomTextField(
+                          controller: _emailController,
+                          hintText: hintText,
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          obscureText: false,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
                         Gap(20),
                         const Row(
                           children: [
@@ -204,34 +223,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ],
                         ),
-                        TextField(
-                          obscureText: _obscureText,
+                        CustomTextField(
                           controller: _passwordController,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock, size: 24),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.white, width: 2.0),
-                              borderRadius: BorderRadius.circular(10.0),
+                          hintText: hintText3,
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          obscureText: _obscureText,
+                          keyboardType: TextInputType.text,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText ? Icons.visibility : Icons.visibility_off,
                             ),
-                            hintText: hintText3,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscureText = !_obscureText;
-                                });
-                              },
-                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
                           ),
-                          style: const TextStyle(
-                              color: Colors.black, fontSize: 14),
                         ),
                       ],
                     ),

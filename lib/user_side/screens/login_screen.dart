@@ -44,7 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       // Sign in the user with email and password
-      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      final UserCredential userCredential =
+          await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
@@ -54,7 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
         final fcmToken = await FirebaseMessaging.instance.getToken();
 
         // Retrieve the user data from Firestore
-        DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
+        DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore
+            .instance
             .collection('users')
             .doc(userCredential.user!.uid)
             .get();
@@ -71,14 +73,17 @@ class _LoginScreenState extends State<LoginScreen> {
           userModel.fcmToken = fcmToken; // Update the local instance
 
           // Store the email in SharedPreferences
-          final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          final SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
           sharedPreferences.setString('email', _emailController.text.trim());
+          //sharedPreferences.setString('key', value)
 
           // Navigate to the home screen
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MyHomePage(), // Replace with your home screen
+              builder: (context) =>
+                  MyHomePage(), // Replace with your home screen
             ),
           );
         }
@@ -124,74 +129,86 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-
-              TextWidget(size: 32, text: helloAgain, color: Colors.black,fontFamily: 'TenorSans',letterSpacing: 2,),
-
+              TextWidget(
+                size: 32,
+                text: helloAgain,
+                color: Colors.black,
+                fontFamily: 'TenorSans',
+                letterSpacing: 2,
+              ),
               const SizedBox(height: 20),
-               Row(
+              Row(
                 children: [
-                  TextWidget(text: email,color: Colors.black,size: 16,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
-
+                  TextWidget(
+                    text: email,
+                    color: Colors.black,
+                    size: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'TenorSans',
+                  ),
                 ],
               ),
-              TextFields(emailController: _emailController, hintText: hintText,),
-
+              CustomTextField(
+                controller: _emailController,
+                hintText: hintText,
+                prefixIcon: const Icon(Icons.email_outlined),
+                obscureText: false,
+                keyboardType: TextInputType.emailAddress,
+              ),
               const SizedBox(height: 10),
-               Row(
+              Row(
                 children: [
-                  TextWidget(size: 16, text: 'PASSWORD',  color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
-
+                  TextWidget(
+                    size: 16,
+                    text: 'PASSWORD',
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'TenorSans',
+                  ),
                 ],
               ),
-              TextField(
+              CustomTextField(
                 controller: _passwordController,
+                hintText: hintText3,
+                prefixIcon: const Icon(Icons.lock_outline),
                 obscureText: _obscureText,
-                decoration: InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                    borderRadius: BorderRadius.circular(10.0),
+                keyboardType: TextInputType.text,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
                   ),
-                  hintText: hintText3,
-                  prefixIcon: const Icon(Icons.lock_rounded, size: 24),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14,fontFamily: 'TenorSans'),
               ),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          const ForgotPasswordScreen(),
-                        ),
-                      );
-                    },
-                    child: TextWidget(size: 12, text: forgotPassword, color: Colors.blueGrey,fontFamily: 'TenorSans',)
-                  ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordScreen(),
+                          ),
+                        );
+                      },
+                      child: TextWidget(
+                        size: 12,
+                        text: forgotPassword,
+                        color: Colors.blueGrey,
+                        fontFamily: 'TenorSans',
+                      )),
                 ],
               ),
               const SizedBox(height: 20),
               ElevatedButtonWidget(
                 text: loginText,
                 onPressed: login,
-
               ),
               const SizedBox(height: 15),
               Row(
@@ -202,8 +219,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 80.0,
                     color: Colors.black,
                   ),
-
-                  TextWidget(size: 16, text: socialLogin, color: Colors.black,fontWeight: FontWeight.bold,fontFamily: 'TenorSans',),
+                  TextWidget(
+                    size: 16,
+                    text: socialLogin,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'TenorSans',
+                  ),
                   Container(
                     height: 1.0,
                     width: 80.0,
@@ -219,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 45,
                     width: 45,
                     decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.8),
+                      color: Colors.transparent.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(50.0),
                       // color: Colors.blue,
                     ),
@@ -246,18 +268,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 15, text: donothaveanaccount, color: Colors.blueGrey,fontFamily: 'TenorSans',),
+              TextWidget(
+                size: 15,
+                text: donothaveanaccount,
+                color: Colors.blueGrey,
+                fontFamily: 'TenorSans',
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
-                      builder: (context) => RegistrationScreen(), // Replace with your home screen
+                      builder: (context) =>
+                          RegistrationScreen(), // Replace with your home screen
                     ),
                   );
                 },
-                child:
-                TextWidget(size: 16,letterSpacing: 2,fontWeight: FontWeight.bold,text: 'REGISTER',color: Colors.black,fontFamily: 'TenorSans',),
-
+                child: TextWidget(
+                  size: 16,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold,
+                  text: 'REGISTER',
+                  color: Colors.black,
+                  fontFamily: 'TenorSans',
+                ),
               ),
             ],
           ),

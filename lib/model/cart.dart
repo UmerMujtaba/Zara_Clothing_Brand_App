@@ -28,10 +28,11 @@ class CartItem {
   @override
   int get hashCode {
     return product.hashCode ^
-    color.hashCode ^
-    size.hashCode ^
-    quantity.hashCode;
+        color.hashCode ^
+        size.hashCode ^
+        quantity.hashCode;
   }
+
   double get totalPrice => product.price * quantity;
 }
 
@@ -49,6 +50,7 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
   void clearCart() {
     state = [];
   }
+
   void updateQuantity(CartItem item, int newQuantity) {
     state = state.map((cartItem) {
       if (cartItem == item) {
@@ -65,7 +67,6 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
 
   int get itemCount => state.length;
 }
-
 
 final cartProvider = StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
   return CartNotifier();

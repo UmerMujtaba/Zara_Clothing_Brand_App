@@ -102,8 +102,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ],
                 ),
                 Gap(20),
-                TextFields(
-                  emailController: _emailController,
+                CustomTextField(
+                  controller: _emailController,
                   hintText: hintText,
                 ),
                 const SizedBox(height: 30),

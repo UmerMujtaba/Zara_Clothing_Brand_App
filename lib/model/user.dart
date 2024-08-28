@@ -4,6 +4,11 @@ class UserModel {
   String email;
   String password;
   String? fcmToken;
+  String? address;
+  String? city;
+  String? country;
+  String? postalCode;
+  String? phoneNo;
 
   UserModel({
     this.id,
@@ -11,6 +16,11 @@ class UserModel {
     required this.email,
     required this.password,
     this.fcmToken,
+    this.address,
+    this.country,
+    this.city,
+    this.phoneNo,
+    this.postalCode,
   });
 
   // Method to convert UserModel to a Map (useful for storing in Firestore)
@@ -20,6 +30,11 @@ class UserModel {
       'name': name,
       'email': email,
       'fcmToken': fcmToken,
+      'address': address,
+      'city':city,
+      'country':country,
+      'postalCode':postalCode,
+      'phoneNo':phoneNo
     };
   }
 
@@ -29,8 +44,14 @@ class UserModel {
       id: map['id'],
       name: map['name'],
       email: map['email'],
-      password: '', // Password should not be stored as plain text in a real app
+      password: '',
+      // Password should not be stored as plain text in a real app
       fcmToken: map['fcmToken'],
+      address: map['address'],
+      city: map['city'],
+      country: map['country'],
+      postalCode: map['postalCode'],
+      phoneNo: map['phoneNo']
     );
   }
 }
