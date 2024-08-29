@@ -225,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     height: 1.0,
                     width: 80.0,
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                   TextWidget(
                     size: 16,
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     height: 1.0,
                     width: 80.0,
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ],
               ),
@@ -252,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context)
                           .colorScheme
                           .tertiary
-                          .withOpacity(0.8),
+                          .withOpacity(0.5),
                       borderRadius: BorderRadius.circular(50.0),
                       // color: Colors.blue,
                     ),
@@ -271,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context)
                           .colorScheme
                           .tertiary
-                          .withOpacity(0.8),
+                          .withOpacity(0.5),
                     ),
                     child: Icon(
                       Icons.g_mobiledata,
