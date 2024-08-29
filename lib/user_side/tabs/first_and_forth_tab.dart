@@ -56,7 +56,10 @@ class FirstAndForthTab extends ConsumerWidget {
                               : products.length == 1
                                   ? '1 Product'
                                   : '${products.length} Products',
-                          style: TextStyle(fontFamily: 'TenorSans'),
+                          style: TextStyle(
+                            fontFamily: 'TenorSans',
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -66,14 +69,15 @@ class FirstAndForthTab extends ConsumerWidget {
                           // onTap: () => _sortProducts(products),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
+                              color: Theme.of(context).colorScheme.secondary,
                               shape: BoxShape.circle,
                             ),
                             width: 40,
                             height: 40,
-                            child: const Icon(
+                            child: Icon(
                               Icons.sort,
-                              color: Colors.black,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
                         ),

@@ -80,18 +80,25 @@ class _BlogListState extends State<BlogList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppbar(),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 40),
-            TextWidget(size: 22, text: blog, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
-
+            TextWidget(
+              size: 22,
+              text: blog,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              letterSpacing: 2,
+              fontFamily: 'TenorSans',
+            ),
             CustomPaint(
               size: const Size(250, 50), // Adjust size as needed
-              painter: LineWithDiamondPainter(),
+              painter: LineWithDiamondPainter(
+                  lineColor: Theme.of(context).colorScheme.inversePrimary),
             ),
             SizedBox(
               height: 30, // Adjust height as needed
@@ -138,4 +145,3 @@ class _BlogListState extends State<BlogList> {
     );
   }
 }
-

@@ -14,19 +14,19 @@ class DeliveryProgressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: TextWidget(
           size: 21,
           text: deliveryInProgress,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.inversePrimary,
           fontFamily: 'TenorSans',
         ),
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
           onPressed: () {
             Navigator.pop(context);

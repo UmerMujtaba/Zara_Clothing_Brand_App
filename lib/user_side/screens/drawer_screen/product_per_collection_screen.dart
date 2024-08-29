@@ -7,9 +7,9 @@ import '../../components/app_bar.dart';
 import '../../components/drawer.dart';
 import '../../components/product_grid.dart';
 
-
 class ProductPerCollectionPage extends ConsumerWidget {
   ProductPerCollectionPage({super.key, required this.collectionName});
+
   final String collectionName;
 
   @override
@@ -18,7 +18,7 @@ class ProductPerCollectionPage extends ConsumerWidget {
     bool _isSortedAscending = ref.watch(isSortedAscendingProvider);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: myAppbar(),
       drawer: MyTabbedDrawer(),
       body: productsAsyncValue.when(
@@ -47,7 +47,12 @@ class ProductPerCollectionPage extends ConsumerWidget {
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
                               productText,
-                              style: TextStyle(fontFamily: 'TenorSans'),
+                              style: TextStyle(
+                                fontFamily: 'TenorSans',
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                              ),
                             ),
                           ),
                         ],
@@ -56,18 +61,22 @@ class ProductPerCollectionPage extends ConsumerWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              ref.read(isSortedAscendingProvider.notifier).state = !_isSortedAscending;
+                              ref
+                                  .read(isSortedAscendingProvider.notifier)
+                                  .state = !_isSortedAscending;
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade300,
+                                color: Theme.of(context).colorScheme.secondary,
                                 shape: BoxShape.circle,
                               ),
                               width: 40,
                               height: 40,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.sort,
-                                color: Colors.black,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
                               ),
                             ),
                           ),

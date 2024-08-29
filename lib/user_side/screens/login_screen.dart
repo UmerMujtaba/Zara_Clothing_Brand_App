@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zara/user_side/components/textss.dart';
 import 'package:zara/user_side/screens/registeration_screen.dart';
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SizedBox(
         height: screenHeight * 0.9,
         width: screenWidth * 1,
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextWidget(
                 size: 32,
                 text: helloAgain,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.inversePrimary,
                 fontFamily: 'TenorSans',
                 letterSpacing: 2,
               ),
@@ -141,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   TextWidget(
                     text: email,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     size: 16,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'TenorSans',
@@ -151,7 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextField(
                 controller: _emailController,
                 hintText: hintText,
-                prefixIcon: const Icon(Icons.email_outlined),
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
                 obscureText: false,
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -161,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextWidget(
                     size: 16,
                     text: 'PASSWORD',
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'TenorSans',
                   ),
@@ -170,12 +174,16 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextField(
                 controller: _passwordController,
                 hintText: hintText3,
-                prefixIcon: const Icon(Icons.lock_outline),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
                 obscureText: _obscureText,
                 keyboardType: TextInputType.text,
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                   onPressed: () {
                     setState(() {
@@ -217,19 +225,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     height: 1.0,
                     width: 80.0,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                   TextWidget(
                     size: 16,
                     text: socialLogin,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'TenorSans',
                   ),
                   Container(
                     height: 1.0,
                     width: 80.0,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ],
               ),
@@ -241,14 +249,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 45,
                     width: 45,
                     decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.8),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .tertiary
+                          .withOpacity(0.8),
                       borderRadius: BorderRadius.circular(50.0),
                       // color: Colors.blue,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.facebook_sharp,
                       size: 40,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
                   const SizedBox(width: 30),
@@ -257,12 +268,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50.0),
-                      color: Colors.transparent.withOpacity(0.8),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .tertiary
+                          .withOpacity(0.8),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.g_mobiledata,
                       size: 40,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
                 ],
@@ -274,6 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.blueGrey,
                 fontFamily: 'TenorSans',
               ),
+              Gap(20),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -289,7 +304,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   letterSpacing: 2,
                   fontWeight: FontWeight.bold,
                   text: 'REGISTER',
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                   fontFamily: 'TenorSans',
                 ),
               ),

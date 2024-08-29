@@ -17,36 +17,54 @@ class Footer extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image(
                 image: AssetImage('assets/images/twitter.png'),
                 height: 20,
                 width: 20,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               Image(
                 image: AssetImage('assets/images/instagram1.png'),
                 height: 20,
                 width: 20,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               Image(
-                image: AssetImage('assets/images/youtube.png'),
+                image: const AssetImage('assets/images/youtube.png'),
                 height: 20,
                 width: 20,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ],
           ),
           CustomPaint(
             size: const Size(300, 50), // Adjust size as needed
-            painter: LineWithDiamondPainter(),
+            painter: LineWithDiamondPainter(
+                lineColor: Theme.of(context).colorScheme.inversePrimary),
           ),
-          TextWidget(size: 16, text: supportEmail, color: Colors.black,fontFamily: 'TenorSans',),
-          TextWidget(size: 16, text: supportContact, color: Colors.black,fontFamily: 'TenorSans',),
-          TextWidget(size: 16, text: dateAndTime, color: Colors.black,fontFamily: 'TenorSans',),
+          TextWidget(
+              size: 16,
+              text: supportEmail,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontFamily: 'TenorSans'),
+          TextWidget(
+              size: 16,
+              text: supportContact,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontFamily: 'TenorSans'),
+          TextWidget(
+            size: 16,
+            text: dateAndTime,
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontFamily: 'TenorSans',
+          ),
           CustomPaint(
             size: const Size(300, 50), // Adjust size as needed
-            painter: LineWithDiamondPainter(),
+            painter: LineWithDiamondPainter(
+                lineColor: Theme.of(context).colorScheme.inversePrimary),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,7 +78,12 @@ class Footer extends StatelessWidget {
                     ),
                   );
                 },
-                child: TextWidget(size: 20, text: 'About', color: Colors.black,fontFamily: 'TenorSans',),
+                child: TextWidget(
+                  size: 20,
+                  text: 'About',
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontFamily: 'TenorSans',
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -71,7 +94,12 @@ class Footer extends StatelessWidget {
                     ),
                   );
                 },
-                child: TextWidget(size: 20, text: 'Contact', color: Colors.black,fontFamily: 'TenorSans',),
+                child: TextWidget(
+                  size: 20,
+                  text: 'Contact',
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontFamily: 'TenorSans',
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -82,12 +110,22 @@ class Footer extends StatelessWidget {
                     ),
                   );
                 },
-                child: TextWidget(size: 20, text: 'Blog', color: Colors.black,fontFamily: 'TenorSans',),
+                child: TextWidget(
+                  size: 20,
+                  text: 'Blog',
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontFamily: 'TenorSans',
+                ),
               ),
             ],
           ),
           const SizedBox(height: 50),
-          TextWidget(size: 14, text: copyRight, color: Colors.black,fontFamily: 'TenorSans',),
+          TextWidget(
+            size: 14,
+            text: copyRight,
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontFamily: 'TenorSans',
+          ),
           const SizedBox(height: 20)
         ],
       ),

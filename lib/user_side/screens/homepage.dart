@@ -21,6 +21,7 @@ class MyHomePage extends ConsumerWidget {
     width = size.width;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: myAppbar(),
       body: Stack(
         children: <Widget>[
@@ -40,10 +41,9 @@ class MyHomePage extends ConsumerWidget {
                 child: TextWidget(
                     size: 46,
                     text: luxuryFashionAccessories,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'PTSerif',
-
                     fontStyle: FontStyle.italic),
               ),
             ),

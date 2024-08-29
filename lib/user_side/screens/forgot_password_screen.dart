@@ -31,12 +31,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Error'),
-            content: const Text(
-                'Password reset link send! Check your email address'),
+            title: Text(
+              'Error',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
+            content: Text(
+              'Password reset link send! Check your email address',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: Text(
+                  'OK',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -51,11 +65,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Error'),
+            title: Text(
+              'Error',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
             content: Text(e.message.toString()),
             actions: <Widget>[
               TextButton(
-                child: const Text('OK'),
+                child: Text(
+                  'OK',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -70,7 +94,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: myAppbar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 0, 30, 25),
@@ -80,25 +104,31 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextWidget(
-                    size: 26,
-                    text: brandName,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 3,fontFamily: 'TenorSans',),
+                  size: 26,
+                  text: brandName,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 3,
+                  fontFamily: 'TenorSans',
+                ),
                 const SizedBox(height: 20),
                 TextWidget(
-                    size: 16,
-                    text: enterTheEmailAddress,
-                    color: Colors.black,
-                    textAlign: TextAlign.center,fontFamily: 'TenorSans',),
+                  size: 16,
+                  text: enterTheEmailAddress,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  textAlign: TextAlign.center,
+                  fontFamily: 'TenorSans',
+                ),
                 const SizedBox(height: 15),
                 Row(
                   children: [
                     TextWidget(
-                        size: 14,
-                        text: 'Email',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,fontFamily: 'TenorSans',),
+                      size: 14,
+                      text: 'Email',
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      fontFamily: 'TenorSans',
+                    ),
                   ],
                 ),
                 Gap(20),

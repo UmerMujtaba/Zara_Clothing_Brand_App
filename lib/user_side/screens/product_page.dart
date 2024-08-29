@@ -43,7 +43,7 @@ class ProductPage extends ConsumerWidget {
     final _controller = PageController();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
@@ -85,18 +85,20 @@ class ProductPage extends ConsumerWidget {
                     children: [
                       Text(
                         product.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                           fontFamily: 'TenorSans',
                           letterSpacing: 2,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                         textAlign: TextAlign.start,
                       ),
                       Text(
                         product.description,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'TenorSans',
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                         maxLines: null, // Allow unlimited lines
                         softWrap: true, // Wrap text to the next line
@@ -107,10 +109,10 @@ class ProductPage extends ConsumerWidget {
                         height: 5,
                       ),
                       Text(
-                        product.price.toString(),
+                        'Rs ${product.price.toString()}',
                         style: const TextStyle(
                             fontFamily: 'TenorSans',
-                            color: Colors.red,
+                            color: Colors.orangeAccent,
                             fontSize: 16),
                       ),
                       Row(
@@ -118,12 +120,20 @@ class ProductPage extends ConsumerWidget {
                           children: [
                             Row(
                               children: [
-                                const Text('Color: '),
-                                _buildColorRadioButton('Black', Colors.black,ref ),
+                                Text(
+                                  'Color: ',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                  ),
+                                ),
                                 _buildColorRadioButton(
-                                    'Orange', Colors.orange.shade300,ref  ),
+                                    'Black', Colors.black, ref),
                                 _buildColorRadioButton(
-                                    'Grey', Colors.grey.shade400,ref ),
+                                    'Orange', Colors.orange.shade300, ref),
+                                _buildColorRadioButton(
+                                    'Grey', Colors.grey.shade400, ref),
                               ],
                             ),
                             const SizedBox(
@@ -131,9 +141,9 @@ class ProductPage extends ConsumerWidget {
                             ),
                             Row(children: [
                               const Text('Size: '),
-                              _buildSizeRadioButton('S',ref),
-                              _buildSizeRadioButton('M',ref),
-                              _buildSizeRadioButton('L',ref),
+                              _buildSizeRadioButton('S', ref),
+                              _buildSizeRadioButton('M', ref),
+                              _buildSizeRadioButton('L', ref),
                             ]),
                           ]),
                     ]),
@@ -151,7 +161,7 @@ class ProductPage extends ConsumerWidget {
           const SizedBox(
             height: 10,
           ),
-          const Row(
+          Row(
             children: [
               Text(
                 material,
@@ -159,6 +169,7 @@ class ProductPage extends ConsumerWidget {
                   fontWeight: FontWeight.w600,
                   fontFamily: 'TenorSans',
                   letterSpacing: 2,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
             ],
@@ -166,15 +177,16 @@ class ProductPage extends ConsumerWidget {
           const SizedBox(
             height: 5,
           ),
-          const Text(
+          Text(
             materialDetail,
             style: TextStyle(
               fontFamily: 'TenorSans',
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             textAlign: TextAlign.start,
           ),
           const SizedBox(height: 10),
-          const Row(
+          Row(
             children: [
               Text(
                 care,
@@ -182,6 +194,7 @@ class ProductPage extends ConsumerWidget {
                   fontWeight: FontWeight.w600,
                   fontFamily: 'TenorSans',
                   letterSpacing: 2,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
             ],
@@ -189,69 +202,90 @@ class ProductPage extends ConsumerWidget {
           const SizedBox(height: 5),
           Text(
             careDetail(product.name),
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'TenorSans',
+              color: Theme.of(context).colorScheme.inversePrimary,
               // fontWeight: FontWeight.w600
             ),
             textAlign: TextAlign.start,
           ),
           const SizedBox(height: 20),
-          const Row(
+          Row(
             children: [
               Image(
                 image: AssetImage('assets/icons/not-bleach.png'),
                 width: 18,
                 height: 18,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               SizedBox(width: 10),
               Text(
                 doNotBleach,
-                style: TextStyle(fontFamily: 'TenorSans', fontSize: 15),
+                style: TextStyle(
+                  fontFamily: 'TenorSans',
+                  fontSize: 15,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               )
             ],
           ),
           const SizedBox(height: 15),
-          const Row(
+          Row(
             children: [
               Image(
                 image: AssetImage('assets/icons/quick-dry.png'),
                 width: 18,
                 height: 18,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               SizedBox(width: 10),
               Text(
                 doNotTumbleDry,
-                style: TextStyle(fontFamily: 'TenorSans', fontSize: 15),
+                style: TextStyle(
+                  fontFamily: 'TenorSans',
+                  fontSize: 15,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               )
             ],
           ),
           const SizedBox(height: 15),
-          const Row(
+          Row(
             children: [
               Image(
                 image: AssetImage('assets/icons/towels.png'),
                 width: 18,
                 height: 18,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               SizedBox(width: 10),
               Text(
                 dryCleanWith,
-                style: TextStyle(fontFamily: 'TenorSans', fontSize: 15),
+                style: TextStyle(
+                  fontFamily: 'TenorSans',
+                  fontSize: 15,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               )
             ],
           ),
           const SizedBox(height: 15),
-          const Row(
+          Row(
             children: [
               Image(
                 image: AssetImage('assets/icons/ironing.png'),
                 width: 18,
                 height: 18,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               SizedBox(width: 10),
               Text(
                 ironAtMax,
-                style: TextStyle(fontFamily: 'TenorSans', fontSize: 15),
+                style: TextStyle(
+                  fontFamily: 'TenorSans',
+                  fontSize: 15,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               )
             ],
           ),
@@ -259,13 +293,19 @@ class ProductPage extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.local_shipping_outlined),
+                  Icon(
+                    Icons.local_shipping_outlined,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                   SizedBox(width: 8),
                   Text(
                     freeFlatRateShipping,
-                    style: TextStyle(fontFamily: 'TenorSans'),
+                    style: TextStyle(
+                      fontFamily: 'TenorSans',
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
                   ),
                 ],
               ),
@@ -359,7 +399,8 @@ class ProductPage extends ConsumerWidget {
   }
 
   // Function to build custom color radio button
-  Widget _buildColorRadioButton(String color, Color buttonColor, WidgetRef ref) {
+  Widget _buildColorRadioButton(
+      String color, Color buttonColor, WidgetRef ref) {
     final _selectedColor = ref.watch(selectedColorProvider);
 
     return GestureDetector(

@@ -13,12 +13,19 @@ class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartItemCount = ref.watch(cartProvider).length;
+    bool isDarkBackground =
+        Theme.of(context).colorScheme.surface.computeLuminance() < 0.5;
+
+    // Choose the image based on the background color
+    String imageAsset = isDarkBackground
+        ? 'assets/images/Logo (2).png' // Image for dark backgrounds
+        : 'assets/images/Logo (1).png';
 
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       title: Image.asset(
-        'assets/images/Logo (1).png',
+        imageAsset,
         filterQuality: FilterQuality.high,
       ),
       centerTitle: true,
@@ -72,5 +79,3 @@ class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
     );
   }
 }
-
-

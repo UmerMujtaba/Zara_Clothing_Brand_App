@@ -30,7 +30,8 @@ class MyDrawer extends StatelessWidget {
       return ExpansionTile(
         title: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             fontSize: 16,
@@ -41,7 +42,10 @@ class MyDrawer extends StatelessWidget {
           return ListTile(
             title: Text(
               subItem.keys.first,
-              style: const TextStyle(fontFamily: 'TenorSans'),
+              style: TextStyle(
+                fontFamily: 'TenorSans',
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -83,24 +87,28 @@ class MyDrawer extends StatelessWidget {
             size: 16,
             text: settings,
             fontFamily: 'TenorSans',
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SettingsScreens()),
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
             );
           },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 40),
           child: ListTile(
-            leading: const Icon(Icons.logout, size: 30, color: Colors.black),
-            title: const Text(
+            leading: Icon(
+              Icons.logout,
+              size: 30,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            title: Text(
               'Log Out',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.inversePrimary,
                 fontFamily: 'TenorSans',
               ),
             ),
@@ -122,16 +130,22 @@ class MyTabbedDrawer extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios_rounded)),
-          bottom: const TabBar(
-            labelStyle: TextStyle(fontFamily: 'TenorSans'),
+              icon: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              )),
+          bottom: TabBar(
+            labelStyle: TextStyle(
+              fontFamily: 'TenorSans',
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
             tabs: [
               Tab(text: 'WOMEN'),
               Tab(text: 'MAN'),

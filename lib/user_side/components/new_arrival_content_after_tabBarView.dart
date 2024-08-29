@@ -12,12 +12,18 @@ class New_arrival_content_after_tabBarView extends StatelessWidget {
       children: [
         const SizedBox(height: 20.0),
         TextWidget(
-            size: 22, text: 'FOLLOW US', color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
+          size: 22,
+          text: 'FOLLOW US',
+          color: Theme.of(context).colorScheme.inversePrimary,
+          letterSpacing: 2,
+          fontFamily: 'TenorSans',
+        ),
         const SizedBox(height: 10.0),
-        const Image(
+        Image(
           image: AssetImage('assets/images/instagram.png'),
           height: 30,
           width: 30,
+          color: Theme.of(context).colorScheme.inversePrimary,
         ),
         const SizedBox(height: 20),
         const Column(
@@ -35,9 +41,7 @@ class New_arrival_content_after_tabBarView extends StatelessWidget {
               text2: '@_john',
             ),
           ],
-
         ),
-
       ],
     );
   }

@@ -5,9 +5,9 @@ class TabbarExample extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TabBar(
-      labelStyle: TextStyle(fontFamily : 'TenorSans'),
-      labelColor: Colors.black,
+    return TabBar(
+      labelStyle: TextStyle(fontFamily: 'TenorSans'),
+      labelColor: Theme.of(context).colorScheme.inversePrimary,
       tabs: [
         Tab(
           text: "All",

@@ -18,7 +18,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
@@ -28,30 +28,37 @@ class _AboutUsState extends State<AboutUs> {
             child: Column(children: [
               const SizedBox(height: 40),
               TextWidget(
-                  size: 22,
-                  text: ourStoryHeading,
-                  color: Colors.black,
-                  letterSpacing: 2,fontFamily: 'TenorSans',),
-
+                size: 22,
+                text: ourStoryHeading,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                letterSpacing: 2,
+                fontFamily: 'TenorSans',
+              ),
               CustomPaint(
                 size: const Size(250, 50), // Adjust size as needed
-                painter: LineWithDiamondPainter(),
+                painter: LineWithDiamondPainter(
+                    lineColor: Theme.of(context).colorScheme.inversePrimary),
               ),
               TextWidget(
-                  size: 14,
-                  text: ourStoryDetail,
-                  color: Colors.grey,
-                  textAlign: TextAlign.justify,fontFamily: 'TenorSans',),
+                size: 14,
+                text: ourStoryDetail,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                textAlign: TextAlign.justify,
+                fontFamily: 'TenorSans',
+              ),
               const BlogContainer(bgImage: 'assets/images/blog3.jpg', name: ''),
               const SizedBox(height: 40),
               TextWidget(
-                  size: 22,
-                  text: 'SIGN UP',
-                  color: Colors.black,
-                  letterSpacing: 2,fontFamily: 'TenorSans',),
+                size: 22,
+                text: 'SIGN UP',
+                color: Theme.of(context).colorScheme.inversePrimary,
+                letterSpacing: 2,
+                fontFamily: 'TenorSans',
+              ),
               CustomPaint(
                 size: const Size(250, 50), // Adjust size as needed
-                painter: LineWithDiamondPainter(),
+                painter: LineWithDiamondPainter(
+                    lineColor: Theme.of(context).colorScheme.inversePrimary),
               ),
               const EmailForm(),
             ]),

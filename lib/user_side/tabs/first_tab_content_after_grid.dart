@@ -21,6 +21,12 @@ class First_tab_content_after_Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkBackground =
+        Theme.of(context).colorScheme.surface.computeLuminance() < 0.5;
+    String imageAsset = isDarkBackground
+        ? 'assets/images/Logo (2).png' // Image for dark backgrounds
+        : 'assets/images/Logo (1).png';
+
     return Column(
       children: [
         TextButton(
@@ -28,13 +34,18 @@ class First_tab_content_after_Grid extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextWidget(size: 22, text: exploreMore, color: Colors.black,fontFamily: 'TenorSans',),
+              TextWidget(
+                size: 22,
+                text: exploreMore,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                fontFamily: 'TenorSans',
+              ),
               const SizedBox(width: 5),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(
+                icon: Icon(
                   Icons.chevron_right,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                   size: 24,
                 ),
               ),
@@ -44,7 +55,8 @@ class First_tab_content_after_Grid extends StatelessWidget {
 
         CustomPaint(
           size: const Size(300, 50), // Adjust size as needed
-          painter: LineWithDiamondPainter(),
+          painter: LineWithDiamondPainter(
+              lineColor: Theme.of(context).colorScheme.inversePrimary),
         ),
         const SizedBox(height: 16.0),
         // Add spacing between sections
@@ -76,13 +88,19 @@ class First_tab_content_after_Grid extends StatelessWidget {
         ),
         CustomPaint(
           size: const Size(300, 50), // Adjust size as needed
-          painter: LineWithDiamondPainter(),
+          painter: LineWithDiamondPainter(
+              lineColor: Theme.of(context).colorScheme.inversePrimary),
         ),
         const SizedBox(height: 10.0),
         //
 
         TextWidget(
-            size: 22, text: collections, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
+          size: 22,
+          text: collections,
+          color: Theme.of(context).colorScheme.inversePrimary,
+          letterSpacing: 2,
+          fontFamily: 'TenorSans',
+        ),
 
         const SizedBox(height: 10.0),
         //
@@ -98,11 +116,17 @@ class First_tab_content_after_Grid extends StatelessWidget {
         const SizedBox(height: 10.0),
         //
         TextWidget(
-            size: 22, text: justForYou, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
+          size: 22,
+          text: justForYou,
+          color: Theme.of(context).colorScheme.inversePrimary,
+          letterSpacing: 2,
+          fontFamily: 'TenorSans',
+        ),
 
         CustomPaint(
           size: const Size(300, 50), // Adjust size as needed
-          painter: LineWithDiamondPainter(),
+          painter: LineWithDiamondPainter(
+              lineColor: Theme.of(context).colorScheme.inversePrimary),
         ),
         SizedBox(
           height: 310,
@@ -113,6 +137,7 @@ class First_tab_content_after_Grid extends StatelessWidget {
                 products.map((item) => ItemContainer(item: item)).toList(),
           ),
         ),
+        const SizedBox(height: 20.0),
         SmoothPageIndicator(
           controller: _controller,
           count: 3,
@@ -121,14 +146,19 @@ class First_tab_content_after_Grid extends StatelessWidget {
             dotHeight: 10.0,
             paintStyle: PaintingStyle.stroke,
             strokeWidth: 1.5,
-            dotColor: Colors.grey,
-            activeDotColor: Colors.grey.shade800,
+            dotColor: Theme.of(context).colorScheme.inversePrimary,
+            activeDotColor: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
         const SizedBox(height: 20.0),
         //
         TextWidget(
-            size: 22, text: trending, color: Colors.black, letterSpacing: 2,fontFamily: 'TenorSans',),
+          size: 22,
+          text: trending,
+          color: Theme.of(context).colorScheme.inversePrimary,
+          letterSpacing: 2,
+          fontFamily: 'TenorSans',
+        ),
 
         const SizedBox(height: 20.0),
         //
@@ -151,21 +181,23 @@ class First_tab_content_after_Grid extends StatelessWidget {
         ),
         const SizedBox(height: 20.0),
         //
-        const Column(
+        Column(
           children: [
-            Image(
-                image: AssetImage('assets/images/Logo (1).png'),
-                filterQuality: FilterQuality.high),
+            Image.asset(
+              imageAsset,
+              filterQuality: FilterQuality.high,
+            ),
           ],
         ),
         const SizedBox(height: 20.0),
         TextWidget(
-            size: 16,
-            text: makingALuxuriousLifeStyle,
-            color: Colors.black,
-            letterSpacing: 2,
-            textAlign: TextAlign.center
-          ,fontFamily: 'TenorSans',),
+          size: 16,
+          text: makingALuxuriousLifeStyle,
+          color: Theme.of(context).colorScheme.inversePrimary,
+          letterSpacing: 2,
+          textAlign: TextAlign.center,
+          fontFamily: 'TenorSans',
+        ),
 
         const SizedBox(height: 10),
         const ImageTextRow(

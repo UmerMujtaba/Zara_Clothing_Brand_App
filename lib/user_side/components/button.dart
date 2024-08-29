@@ -14,14 +14,14 @@ class MyButton extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.symmetric(horizontal: 60),
         decoration: BoxDecoration(
-            color: Colors.transparent.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(50)),
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.inversePrimary,
                 letterSpacing: 3,
                 fontFamily: 'TenorSans',
                 fontSize: 16),
@@ -44,7 +44,11 @@ class Mybutton2 extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1),
+          color: Theme.of(context).colorScheme.tertiary,
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.surface,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
@@ -53,13 +57,16 @@ class Mybutton2 extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: const TextStyle(fontFamily: 'TenorSans'),
+                style: TextStyle(
+                  fontFamily: 'TenorSans',
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               ),
               const SizedBox(width: 5),
-              const Icon(
+              Icon(
                 Icons.add,
                 size: 15,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ],
           ),
@@ -80,7 +87,7 @@ class Button3 extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
         // Set the background color to black
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
@@ -91,9 +98,9 @@ class Button3 extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: 'TenorSans',
-          color: Colors.white, // Set text color to white for contrast
+          color: Theme.of(context).colorScheme.inversePrimary,
         ),
       ),
     );
@@ -159,19 +166,19 @@ class ElevatedButtonWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent.withOpacity(0.5),
+        backgroundColor:
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
         shadowColor: Colors.transparent,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         // Set the background color of the button
         minimumSize: Size(double.infinity, 40),
       ),
       child: Text(
         text,
         style: TextStyle(
-            color: Colors.white,
-        fontFamily: 'TenorSans',
-        fontSize: 18), // Set the text color of the button
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontFamily: 'TenorSans',
+            fontSize: 18), // Set the text color of the button
       ),
     );
   }

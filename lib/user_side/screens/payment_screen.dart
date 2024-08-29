@@ -123,18 +123,21 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: TextWidget(
             size: 22,
             text: checkOut,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
             fontFamily: 'TenorSans',
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },

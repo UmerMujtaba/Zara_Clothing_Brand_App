@@ -14,8 +14,8 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: myAppbar(),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: SingleChildScrollView(
         child: Center(
@@ -23,20 +23,37 @@ class ErrorScreen extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Column(children: [
               const SizedBox(height: 40),
-
-              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
-              TextWidget(size: 22, text: pageNotFound, color: Colors.black,letterSpacing: 2,fontFamily: 'TenorSans',),
-
+              TextWidget(
+                size: 22,
+                text: pageNotFound,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                letterSpacing: 2,
+                fontFamily: 'TenorSans',
+              ),
+              TextWidget(
+                size: 22,
+                text: pageNotFound,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                letterSpacing: 2,
+                fontFamily: 'TenorSans',
+              ),
               CustomPaint(
                 size: const Size(250, 50), // Adjust size as needed
-                painter: LineWithDiamondPainter(),
+                painter: LineWithDiamondPainter(
+                    lineColor: Theme.of(context).colorScheme.inversePrimary),
               ),
-              const Image(
-                image: AssetImage('assets/icons/girl.png'),
+              Image(
+                image: const AssetImage('assets/icons/girl.png'),
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               const SizedBox(height: 20),
-              TextWidget(size: 14, text: cantFindPageYouAreLookingFor, color: Colors.black,textAlign: TextAlign.center,fontFamily: 'TenorSans',),
-
+              TextWidget(
+                size: 14,
+                text: cantFindPageYouAreLookingFor,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                textAlign: TextAlign.center,
+                fontFamily: 'TenorSans',
+              ),
               const SizedBox(height: 20),
               Button3(
                 text: 'HOME PAGE',

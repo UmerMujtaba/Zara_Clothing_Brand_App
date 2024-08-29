@@ -24,13 +24,13 @@ class ItemContainer extends ConsumerWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondary,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
+              color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: const Offset(0, 3),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
@@ -39,7 +39,7 @@ class ItemContainer extends ConsumerWidget {
           children: [
             Image.network(
               item.imageUrl,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               width: double.infinity,
               height: 250, // Adjust height as needed
             ),
@@ -47,7 +47,8 @@ class ItemContainer extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 item.name,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                   fontFamily: 'TenorSans',
@@ -57,15 +58,14 @@ class ItemContainer extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                item.price.toString(),
-                style: const TextStyle(
-                  color: Colors.red,
+                'Rs ${item.price.toString()}',
+                style: TextStyle(
+                  color: Colors.orangeAccent,
                   fontSize: 14,
                   fontFamily: 'TenorSans',
                 ),
               ),
             ),
-
           ],
         ),
       ),

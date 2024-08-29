@@ -18,33 +18,25 @@ String generateReceipt(List<CartItem> cartItems) {
   int totalItems = 0;
 
   StringBuffer receipt = StringBuffer()
-    ..writeln(centerText("ORDER CONFIRMATION", 40))
-    ..writeln()
-    ..writeln(
-        "🕒 Date & Time: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())}")
-    ..writeln()
-    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    ..writeln()
-    ..writeln("🛒 𝓨𝓸𝓾𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝓢𝓾𝓶𝓶𝓪𝓻𝔂")
-    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    ..writeln(centerText("ORDER CONFIRMATION", 40))..writeln()..writeln(
+        "🕒 Date & Time: ${DateFormat('yyyy-MM-dd HH:mm:ss').format(
+            DateTime.now())}")..writeln()..writeln(
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")..writeln()..writeln(
+        "🛒 𝓨𝓸𝓾𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝓢𝓾𝓶𝓶𝓪𝓻𝔂")..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
   for (var item in cartItems) {
     totalAmount += item.totalPrice;
     totalItems += item.quantity;
 
-    receipt
-      ..writeln("🛍️ ${item.quantity} x ${item.product.name}")
-      ..writeln("   - ${_formatPrice(item.product.price)} each")
-      ..writeln();
+    receipt..writeln("🛍️ ${item.quantity} x ${item.product.name}")..writeln(
+        "   - ${_formatPrice(item.product.price)} each")..writeln();
   }
 
-  receipt
-    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    ..writeln("🔢 Total Items: $totalItems")
-    ..writeln("💵 Total Price: ${_formatPrice(totalAmount)}")
-    ..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    ..writeln()
-    ..writeln("🙏 𝓣𝓱𝓪𝓷𝓴 𝓨𝓸𝓾 𝓯𝓸𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝔀𝓲𝓽𝓱 𝓤𝓼!");
+  receipt..writeln("━━━━━━━━━━━━━━━━━━━━━━━━━━━")..writeln(
+      "🔢 Total Items: $totalItems")..writeln(
+      "💵 Total Price: ${_formatPrice(totalAmount)}")..writeln(
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━")..writeln()..writeln(
+      "🙏 𝓣𝓱𝓪𝓷𝓴 𝓨𝓸𝓾 𝓯𝓸𝓻 𝓢𝓱𝓸𝓹𝓹𝓲𝓷𝓰 𝔀𝓲𝓽𝓱 𝓤𝓼!");
 
   return receipt.toString();
 }
@@ -75,32 +67,45 @@ class MyReceipt extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Here's your receipt.",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Theme
+                  .of(context)
+                  .colorScheme
+                  .inversePrimary,),
             ),
             const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme
+                      .of(context)
+                      .colorScheme
+                      .tertiary,
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.all(16),
               child: Text(
                 receiptContent,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'TenorSans',
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Theme
+                      .of(context)
+                      .colorScheme
+                      .inversePrimary,
                 ),
               ),
             ),
             const SizedBox(height: 25),
-            const Text(
+            Text(
               'Estimated Delivery time is 4:10 PM',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16, color: Theme
+                  .of(context)
+                  .colorScheme
+                  .inversePrimary,),
             ),
           ],
         ),
@@ -118,11 +123,11 @@ class MyReceipt extends ConsumerWidget {
 
     final totalAmount = cartItems.fold<double>(
       0.0,
-      (previousValue, item) => previousValue + item.totalPrice,
+          (previousValue, item) => previousValue + item.totalPrice,
     );
     final totalItems = cartItems.fold<int>(
       0,
-      (previousValue, item) => previousValue + item.quantity,
+          (previousValue, item) => previousValue + item.quantity,
     );
 
     // Prepare receipt data

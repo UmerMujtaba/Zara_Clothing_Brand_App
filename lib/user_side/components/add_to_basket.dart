@@ -8,8 +8,8 @@ class AddToBasket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.black,
-        child: const Row(
+        color: Theme.of(context).colorScheme.tertiary,
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
@@ -18,20 +18,15 @@ class AddToBasket extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.add,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
                 Text('ADD TO BASKET',
                     style: TextStyle(
-                        fontFamily: 'TenorSans', color: Colors.white)),
+                      fontFamily: 'TenorSans',
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    )),
               ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-              ),
             ),
           ],
         ));

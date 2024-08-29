@@ -17,11 +17,15 @@ class NewArrival extends ConsumerWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: TextWidget(size: 22, text: newArrival, color: Colors.black,fontFamily: 'TenorSans',),
-
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          title: TextWidget(
+            size: 22,
+            text: newArrival,
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontFamily: 'TenorSans',
+          ),
           centerTitle: true,
           bottom: const TabbarExample(),
         ),
@@ -35,7 +39,15 @@ class NewArrival extends ConsumerWidget {
                   children: [
                     FirstAndForthTab(
                       controller: controller,
-                      collectionNames: const ['Leather', 'Dress', 'Outer', 'Glasses', 'Hat', 'Tshirts', 'Fancy'],
+                      collectionNames: const [
+                        'Leather',
+                        'Dress',
+                        'Outer',
+                        'Glasses',
+                        'Hat',
+                        'Tshirts',
+                        'Fancy'
+                      ],
                     ),
                     SecondAndThirdTab(
                       controller: controller,

@@ -15,7 +15,7 @@ class ImageTextRow extends StatelessWidget {
     required this.text,
     required this.imagePath2,
     required this.text2,
-    this.imageSize = 40.0,  // Default image size
+    this.imageSize = 40.0, // Default image size
     this.textStyle,
   }) : super(key: key);
 
@@ -27,18 +27,24 @@ class ImageTextRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Flexible(
-
             child: Column(
               children: [
                 Image(
                   image: AssetImage(imagePath),
                   width: imageSize,
                   height: imageSize,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
-                const SizedBox(height: 8),  // Add some spacing between image and text
+                const SizedBox(height: 8),
+                // Add some spacing between image and text
                 Text(
                   text,
-                  style: textStyle ?? const TextStyle(fontSize: 16,fontFamily: 'TenorSans'),
+                  style: textStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'TenorSans',
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -46,18 +52,24 @@ class ImageTextRow extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Flexible(
-
             child: Column(
               children: [
                 Image(
                   image: AssetImage(imagePath2),
                   width: imageSize,
                   height: imageSize,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
-                const SizedBox(height: 8),  // Add some spacing between image and text
+                const SizedBox(height: 8),
+                // Add some spacing between image and text
                 Text(
                   text2,
-                  style: textStyle ?? const TextStyle(fontSize: 16,fontFamily: 'TenorSans'),
+                  style: textStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'TenorSans',
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],

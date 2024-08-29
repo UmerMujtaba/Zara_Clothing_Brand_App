@@ -47,7 +47,9 @@ class ImageTextStack extends StatelessWidget {
                     child: Text(
                       text,
                       style: const TextStyle(
-                          color: Colors.black,fontFamily: 'TenorSans',fontSize: 16),
+                          color: Colors.black,
+                          fontFamily: 'TenorSans',
+                          fontSize: 16),
                     ),
                   ),
                 ],
@@ -79,7 +81,9 @@ class ImageTextStack extends StatelessWidget {
                     child: Text(
                       text2,
                       style: const TextStyle(
-                          color: Colors.black,fontFamily: 'TenorSans',fontSize: 16),
+                          color: Colors.black,
+                          fontFamily: 'TenorSans',
+                          fontSize: 16),
                     ),
                   ),
                 ],

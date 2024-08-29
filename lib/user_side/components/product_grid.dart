@@ -26,16 +26,17 @@ class ProductGrid extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProductPage(product: product)),
+              MaterialPageRoute(
+                  builder: (context) => ProductPage(product: product)),
             );
           },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondary,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 2,
                   blurRadius: 5,
                   offset: const Offset(0, 3),
@@ -43,7 +44,6 @@ class ProductGrid extends StatelessWidget {
               ],
             ),
             child: Column(
-
               children: [
                 Stack(
                   children: [
@@ -53,12 +53,12 @@ class ProductGrid extends StatelessWidget {
                       width: double.infinity,
                       height: 250, // Adjust height as needed
                     ),
-                    const Positioned(
+                    Positioned(
                       bottom: 8,
                       right: 8,
                       child: Icon(
                         Icons.favorite_border,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
                   ],
@@ -70,12 +70,16 @@ class ProductGrid extends StatelessWidget {
                     children: [
                       Text(
                         product.name, // Use product name
-                        style: const TextStyle(fontFamily: 'TenorSans'),
+                        style: TextStyle(
+                          fontFamily: 'TenorSans',
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                       Text(
-                        product.price.toString(), // Use product price
+                        'Rs ${product.price.toString()}', // Use product price
                         style: const TextStyle(
-                            fontFamily: 'TenorSans', color: Colors.orange),
+                            fontFamily: 'TenorSans',
+                            color: Colors.orangeAccent),
                       ),
                     ],
                   ),

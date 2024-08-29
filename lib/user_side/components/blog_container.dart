@@ -16,23 +16,25 @@ class BlogContainer extends StatelessWidget {
         SizedBox(
           height: 250,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
             child: Stack(
               children: [
                 SizedBox(
                   width: double.infinity,
                   child: Image.network(
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     bgImage,
                     fit: BoxFit.cover,
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   top: 10.0,
                   right: 10.0,
                   child: Icon(
                     Icons.favorite_border,
                     size: 30,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
                 Positioned(
@@ -40,10 +42,10 @@ class BlogContainer extends StatelessWidget {
                   left: 10.0,
                   child: Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'TenorSans',
                       fontSize: 22,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
                 ),
@@ -63,11 +65,6 @@ class BlogContainer extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
 
 class BlogContainerRow extends StatelessWidget {
   const BlogContainerRow(

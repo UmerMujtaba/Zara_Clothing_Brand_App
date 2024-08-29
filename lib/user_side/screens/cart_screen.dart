@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart'; // Import fluttertoast package
 import 'package:zara/model/cart.dart';
 import 'package:zara/user_side/components/textss.dart';
 import 'package:zara/user_side/screens/payment_screen.dart';
@@ -7,6 +8,7 @@ import '../../providers/providers.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
 import '../components/quantity_selector.dart';
+import '../components/toasts.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({super.key});
@@ -16,20 +18,20 @@ class CartPage extends ConsumerWidget {
     final cart = ref.watch(cartProvider);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
         title: TextWidget(
             size: 22,
             text: 'C A R T',
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
             fontFamily: 'TenorSans'),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -37,9 +39,9 @@ class CartPage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.delete,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             onPressed: () {
               showDialog(
@@ -47,7 +49,7 @@ class CartPage extends ConsumerWidget {
                 builder: (context) => AlertDialog(
                   title: TextWidget(
                     size: 20,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     text: areYouSureYouWantToEmptyCart,
                     fontFamily: 'TenorSans',
                   ),
@@ -59,7 +61,7 @@ class CartPage extends ConsumerWidget {
                         child: TextWidget(
                           size: 14,
                           text: cancel,
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         )),
                     TextButton(
                         onPressed: () {
@@ -69,7 +71,7 @@ class CartPage extends ConsumerWidget {
                         child: TextWidget(
                           size: 14,
                           text: yes,
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         )),
                   ],
                 ),
@@ -83,7 +85,14 @@ class CartPage extends ConsumerWidget {
           // List of cart items
           Expanded(
             child: cart.isEmpty
-                ? const Center(child: Text('Cart is empty..'))
+                ? Center(
+                    child: Text(
+                    'Cart is empty..',
+                    style: TextStyle(
+                        fontFamily: 'TenorSans',
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontSize: 16),
+                  ))
                 : ListView.builder(
                     itemCount: cart.length,
                     itemBuilder: (context, index) {
@@ -95,12 +104,20 @@ class CartPage extends ConsumerWidget {
           ),
           MyButton(
             text: goToCheckout,
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const PaymentPage(),
-              ),
-            ),
+            onTap: () {
+              if (cart.isEmpty) {
+                // Show toast if the cart is empty
+                toastBasicRed('Cart is Empty');
+              } else {
+                // Navigate to payment page if the cart is not empty
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PaymentPage(),
+                  ),
+                );
+              }
+            },
           ),
           const SizedBox(height: 25),
         ],
@@ -119,28 +136,33 @@ class MyCartTile extends ConsumerWidget {
     return ListTile(
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-      leading: // Adjust the height as needed
-          Image.network(
+      leading: Image.network(
         cartItem.product.imageUrl,
         fit: BoxFit.cover,
       ),
       title: TextWidget(
         size: 16,
         text: cartItem.product.name,
-        color: Colors.black,
+        color: Theme.of(context).colorScheme.inversePrimary,
         fontFamily: 'TenorSans',
       ),
       subtitle: Text(
         'Color: ${cartItem.color}\nSize: ${cartItem.size}\nQuantity: ${cartItem.quantity}\nPrice: ${cartItem.totalPrice}',
-        // Assuming Product has price
-        style: TextStyle(fontFamily: 'TenorSans', fontSize: 14),
+        style: TextStyle(
+          fontFamily: 'TenorSans',
+          fontSize: 14,
+          color: Theme.of(context).colorScheme.primary,
+        ),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           MyQuantitySelector(cartItem: cartItem),
           IconButton(
-            icon: const Icon(Icons.remove_shopping_cart),
+            icon: Icon(
+              Icons.remove_shopping_cart,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
             onPressed: () {
               ref.read(cartProvider.notifier).removeItem(cartItem);
             },

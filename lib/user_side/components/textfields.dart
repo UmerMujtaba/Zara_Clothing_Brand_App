@@ -21,7 +21,7 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.suffixIcon, // Default value is false
       this.readOnly = false,
-      this.textCapitalization=TextCapitalization.none})
+      this.textCapitalization = TextCapitalization.none})
       : super(key: key);
 
   @override
@@ -34,25 +34,33 @@ class CustomTextField extends StatelessWidget {
       textCapitalization: TextCapitalization.sentences,
       // Use the obscureText parameter
       decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        border: UnderlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: const BorderSide(color: Colors.black, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        hintText: hintText,
-      ),
-      style: const TextStyle(color: Colors.black, fontSize: 14),
+          filled: false,
+          fillColor: Theme.of(context).colorScheme.inversePrimary,
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          border: UnderlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                width: 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontStyle: FontStyle.italic,
+              fontSize: 12,
+              fontWeight: FontWeight.w300,
+              fontFamily: 'TenorSans')),
+      style: TextStyle(
+          color: Theme.of(context).colorScheme.inversePrimary, fontSize: 14),
     );
   }
 }

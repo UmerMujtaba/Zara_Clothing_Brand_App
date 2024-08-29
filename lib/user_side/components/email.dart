@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:zara/user_side/components/button.dart';
 
 import 'constants.dart';
 
@@ -34,7 +35,7 @@ class _EmailFormState extends State<EmailForm> {
     try {
       await FlutterEmailSender.send(email);
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text(emailSentSuccess)),
+        SnackBar(content: Text(emailSentSuccess)),
       );
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -60,26 +61,12 @@ class _EmailFormState extends State<EmailForm> {
             keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _sendEmail,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black, // Black button background
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0), // Rectangular shape
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 16), // Button padding
-            ),
-            child: const Text(
-              submit,
-              style: TextStyle(
-                fontFamily: 'TenorSans',
-                color: Colors.white, // White text color
-              ),
-            ),
+          MyButton(
+            text: submit,
+            onTap: _sendEmail,
           ),
         ],
       ),
     );
   }
 }
-

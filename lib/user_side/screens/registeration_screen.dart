@@ -2,25 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/user.dart';
+import '../../theme/theme_provider.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
 import '../components/textfields.dart';
 import 'login_screen.dart';
 
-class RegistrationScreen extends StatefulWidget {
+class RegistrationScreen extends ConsumerStatefulWidget {
   const RegistrationScreen({
     super.key,
   });
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  ConsumerState<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   bool _obscureText = true;
@@ -56,11 +58,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             .doc(userModel.id)
             .set(userModel.toMap());
 
-
         //saving name in shared preferences
-        final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        final SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
         sharedPreferences.setString('username', _nameController.text);
-
 
         // Registration successful, navigate to the login screen or show a success message
         Navigator.push(
@@ -86,7 +87,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           const SnackBar(content: Text('The email address is invalid.')),
         );
       } else {
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('An new occurred: ${e.message}')),
         );
@@ -112,13 +112,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = ref.read(themeNotifierProvider.notifier);
+    final themeData = ref.watch(themeNotifierProvider);
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    //final Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: SingleChildScrollView(
@@ -126,12 +127,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             padding: const EdgeInsets.only(top: 25.0, left: 25, right: 25),
             child: Column(
               children: <Widget>[
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 60),
-                  child: const Text(
+                  child: Text(
                     welcome,
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.inversePrimary,
                         fontSize: 32,
                         fontFamily: 'TenorSans',
                         letterSpacing: 2),
@@ -153,10 +154,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   addProfilePic,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'TenorSans',
@@ -168,12 +169,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     child: Column(
                       children: <Widget>[
                         const SizedBox(height: 20),
-                        const Row(
+                        Row(
                           children: [
                             Text(
                               'Name',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -184,17 +187,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         CustomTextField(
                           controller: _nameController,
                           hintText: hintText4,
-                          prefixIcon: const Icon(Icons.text_fields_outlined),
+                          prefixIcon: Icon(
+                            Icons.text_fields_outlined,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
                           obscureText: false,
                           keyboardType: TextInputType.text,
                         ),
                         Gap(20),
-                        const Row(
+                        Row(
                           children: [
                             Text(
                               'Email',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -205,17 +213,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         CustomTextField(
                           controller: _emailController,
                           hintText: hintText,
-                          prefixIcon: const Icon(Icons.email_outlined),
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
                         ),
                         Gap(20),
-                        const Row(
+                        Row(
                           children: [
                             Text(
                               'Password',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -226,12 +239,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         CustomTextField(
                           controller: _passwordController,
                           hintText: hintText3,
-                          prefixIcon: const Icon(Icons.lock_outline),
+                          prefixIcon: Icon(
+                            Icons.lock_outline,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
                           obscureText: _obscureText,
                           keyboardType: TextInputType.text,
                           suffixIcon: IconButton(
+                            color: Theme.of(context).colorScheme.inversePrimary,
                             icon: Icon(
-                              _obscureText ? Icons.visibility : Icons.visibility_off,
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                             ),
                             onPressed: () {
                               setState(() {
@@ -287,4 +306,3 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
-
