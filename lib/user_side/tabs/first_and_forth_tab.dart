@@ -35,6 +35,7 @@ class FirstAndForthTab extends ConsumerWidget {
     // }
 
     final _controller = PageController();
+
     return productsAsyncValue.when(
       data: (products) {
         return SingleChildScrollView(
@@ -42,9 +43,7 @@ class FirstAndForthTab extends ConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -85,9 +84,7 @@ class FirstAndForthTab extends ConsumerWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxHeight: double.infinity),
                   child: GridView.builder(
@@ -116,8 +113,25 @@ class FirstAndForthTab extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () {
+        // Use a different color based on background
+        final loaderColor = isDarkBackground ? Colors.white : Colors.black;
+
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(loaderColor),
+          ),
+        );
+      },
       error: (error, stackTrace) => Center(child: Text('Error: $error')),
     );
+  }
+}
+
+extension on Color {
+  bool get isDark {
+    // Compute if the color is dark
+    final brightness = this.computeLuminance();
+    return brightness < 0.5;
   }
 }
