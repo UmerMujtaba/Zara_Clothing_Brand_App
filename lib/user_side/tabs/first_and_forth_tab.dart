@@ -22,7 +22,8 @@ class FirstAndForthTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue =
         ref.watch(productsCombinedProvider(collectionNames));
-
+    final isDarkBackground =
+        Theme.of(context).colorScheme.surface.computeLuminance() < 0.5;
     // bool _isSortedAscending = true; // To toggle sorting
     //
     // Future<void> _sortProducts(List<Product> products) async {
