@@ -158,6 +158,7 @@ class ProductPage extends ConsumerWidget {
               _addToCart();
             },
             child: RandomGestureDetector(
+              icon: Icons.add,
               name: 'ADD TO BASKET',
             ),
           ),

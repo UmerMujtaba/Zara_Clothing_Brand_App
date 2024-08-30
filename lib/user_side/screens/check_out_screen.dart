@@ -211,6 +211,7 @@ class CheckoutScreen extends ConsumerWidget {
                   }
                 },
                 child: RandomGestureDetector(
+                  icon: Icons.shopping_bag_outlined,
                   name: 'CHECKOUT',
                 ),
               ),

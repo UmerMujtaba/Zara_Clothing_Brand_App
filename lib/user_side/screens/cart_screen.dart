@@ -5,6 +5,7 @@ import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/constants.dart';
 import 'package:zara/user_side/components/drawer.dart';
 import 'package:zara/user_side/components/textss.dart';
+import 'package:zara/user_side/screens/new_arrival.dart';
 import 'package:zara/user_side/screens/payment_screen.dart';
 
 import '../../model/cart.dart';
@@ -42,10 +43,7 @@ class CartScreen extends ConsumerWidget {
                             TextWidget(
                               text: 'CART',
                               color:
-                              Theme
-                                  .of(context)
-                                  .colorScheme
-                                  .inversePrimary,
+                                  Theme.of(context).colorScheme.inversePrimary,
                               size: 22,
                               fontFamily: 'TenorSans',
                             ),
@@ -59,8 +57,7 @@ class CartScreen extends ConsumerWidget {
                                 text: 'Your bag is empty',
                                 fontFamily: 'TenorSans',
                                 size: 16,
-                                color: Theme
-                                    .of(context)
+                                color: Theme.of(context)
                                     .colorScheme
                                     .inversePrimary,
                               ),
@@ -83,19 +80,17 @@ class CartScreen extends ConsumerWidget {
               ),
             ),
           ),
-          CustomPaint(
-            size: const Size(300, 40), // Adjust size as needed
-            painter: LineWithDiamondPainter(
-                lineColor: Theme
-                    .of(context)
-                    .colorScheme
-                    .inversePrimary),
-          ),
           if (cart.isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
+                  CustomPaint(
+                    size: const Size(300, 40), // Adjust size as needed
+                    painter: LineWithDiamondPainter(
+                        lineColor:
+                            Theme.of(context).colorScheme.inversePrimary),
+                  ),
                   const Gap(20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,10 +98,7 @@ class CartScreen extends ConsumerWidget {
                       TextWidget(
                         size: 18,
                         text: 'SUBTOTAL:',
-                        color: Theme
-                            .of(context)
-                            .colorScheme
-                            .inversePrimary,
+                        color: Theme.of(context).colorScheme.inversePrimary,
                         fontFamily: 'TenorSans',
                       ),
                       TextWidget(
@@ -122,9 +114,8 @@ class CartScreen extends ConsumerWidget {
                   TextWidget(
                     size: 14,
                     text:
-                    '*Shipping charges, taxes and discount codes are calculated at the time of accounting.',
-                    color: Theme
-                        .of(context)
+                        '*Shipping charges, taxes and discount codes are calculated at the time of accounting.',
+                    color: Theme.of(context)
                         .colorScheme
                         .inversePrimary
                         .withOpacity(0.6),
@@ -146,10 +137,16 @@ class CartScreen extends ConsumerWidget {
                       ),
                     );
                   } else {
-                    toastBasicRed('Cart is Empty');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NewArrival(),
+                      ),
+                    );
                   }
                 },
                 child: RandomGestureDetector(
+                  icon: Icons.shopping_bag_outlined,
                   name: cart.isEmpty ? 'CONTINUE SHOPPING' : 'BUY NOW',
                 ),
               ),

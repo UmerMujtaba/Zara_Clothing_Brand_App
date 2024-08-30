@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class RandomGestureDetector extends StatelessWidget {
   final String? name;
+  final IconData? icon;
 
   RandomGestureDetector({
     super.key,
     this.name,
+    this.icon,
   });
 
   @override
@@ -18,7 +20,7 @@ class RandomGestureDetector extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(
-                Icons.add,
+                icon,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
