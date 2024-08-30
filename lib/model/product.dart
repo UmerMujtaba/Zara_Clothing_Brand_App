@@ -1,4 +1,3 @@
-
 class Product {
   final String id;
   final String name;
@@ -8,8 +7,7 @@ class Product {
   final String imageUrl;
   final String timestamp;
 
-
-  Product( {
+  Product({
     required this.id,
     required this.name,
     required this.price,
@@ -41,7 +39,7 @@ class Product {
       description: map['description'] ?? '',
       tag: map['tag'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      timestamp: map['timestamp'] ??'',
+      timestamp: map['timestamp'] ?? '',
     );
   }
 

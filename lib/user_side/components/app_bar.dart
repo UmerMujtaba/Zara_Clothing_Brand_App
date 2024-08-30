@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zara/user_side/screens/check_out_screen.dart';
 import '../../model/cart.dart';
 import '../../providers/providers.dart';
 import '../screens/cart_screen.dart';
 
+//${cartItem.totalPrice}
 class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
   const myAppbar({Key? key}) : super(key: key);
 
@@ -22,7 +24,7 @@ class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
         : 'assets/images/Logo (1).png';
 
     return AppBar(
-      automaticallyImplyLeading: false,
+      // automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       title: Image.asset(
         imageAsset,
@@ -43,7 +45,7 @@ class myAppbar extends ConsumerWidget implements PreferredSizeWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CartPage(),
+                    builder: (context) => CartScreen(),
                   ),
                 );
               },

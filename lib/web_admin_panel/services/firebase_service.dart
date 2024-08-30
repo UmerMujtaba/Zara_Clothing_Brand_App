@@ -6,7 +6,6 @@ import '../../model/product.dart';
 import '../../model/user.dart';
 import 'package:http/http.dart' as http;
 
-
 Future<void> addProduct(String collectionName, Product product) async {
   dynamic res = await FirebaseFirestore.instance
       .collection(collectionName)
@@ -18,7 +17,6 @@ Future<void> addBlog(String collectionName, Blog blog) async {
       .collection(collectionName)
       .add(blog.toMap());
 }
-
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -36,8 +34,6 @@ class FirebaseService {
       return [];
     }
   }
-
-
 
   //one func having list of collection as parameter
   Stream<List<Product>> fetchCombinedCollections(List<String> collectionNames) {
@@ -63,25 +59,17 @@ class FirebaseService {
     });
   }
 
-
-
-
-
-
-
 //for per collection
   Stream<List<Product>> fetchPerCollection(String collectionName) {
     return _firestore
         .collection(collectionName)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) {
-      return Product.fromMap(doc.data() as Map<String, dynamic>);
-    }).toList());
+              return Product.fromMap(doc.data() as Map<String, dynamic>);
+            }).toList());
   }
 
-
-
-  Future<void> sendNotification(UserModel user, String title, String body) async {
+/* Future<void> sendNotification(UserModel user, String title, String body) async {
     final fcmToken = user.fcmToken;
 
     if (fcmToken!.isEmpty) {
@@ -122,5 +110,5 @@ class FirebaseService {
       print("Failed to send notification: ${response.statusCode}");
     }
   }
-
+*/
 }

@@ -51,6 +51,10 @@ class CartNotifier extends StateNotifier<List<CartItem>> {
     state = [];
   }
 
+  double get totalPrice {
+    return state.fold(0, (sum, item) => sum + item.totalPrice);
+  }
+
   void updateQuantity(CartItem item, int newQuantity) {
     state = state.map((cartItem) {
       if (cartItem == item) {

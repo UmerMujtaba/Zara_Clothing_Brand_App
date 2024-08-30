@@ -4,7 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:zara/providers/providers.dart';
 import '../../model/cart.dart';
 import '../../model/product.dart';
-import '../components/add_to_basket.dart';
+import '../components/gesture_detector.dart';
 import '../components/app_bar.dart';
 import '../components/constants.dart';
 import '../components/drawer.dart';
@@ -154,10 +154,13 @@ class ProductPage extends ConsumerWidget {
             height: 10,
           ),
           GestureDetector(
-              onTap: () {
-                _addToCart();
-              },
-              child: const AddToBasket()),
+            onTap: () {
+              _addToCart();
+            },
+            child: RandomGestureDetector(
+              name: 'ADD TO BASKET',
+            ),
+          ),
           const SizedBox(
             height: 10,
           ),

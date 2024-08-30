@@ -12,65 +12,54 @@ class MyQuantitySelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme
-            .of(context)
-            .colorScheme
-            .tertiary,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GestureDetector(
-            onTap: () {
-              if (cartItem.quantity > 1) {
-                ref.read(cartProvider.notifier).updateQuantity(
-                    cartItem, cartItem.quantity - 1);
-              }
-            },
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (cartItem.quantity > 1) {
+              ref
+                  .read(cartProvider.notifier)
+                  .updateQuantity(cartItem, cartItem.quantity - 1);
+            }
+          },
+          child: CircleAvatar(
+            radius: 12,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             child: Icon(
               Icons.remove,
-              color: Theme
-                  .of(context)
-                  .colorScheme
-                  .inversePrimary,
-              size: 20,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              size: 16,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: SizedBox(
-              width: 25, // Adjust the width as needed
-              child: Center(
-                child: Text(
-                  cartItem.quantity.toString(),
-                  style: TextStyle(color: Theme
-                      .of(context)
-                      .colorScheme
-                      .inversePrimary,),
-                ),
-              ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            cartItem.quantity.toString(),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontSize: 16,
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              ref.read(cartProvider.notifier).updateQuantity(
-                  cartItem, cartItem.quantity + 1);
-            },
+        ),
+        GestureDetector(
+          onTap: () {
+            ref
+                .read(cartProvider.notifier)
+                .updateQuantity(cartItem, cartItem.quantity + 1);
+          },
+          child: CircleAvatar(
+            radius: 12,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             child: Icon(
               Icons.add,
-              color: Theme
-                  .of(context)
-                  .colorScheme
-                  .inversePrimary,
-              size: 20,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              size: 16,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

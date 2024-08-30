@@ -10,7 +10,6 @@ const String address = 'Address';
 const String country = 'Country';
 const String city = 'City';
 const String postalCode = 'Postal Code';
-
 const String register = 'Register';
 const String socialLogin = 'Social Logins';
 const String forgotPassword = 'Forgot Password?';
@@ -45,6 +44,14 @@ const String yes = 'Yes';
 const String no = 'No';
 const String name = 'Name';
 const String goToCheckout = 'Go To Checkout';
+const String addPromoCode = 'Add promo code';
+const String delivery = 'Delivery';
+const String cart = 'CART';
+const String youHaveNoItemsInYourShoppingBag =
+    'You have no items in your shopping bag.';
+const String free = 'Free';
+const String cartIsEmpty = 'Cart is empty..';
+
 const String payNow = 'Pay Now';
 const String checkOut = 'CHECK OUT';
 const String settings = 'Settings';
