@@ -54,7 +54,7 @@ class CartScreen extends ConsumerWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               child: TextWidget(
-                                text: 'Your bag is empty',
+                                text: youHaveNoItemsInYourShoppingBag,
                                 fontFamily: 'TenorSans',
                                 size: 16,
                                 color: Theme.of(context)

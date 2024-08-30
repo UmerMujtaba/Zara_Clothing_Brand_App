@@ -21,8 +21,9 @@ class MyCartTile extends ConsumerWidget {
       ),
       title: TextWidget(
         size: 16,
-        text: cartItem.product.name,
+        text: cartItem.product.name.toUpperCase(),
         color: Theme.of(context).colorScheme.inversePrimary,
+        letterSpacing: 1,
         fontFamily: 'TenorSans',
       ),
       subtitle: Column(
