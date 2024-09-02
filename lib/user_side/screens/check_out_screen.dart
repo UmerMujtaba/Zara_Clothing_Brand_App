@@ -6,9 +6,11 @@ import 'package:gap/gap.dart';
 import 'package:zara/model/cart.dart';
 import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/textss.dart';
+import 'package:zara/user_side/screens/payment_screen.dart';
 
 import '../../model/user.dart';
 
+import '../../web_admin_panel/constants.dart';
 import '../components/constants.dart';
 import '../components/gesture_detector.dart';
 import '../components/cart_tile.dart';
@@ -303,6 +305,8 @@ class shipping_address_case_checkout extends ConsumerStatefulWidget {
 
 class _ShippingAddressCaseCheckoutState
     extends ConsumerState<shipping_address_case_checkout> {
+  String? _selectedPaymentMethod;
+
   @override
   Widget build(BuildContext context) {
     // Listen to the userProvider to get the user data
@@ -450,6 +454,19 @@ class _ShippingAddressCaseCheckoutState
                           CheckOutGestureDetector(
                             name: 'Select payment method',
                             icon: Icons.keyboard_arrow_down_outlined,
+                            selectedOption: _selectedPaymentMethod,
+                            options: ['Cash', 'Card'],
+                            onOptionChanged: (newValue) {
+                              setState(() {
+                                _selectedPaymentMethod = newValue;
+                                Navigator.push(
+                                  context, // Pass the current context directly
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PaymentPage()),
+                                );
+                              });
+                            },
                           ),
                         ]),
                       ),
@@ -524,32 +541,30 @@ class _final_checkout_case_checkoutState
         .watch(cartProvider.notifier.select((notifier) => notifier.totalPrice));
 
     return Scaffold(
+      // appBar: const myAppbar(),
+      // drawer: const MyTabbedDrawer(),
       body: userAsyncValue.when(
         data: (user) {
-          String formattedAddress = [
-            user.addresses,
-          ]
-              .where((element) => element != null && element.isNotEmpty)
-              .join(', ');
+          String formattedAddress =
+              user.addresses != null && user.addresses!.isNotEmpty
+                  ? [
+                      user.addresses!.first['address'] ?? '',
+                      user.addresses!.first['city'] ?? '',
+                      user.addresses!.first['state'] ?? '',
+                      user.addresses!.first['zipCode'] ?? '',
+                    ].where((element) => element.isNotEmpty).join(', ')
+                  : 'No address available';
 
           return Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // // Center vertically
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // // Center horizontally
             children: [
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Gap(40),
                               TextWidget(

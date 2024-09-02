@@ -1,14 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
+import 'package:zara/model/card.dart';
+import 'package:zara/user_side/components/app_bar.dart';
+import 'package:zara/user_side/components/drawer.dart';
 import '../../model/cart.dart';
+import '../../model/encryption.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
+import '../components/line.dart';
 import '../components/my_receipt.dart';
 import '../components/textss.dart';
+import 'check_out_screen.dart';
 import 'delivery_progress_screen.dart';
 
 class PaymentPage extends ConsumerStatefulWidget {
@@ -20,12 +29,43 @@ class PaymentPage extends ConsumerStatefulWidget {
 
 class _PaymentPageState extends ConsumerState<PaymentPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  String id = const Uuid().v4();
   String cardNumber = "";
   String expiryDate = "";
   String cardHolderName = "";
   String cvcCode = "";
   bool isCvcFocused = false;
+
+  final CollectionReference _cardCollection =
+      FirebaseFirestore.instance.collection('cards');
+
+  Future<void> saveCardDetails({
+    required String cardNumber,
+    required String expiryDate,
+    required String cardHolderName,
+    required String cvcCode,
+  }) async {
+    try {
+      // Encrypt the CVC code before storing
+      String encryptedCVC = EncryptionHelper.encryptCVC(cvcCode);
+
+      // Create a CardModel instance
+      CardModel card = CardModel(
+        id: id,
+        cardNumber: cardNumber,
+        expiryDate: expiryDate,
+        cardHolderName: cardHolderName,
+        cvc: encryptedCVC,
+      );
+
+      // Save the card details to Firestore
+      await _cardCollection.add(card.toMap());
+
+      debugPrint('Card details saved successfully.');
+    } catch (e) {
+      debugPrint('Failed to save card details: $e');
+    }
+  }
 
   Future<String?> getEmailFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
@@ -124,27 +164,24 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: TextWidget(
-            size: 22,
-            text: checkOut,
-            color: Theme.of(context).colorScheme.inversePrimary,
-            fontFamily: 'TenorSans',
-          ),
-          centerTitle: true,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_rounded,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        appBar: myAppbar(),
+        drawer: MyTabbedDrawer(),
         body: Column(
           children: [
+            Gap(20),
+            TextWidget(
+              size: 24,
+              text: 'PAYMENT METHOD',
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontFamily: 'TenorSans',
+            ),
+            CustomPaint(
+              size: const Size(200, 50), // Adjust size as needed
+              painter: LineWithDiamondPainter(
+                lineColor: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
+            Gap(20),
             CreditCardWidget(
               cardNumber: cardNumber,
               expiryDate: expiryDate,
@@ -170,9 +207,41 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
             ),
             const Spacer(),
             MyButton(
-              text: payNow,
-              onTap: () async {
-                userTappedPay(ref);
+              text: 'ADD CARD',
+              onTap: () {
+                // Save card details and show dialog after completion
+                saveCardDetails(
+                  cardNumber: cardNumber,
+                  expiryDate: expiryDate,
+                  cardHolderName: cardHolderName,
+                  cvcCode: cvcCode,
+                ).then((_) {
+                  // Show a confirmation dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Card Added Successfully"),
+                        content: const Text(
+                            "Your card has been added successfully."),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close the dialog
+                              Navigator.of(context)
+                                  .pop(); // Pop the current screen
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                });
+
+                Navigator.of(context).pop();
+
+                //userTappedPay(ref);
               },
             ),
             const SizedBox(height: 25),
