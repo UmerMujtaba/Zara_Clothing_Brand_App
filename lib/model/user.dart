@@ -5,6 +5,7 @@ class UserModel {
   String password;
   String? fcmToken;
   List<Map<String, dynamic>>? addresses;
+  List<Map<String, dynamic>>? cardDetails;
   String? phoneNo;
 
   UserModel({
@@ -14,6 +15,7 @@ class UserModel {
     required this.password,
     this.fcmToken,
     this.addresses,
+    this.cardDetails,
     this.phoneNo,
   });
 
@@ -25,6 +27,7 @@ class UserModel {
       'email': email,
       'fcmToken': fcmToken,
       'addresses': addresses,
+      'card': cardDetails,
       'phoneNo': phoneNo
     };
   }
@@ -45,6 +48,20 @@ class UserModel {
           String>{}; // Default to an empty map if the type is incorrect
     }).toList();
 
+    var cardsList = map['card'] as List<dynamic>? ?? [];
+    var cards = cardsList.map((e) {
+      if (e is Map<String, dynamic>) {
+        return {
+          'cardNumber': e['cardNumber']?.toString() ?? '',
+          'cvc': e['cvc']?.toString() ?? '',
+          'cardHolderName': e['cardHolderName']?.toString() ?? '',
+          'expiryDate': e['expiryDate']?.toString() ?? '',
+        };
+      }
+      return <String,
+          String>{}; // Default to an empty map if the type is incorrect
+    }).toList();
+
     return UserModel(
       id: map['id'],
       name: map['name'],
@@ -53,6 +70,7 @@ class UserModel {
       // Password should not be stored as plain text in a real app
       fcmToken: map['fcmToken'],
       addresses: addresses,
+      cardDetails: cards,
       phoneNo: map['phoneNo'],
     );
   }

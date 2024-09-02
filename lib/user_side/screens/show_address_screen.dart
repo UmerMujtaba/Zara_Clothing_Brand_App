@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/drawer.dart';
 import 'package:zara/user_side/components/textss.dart';
+import '../../providers/providers.dart';
 import '../components/gesture_detector.dart';
 import 'add_shipping_address.dart';
 import 'check_out_screen.dart';

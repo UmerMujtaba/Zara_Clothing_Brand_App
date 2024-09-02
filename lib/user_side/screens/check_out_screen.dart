@@ -10,6 +10,7 @@ import 'package:zara/user_side/screens/payment_screen.dart';
 
 import '../../model/user.dart';
 
+import '../../providers/providers.dart';
 import '../../web_admin_panel/constants.dart';
 import '../components/constants.dart';
 import '../components/gesture_detector.dart';
@@ -64,7 +65,13 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   },
                 )
               : currentStep == CheckoutStep.finalCheckOut
-                  ? const final_checkout_case_checkout()
+                  ? final_checkout_case_checkout(
+                      onProceed: () {
+                        setState(() {
+                          currentStep = CheckoutStep.finalCheckOut;
+                        });
+                      },
+                    )
                   : Container(),
     );
   }
@@ -272,26 +279,6 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
   }
 }
 
-final userProvider = StreamProvider<UserModel>((ref) {
-  User? user = FirebaseAuth.instance.currentUser;
-  if (user == null) {
-    throw Exception("No user is currently signed in.");
-  }
-
-  print('Fetching user data for UID: ${user.uid}');
-  return FirebaseFirestore.instance
-      .collection('users')
-      .doc(user.uid)
-      .snapshots()
-      .map((snapshot) {
-    if (!snapshot.exists) {
-      throw Exception("User document does not exist.");
-    }
-
-    return UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
-  });
-});
-
 // Define a provider for cart total price (example)
 class shipping_address_case_checkout extends ConsumerStatefulWidget {
   final VoidCallback onProceed;
@@ -320,6 +307,9 @@ class _ShippingAddressCaseCheckoutState
     return Scaffold(
       body: userAsyncValue.when(
         data: (user) {
+          //card details
+          // Assuming you want to format the first card's details as a string
+
           // Formatting address
           String formattedAddress =
               user.addresses != null && user.addresses!.isNotEmpty
@@ -455,7 +445,7 @@ class _ShippingAddressCaseCheckoutState
                             name: 'Select payment method',
                             icon: Icons.keyboard_arrow_down_outlined,
                             selectedOption: _selectedPaymentMethod,
-                            options: ['Cash', 'Card'],
+                            options: ['COD', 'Card'],
                             onOptionChanged: (newValue) {
                               setState(() {
                                 _selectedPaymentMethod = newValue;
@@ -507,7 +497,7 @@ class _ShippingAddressCaseCheckoutState
                       }
                     },
                     icon: Icons.shopping_bag_outlined,
-                    name: 'PLACE ORDER',
+                    name: 'CHECKOUT',
                   ),
                 ],
               ),
@@ -522,7 +512,9 @@ class _ShippingAddressCaseCheckoutState
 }
 
 class final_checkout_case_checkout extends ConsumerStatefulWidget {
-  const final_checkout_case_checkout({super.key});
+  final VoidCallback onProceed;
+
+  final_checkout_case_checkout({super.key, required this.onProceed});
 
   @override
   ConsumerState<final_checkout_case_checkout> createState() =>
@@ -545,6 +537,27 @@ class _final_checkout_case_checkoutState
       // drawer: const MyTabbedDrawer(),
       body: userAsyncValue.when(
         data: (user) {
+          String card = user.cardDetails != null && user.cardDetails!.isNotEmpty
+              ? (() {
+                  String cardNumber =
+                      user.cardDetails!.first['cardNumber'] ?? 'N/A';
+                  if (cardNumber.length >= 8) {
+                    String first4 = cardNumber.substring(0, 4);
+                    String last4 = cardNumber.substring(cardNumber.length - 4);
+
+                    // Construct the masked middle section
+                    String maskedMiddle = '**** ****';
+
+                    // Combine all parts
+                    String masked = '$first4 $maskedMiddle $last4';
+
+                    return masked;
+                  } else {
+                    return cardNumber; // If the card number is shorter than 8 digits, return it as is.
+                  }
+                })()
+              : 'No Card Details';
+
           String formattedAddress =
               user.addresses != null && user.addresses!.isNotEmpty
                   ? [
@@ -569,7 +582,7 @@ class _final_checkout_case_checkoutState
                               const Gap(40),
                               TextWidget(
                                 size: 24,
-                                text: 'Checkout',
+                                text: 'CHECKOUT',
                                 color: Theme.of(context)
                                     .colorScheme
                                     .inversePrimary,
@@ -623,6 +636,58 @@ class _final_checkout_case_checkoutState
                                         fontSize: 16,
                                       ),
                                     ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Card No: ',
+                                          style: TextStyle(
+                                            fontFamily: 'TenorSans',
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        Text(
+                                          card.isEmpty
+                                              ? 'No card Details'
+                                              : card,
+                                          style: TextStyle(
+                                            fontFamily: 'TenorSans',
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                            fontSize: 16,
+                                          ),
+                                          overflow: TextOverflow.visible,
+                                          softWrap: true, // Allow text to wrap
+                                        ),
+                                      ],
+                                    ),
+                                    if (cart.isEmpty)
+                                      Center(
+                                        child: Text(
+                                          cartIsEmpty,
+                                          style: TextStyle(
+                                            fontFamily: 'TenorSans',
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      )
+                                    else
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: cart.length,
+                                        itemBuilder: (context, index) {
+                                          final cartItem = cart[index];
+                                          return MyCartTile(cartItem: cartItem);
+                                        },
+                                      ),
                                   ],
                                 ),
                               ),
@@ -634,6 +699,41 @@ class _final_checkout_case_checkoutState
                   ),
                 ),
               ),
+              const Gap(30),
+              Column(children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        size: 18,
+                        text: 'EST. TOTAL:',
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontFamily: 'TenorSans',
+                      ),
+                      TextWidget(
+                        size: 18,
+                        text: 'Rs $totalPrice',
+                        color: Colors.orangeAccent,
+                        fontFamily: 'TenorSans',
+                      ),
+                    ],
+                  ),
+                ),
+                const Gap(20),
+                RandomGestureDetector(
+                  onTap: () {
+                    if (cart.isEmpty) {
+                      toastBasicRed('Cart is Empty');
+                    } else {
+                      widget.onProceed();
+                    }
+                  },
+                  icon: Icons.shopping_bag_outlined,
+                  name: 'PLACE ORDER',
+                ),
+              ])
             ],
           );
         },

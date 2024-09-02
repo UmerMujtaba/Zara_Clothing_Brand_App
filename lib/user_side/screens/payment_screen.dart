@@ -12,6 +12,7 @@ import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/drawer.dart';
 import '../../model/cart.dart';
 import '../../model/encryption.dart';
+import '../../providers/providers.dart';
 import '../components/button.dart';
 import '../components/constants.dart';
 import '../components/line.dart';
@@ -36,35 +37,45 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
   String cvcCode = "";
   bool isCvcFocused = false;
 
-  final CollectionReference _cardCollection =
-      FirebaseFirestore.instance.collection('cards');
-
   Future<void> saveCardDetails({
     required String cardNumber,
     required String expiryDate,
     required String cardHolderName,
     required String cvcCode,
+    required String userId, // Pass the user's ID
   }) async {
     try {
-      // Encrypt the CVC code before storing
-      String encryptedCVC = EncryptionHelper.encryptCVC(cvcCode);
+      // Encrypt the CVC code (implement your encryption logic)
+      String encryptedCvc = encryptCvc(cvcCode);
 
-      // Create a CardModel instance
+      // Create a new card model
       CardModel card = CardModel(
-        id: id,
         cardNumber: cardNumber,
         expiryDate: expiryDate,
         cardHolderName: cardHolderName,
-        cvc: encryptedCVC,
+        cvc: encryptedCvc,
       );
 
-      // Save the card details to Firestore
-      await _cardCollection.add(card.toMap());
+      // Reference to the user's document in Firestore
+      DocumentReference userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
 
-      debugPrint('Card details saved successfully.');
+      // Update the user's document with the new card details
+      await userDocRef.update({
+        'card': FieldValue.arrayUnion([card.toMap()]),
+        // Add the card details to the existing list
+      });
     } catch (e) {
-      debugPrint('Failed to save card details: $e');
+      // Handle any errors
+      print('Error saving card details: $e');
     }
+  }
+
+// Function to encrypt CVC (example, implement your own encryption)
+  String encryptCvc(String cvc) {
+    // Implement your encryption logic here
+    // For demonstration purposes, this just returns the same CVC
+    return cvc;
   }
 
   Future<String?> getEmailFromSharedPreferences() async {
@@ -209,37 +220,46 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
             MyButton(
               text: 'ADD CARD',
               onTap: () {
-                // Save card details and show dialog after completion
-                saveCardDetails(
-                  cardNumber: cardNumber,
-                  expiryDate: expiryDate,
-                  cardHolderName: cardHolderName,
-                  cvcCode: cvcCode,
-                ).then((_) {
-                  // Show a confirmation dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("Card Added Successfully"),
-                        content: const Text(
-                            "Your card has been added successfully."),
-                        actions: <Widget>[
-                          TextButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop(); // Close the dialog
-                              Navigator.of(context)
-                                  .pop(); // Pop the current screen
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                });
+                final user = ref.read(userProvider).maybeWhen(
+                      data: (user) => user,
+                      orElse: () => null,
+                    );
 
-                Navigator.of(context).pop();
+                if (user != null) {
+                  // Save card details and show dialog after completion
+                  saveCardDetails(
+                    cardNumber: cardNumber,
+                    expiryDate: expiryDate,
+                    cardHolderName: cardHolderName,
+                    cvcCode: cvcCode,
+                    userId: user.id!, // Pass the user's ID
+                  ).then((_) {
+                    // Show a confirmation dialog
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Card Added Successfully"),
+                          content: const Text(
+                              "Your card has been added successfully."),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                                Navigator.of(context)
+                                    .pop(); // Pop the current screen
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  });
+                } else {
+                  // Handle case where user is not found or not logged in
+                  print("User not found");
+                }
 
                 //userTappedPay(ref);
               },
