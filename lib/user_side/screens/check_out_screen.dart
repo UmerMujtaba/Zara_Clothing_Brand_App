@@ -276,6 +276,7 @@ final userProvider = StreamProvider<UserModel>((ref) {
     throw Exception("No user is currently signed in.");
   }
 
+  print('Fetching user data for UID: ${user.uid}');
   return FirebaseFirestore.instance
       .collection('users')
       .doc(user.uid)
@@ -315,13 +316,16 @@ class _ShippingAddressCaseCheckoutState
     return Scaffold(
       body: userAsyncValue.when(
         data: (user) {
-          //print(user.address);
           // Formatting address
-          String formattedAddress = [
-            user.addresses,
-          ]
-              .where((element) => element != null && element.isNotEmpty)
-              .join(', ');
+          String formattedAddress =
+              user.addresses != null && user.addresses!.isNotEmpty
+                  ? [
+                      user.addresses!.first['address'] ?? '',
+                      user.addresses!.first['city'] ?? '',
+                      user.addresses!.first['state'] ?? '',
+                      user.addresses!.first['zipCode'] ?? '',
+                    ].where((element) => element.isNotEmpty).join(', ')
+                  : 'No address available';
 
           return Column(
             children: [

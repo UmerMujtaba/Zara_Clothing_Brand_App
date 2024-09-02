@@ -85,3 +85,47 @@ class CheckOutGestureDetector extends StatelessWidget {
     );
   }
 }
+
+class AddAddressGestureDetector extends StatelessWidget {
+  final String? name;
+  final IconData? icon;
+  final Function()? onTap;
+
+  AddAddressGestureDetector({
+    super.key,
+    this.name,
+    this.icon,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+            padding: EdgeInsets.all(40),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(10)),
+            // color: Theme.of(context).colorScheme.secondary,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                Text(name!,
+                    style: TextStyle(
+                      fontFamily: 'TenorSans',
+                      fontSize: 18,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    )),
+              ],
+            )),
+      ),
+    );
+  }
+}

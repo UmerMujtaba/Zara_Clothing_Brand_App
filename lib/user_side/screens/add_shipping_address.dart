@@ -149,7 +149,11 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
             Spacer(), // Pushes the RandomGestureDetector to the bottom
             RandomGestureDetector(
               onTap: () {
-                addAddressToUser(address: '', city: '', state: '', zipCode: '');
+                addAddressToUser(
+                    address: _addressController.text,
+                    city: _cityController.text,
+                    state: _stateController.text,
+                    zipCode: _zipController.text);
               },
               icon: Icons.my_location_outlined,
               name: 'ADD NOW',

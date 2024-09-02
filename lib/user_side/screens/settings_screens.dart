@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zara/user_side/screens/add_shipping_address.dart';
+import 'package:zara/user_side/screens/show_address_screen.dart';
 
 import '../../theme/theme_provider.dart';
 import 'edit_profile_screen.dart';
@@ -77,6 +79,35 @@ class SettingsScreen extends ConsumerWidget {
                               builder: (context) => const EditProfileScreen()));
                     },
                     icon: Icon(Icons.keyboard_arrow_right_outlined,
+                        color: Theme.of(context).colorScheme.inversePrimary))
+              ]),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
+          padding: const EdgeInsets.all(25),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //dark mode
+              children: [
+                Text(
+                  'Add Address',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'TenorSans',
+                      color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ShowAddressScreen()));
+                    },
+                    icon: Icon(Icons.add,
                         color: Theme.of(context).colorScheme.inversePrimary))
               ]),
         )
