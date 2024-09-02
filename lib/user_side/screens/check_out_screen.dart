@@ -17,6 +17,7 @@ import '../components/gesture_detector.dart';
 import '../components/cart_tile.dart';
 import '../components/drawer.dart';
 import '../components/line.dart';
+import '../components/success_pop_up.dart';
 import '../components/toasts.dart';
 import 'add_shipping_address.dart';
 
@@ -70,6 +71,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                         setState(() {
                           currentStep = CheckoutStep.finalCheckOut;
                         });
+                        showPaymentSuccessDialog(context);
                       },
                     )
                   : Container(),
