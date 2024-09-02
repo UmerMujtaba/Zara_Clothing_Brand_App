@@ -28,8 +28,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     super.initState();
     _nameController = TextEditingController(text: widget.productData['name']);
     _tagController = TextEditingController(text: widget.productData['tag']);
-    _descriptionController = TextEditingController(text: widget.productData['description']);
-    _priceController = TextEditingController(text: widget.productData['price'].toString());
+    _descriptionController =
+        TextEditingController(text: widget.productData['description']);
+    _priceController =
+        TextEditingController(text: widget.productData['price'].toString());
   }
 
   Future<void> _saveProduct() async {
@@ -51,10 +53,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product', style: TextStyle(fontFamily: 'TenorSans')),
+        title: const Text('Edit Product',
+            style: TextStyle(fontFamily: 'TenorSans')),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: _saveProduct,
           ),
         ],
@@ -66,19 +69,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(labelText: 'Name'),
             ),
             TextField(
               controller: _tagController,
-              decoration: InputDecoration(labelText: 'Tag'),
+              decoration: const InputDecoration(labelText: 'Tag'),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
             TextField(
               controller: _priceController,
-              decoration: InputDecoration(labelText: 'Price'),
+              decoration: const InputDecoration(labelText: 'Price'),
               keyboardType: TextInputType.number,
             ),
           ],

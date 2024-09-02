@@ -18,10 +18,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _postalCodeController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _countryController = TextEditingController();
   final _phoneNoController = TextEditingController();
 
   @override
@@ -64,11 +60,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         // Prepare the data to be saved
         Map<String, dynamic> userData = {
           'name': _nameController.text.trim(),
-          'phone': _phoneNoController.text.trim(),
-          'address': _addressController.text.trim(),
-          'country': _countryController.text.trim(),
-          'city': _cityController.text.trim(),
-          'postalCode': _postalCodeController.text.trim(),
+          'phoneNo': _phoneNoController.text.trim(),
         };
 
         // Update the user's document in Firestore
@@ -221,80 +213,80 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 keyboardType: TextInputType.phone,
               ),
               const Gap(15),
-              Row(
-                children: [
-                  TextWidget(
-                    size: 16,
-                    text: address,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    letterSpacing: 1,
-                    fontFamily: 'TenorSans',
-                    fontWeight: FontWeight.bold,
-                  )
-                ],
-              ),
-              CustomTextField(
-                controller: _addressController,
-                hintText: hintText6,
-                keyboardType: TextInputType.text,
-                prefixIcon: const Icon(Icons.home_outlined),
-              ),
-              const Gap(15),
-              Row(
-                children: [
-                  TextWidget(
-                    size: 16,
-                    text: country,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    letterSpacing: 1,
-                    fontFamily: 'TenorSans',
-                    fontWeight: FontWeight.bold,
-                  )
-                ],
-              ),
-              CustomTextField(
-                  controller: _countryController,
-                  hintText: hintText8,
-                  keyboardType: TextInputType.text,
-                  prefixIcon: const Icon(Icons.flag_outlined)),
-              const Gap(15),
-              Row(
-                children: [
-                  TextWidget(
-                    size: 16,
-                    text: city,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    letterSpacing: 1,
-                    fontFamily: 'TenorSans',
-                    fontWeight: FontWeight.bold,
-                  )
-                ],
-              ),
-              CustomTextField(
-                controller: _cityController,
-                hintText: hintText7,
-                keyboardType: TextInputType.text,
-                prefixIcon: const Icon(Icons.location_city_outlined),
-              ),
-              const Gap(15),
-              Row(
-                children: [
-                  TextWidget(
-                    size: 16,
-                    text: postalCode,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    letterSpacing: 1,
-                    fontFamily: 'TenorSans',
-                    fontWeight: FontWeight.bold,
-                  )
-                ],
-              ),
-              CustomTextField(
-                controller: _postalCodeController,
-                hintText: hintText9,
-                keyboardType: TextInputType.number,
-                prefixIcon: const Icon(Icons.numbers_outlined),
-              ),
+              // Row(
+              //   children: [
+              //     TextWidget(
+              //       size: 16,
+              //       text: address,
+              //       color: Theme.of(context).colorScheme.inversePrimary,
+              //       letterSpacing: 1,
+              //       fontFamily: 'TenorSans',
+              //       fontWeight: FontWeight.bold,
+              //     )
+              //   ],
+              // ),
+              // CustomTextField(
+              //   controller: _addressController,
+              //   hintText: hintText6,
+              //   keyboardType: TextInputType.text,
+              //   prefixIcon: const Icon(Icons.home_outlined),
+              // ),
+              // const Gap(15),
+              // Row(
+              //   children: [
+              //     TextWidget(
+              //       size: 16,
+              //       text: country,
+              //       color: Theme.of(context).colorScheme.inversePrimary,
+              //       letterSpacing: 1,
+              //       fontFamily: 'TenorSans',
+              //       fontWeight: FontWeight.bold,
+              //     )
+              //   ],
+              // ),
+              // CustomTextField(
+              //     controller: _countryController,
+              //     hintText: hintText8,
+              //     keyboardType: TextInputType.text,
+              //     prefixIcon: const Icon(Icons.flag_outlined)),
+              // const Gap(15),
+              // Row(
+              //   children: [
+              //     TextWidget(
+              //       size: 16,
+              //       text: city,
+              //       color: Theme.of(context).colorScheme.inversePrimary,
+              //       letterSpacing: 1,
+              //       fontFamily: 'TenorSans',
+              //       fontWeight: FontWeight.bold,
+              //     )
+              //   ],
+              // ),
+              // CustomTextField(
+              //   controller: _cityController,
+              //   hintText: hintText7,
+              //   keyboardType: TextInputType.text,
+              //   prefixIcon: const Icon(Icons.location_city_outlined),
+              // ),
+
+              // Row(
+              //   children: [
+              //     TextWidget(
+              //       size: 16,
+              //       text: postalCode,
+              //       color: Theme.of(context).colorScheme.inversePrimary,
+              //       letterSpacing: 1,
+              //       fontFamily: 'TenorSans',
+              //       fontWeight: FontWeight.bold,
+              //     )
+              //   ],
+              // ),
+              // CustomTextField(
+              //   controller: _postalCodeController,
+              //   hintText: hintText9,
+              //   keyboardType: TextInputType.number,
+              //   prefixIcon: const Icon(Icons.numbers_outlined),
+              // ),
               const Gap(30),
               MyButton(
                 text: save,

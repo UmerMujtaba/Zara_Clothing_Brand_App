@@ -12,7 +12,7 @@ class Update extends StatefulWidget {
 
 class _UpdateState extends State<Update> {
   Future<Map<String, List<Map<String, dynamic>>>>
-      _fetchCollectionsAndProducts() async {
+  _fetchCollectionsAndProducts() async {
     Map<String, List<Map<String, dynamic>>> collectionsWithProducts = {};
 
     List<String> collectionNames = [
@@ -27,7 +27,7 @@ class _UpdateState extends State<Update> {
 
     for (String collectionName in collectionNames) {
       QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection(collectionName).get();
+      await FirebaseFirestore.instance.collection(collectionName).get();
       List<Map<String, dynamic>> products = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         data['id'] = doc.id; // Save the document ID
@@ -43,37 +43,47 @@ class _UpdateState extends State<Update> {
   void _showEditDialog(BuildContext context, String collectionName,
       String productId, Map<String, dynamic> product) {
     TextEditingController nameController =
-        TextEditingController(text: product['name']);
+    TextEditingController(text: product['name']);
     TextEditingController descriptionController =
-        TextEditingController(text: product['description']);
+    TextEditingController(text: product['description']);
     TextEditingController tagController =
     TextEditingController(text: product['tag']);
     TextEditingController priceController =
-        TextEditingController(text: product['price'].toString());
+    TextEditingController(text: product['price'].toString());
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Product', style: TextStyle(fontFamily: 'TenorSans'),textAlign: TextAlign.center,),
+          title: const Text(
+            'Edit Product', style: TextStyle(fontFamily: 'TenorSans'),
+            textAlign: TextAlign.center,),
           content: SingleChildScrollView(
             child: Column(
               children: [
                 TextField(
                   controller: nameController,
-                  decoration: const InputDecoration(labelText: 'Name', labelStyle: TextStyle(fontFamily: 'TenorSans',fontSize: 20),),
+                  decoration: const InputDecoration(labelText: 'Name',
+                    labelStyle: TextStyle(
+                        fontFamily: 'TenorSans', fontSize: 20),),
                 ),
                 TextField(
                   controller: descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description', labelStyle: TextStyle(fontFamily: 'TenorSans',fontSize: 20),),
+                  decoration: const InputDecoration(labelText: 'Description',
+                    labelStyle: TextStyle(
+                        fontFamily: 'TenorSans', fontSize: 20),),
                 ),
                 TextField(
                   controller: tagController,
-                  decoration: const InputDecoration(labelText: 'Tag', labelStyle: TextStyle(fontFamily: 'TenorSans',fontSize: 20),),
+                  decoration: const InputDecoration(labelText: 'Tag',
+                    labelStyle: TextStyle(
+                        fontFamily: 'TenorSans', fontSize: 20),),
                 ),
                 TextField(
                   controller: priceController,
-                  decoration: const InputDecoration(labelText: 'Price', labelStyle: TextStyle(fontFamily: 'TenorSans',fontSize: 20),),
+                  decoration: const InputDecoration(labelText: 'Price',
+                    labelStyle: TextStyle(
+                        fontFamily: 'TenorSans', fontSize: 20),),
                   keyboardType: TextInputType.number,
                 ),
 
@@ -82,13 +92,15 @@ class _UpdateState extends State<Update> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel', style: TextStyle(fontFamily: 'TenorSans',fontSize: 16),),
+              child: const Text('Cancel',
+                style: TextStyle(fontFamily: 'TenorSans', fontSize: 16),),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Save', style: TextStyle(fontFamily: 'TenorSans',fontSize: 16),),
+              child: const Text('Save',
+                style: TextStyle(fontFamily: 'TenorSans', fontSize: 16),),
               onPressed: () async {
                 // Save the updated data to Firestore
                 await FirebaseFirestore.instance
@@ -105,7 +117,7 @@ class _UpdateState extends State<Update> {
                 setState(() {
                   product['name'] = nameController.text;
                   product['description'] = descriptionController.text;
-                  product['tag']=tagController.text;
+                  product['tag'] = tagController.text;
                   product['price'] = double.tryParse(priceController.text) ?? 0;
                 });
 
@@ -145,35 +157,35 @@ class _UpdateState extends State<Update> {
                     } else if (snapshot.hasError) {
                       return const Center(
                           child:
-                              Text('Error fetching collections and products'));
+                          Text('Error fetching collections and products'));
                     } else if (snapshot.hasData) {
                       Map<String, List<Map<String, dynamic>>>
-                          collectionsWithProducts = snapshot.data!;
+                      collectionsWithProducts = snapshot.data!;
                       return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: collectionsWithProducts.length,
                         itemBuilder: (context, index) {
                           String collectionName =
-                              collectionsWithProducts.keys.elementAt(index);
+                          collectionsWithProducts.keys.elementAt(index);
                           List<Map<String, dynamic>> products =
-                              collectionsWithProducts[collectionName]!;
+                          collectionsWithProducts[collectionName]!;
                           return ExpansionTile(
                             title: Text(
                               collectionName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: 'TenorSans', fontSize: 20),
                             ),
                             children: products.map((product) {
                               return ListTile(
                                 title: Text(
                                   product['name'] ?? 'No name',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontFamily: 'TenorSans', fontSize: 18),
                                 ),
                                 subtitle: Text(
                                   product['description'] ?? 'No description',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 15, fontFamily: 'TenorSans'),
                                 ),
                                 onTap: () {

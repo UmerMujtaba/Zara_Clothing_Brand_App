@@ -2,24 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // Import fluttertoast package
 import 'package:gap/gap.dart';
 import 'package:zara/model/cart.dart';
 import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/textss.dart';
-import 'package:zara/user_side/screens/payment_screen.dart';
-import '../../model/product.dart';
+
 import '../../model/user.dart';
-import '../../providers/providers.dart';
+
 import '../components/constants.dart';
 import '../components/gesture_detector.dart';
-import '../components/button.dart';
 import '../components/cart_tile.dart';
-import '../components/constants.dart';
 import '../components/drawer.dart';
 import '../components/line.dart';
-import '../components/quantity_selector.dart';
 import '../components/toasts.dart';
+import 'add_shipping_address.dart';
 
 enum CheckoutStep {
   cartItems,
@@ -45,7 +41,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: myAppbar(),
+      appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: currentStep == CheckoutStep.cartItems
           ? cart_items_case_checkout(
@@ -66,7 +62,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   },
                 )
               : currentStep == CheckoutStep.finalCheckOut
-                  ? final_checkout_case_checkout()
+                  ? const final_checkout_case_checkout()
                   : Container(),
     );
   }
@@ -102,7 +98,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     children: [
-                      Gap(40),
+                      const Gap(40),
                       TextWidget(
                         size: 24,
                         text: checkOut,
@@ -132,7 +128,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                       else
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: widget.cart.length,
                           itemBuilder: (context, index) {
                             final cartItem = widget.cart[index];
@@ -155,7 +151,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
-                          Gap(20),
+                          const Gap(20),
                           GestureDetector(
                             onTap: () {},
                             child: TextWidget(
@@ -188,7 +184,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                                       .inversePrimary,
                                 ),
                               ),
-                              Gap(20),
+                              const Gap(20),
                               GestureDetector(
                                 onTap: () {},
                                 child: TextWidget(
@@ -229,7 +225,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
             ),
           ),
         ),
-        if (widget.cart.isEmpty) Spacer(),
+        if (widget.cart.isEmpty) const Spacer(),
         Column(
           children: [
             Padding(
@@ -252,7 +248,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                 ],
               ),
             ),
-            Gap(20),
+            const Gap(20),
             GestureDetector(
               onTap: () {
                 if (widget.cart.isEmpty) {
@@ -274,20 +270,23 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
   }
 }
 
-final userProvider = FutureProvider<UserModel>((ref) async {
+final userProvider = StreamProvider<UserModel>((ref) {
   User? user = FirebaseAuth.instance.currentUser;
   if (user == null) {
     throw Exception("No user is currently signed in.");
   }
 
-  DocumentSnapshot userDoc =
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+  return FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.uid)
+      .snapshots()
+      .map((snapshot) {
+    if (!snapshot.exists) {
+      throw Exception("User document does not exist.");
+    }
 
-  if (!userDoc.exists) {
-    throw Exception("User document does not exist.");
-  }
-
-  return UserModel.fromMap(userDoc.data() as Map<String, dynamic>);
+    return UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
+  });
 });
 
 // Define a provider for cart total price (example)
@@ -316,12 +315,10 @@ class _ShippingAddressCaseCheckoutState
     return Scaffold(
       body: userAsyncValue.when(
         data: (user) {
+          //print(user.address);
           // Formatting address
           String formattedAddress = [
-            user.address,
-            user.city,
-            user.country,
-            user.postalCode,
+            user.addresses,
           ]
               .where((element) => element != null && element.isNotEmpty)
               .join(', ');
@@ -335,7 +332,7 @@ class _ShippingAddressCaseCheckoutState
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Column(children: [
-                          Gap(40),
+                          const Gap(40),
                           TextWidget(
                             size: 24,
                             text: 'Checkout',
@@ -404,10 +401,17 @@ class _ShippingAddressCaseCheckoutState
                             ),
                           ),
                           CheckOutGestureDetector(
-                            name: 'Add shipping address',
-                            icon: Icons.add,
-                          ),
-                          Gap(30),
+                              name: 'Add shipping address',
+                              icon: Icons.add,
+                              onTap: () {
+                                Navigator.push(
+                                  context, // Pass the current context directly
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AddShippingAddress()),
+                                );
+                              }),
+                          const Gap(30),
                           Row(
                             children: [
                               TextWidget(
@@ -420,12 +424,12 @@ class _ShippingAddressCaseCheckoutState
                               ),
                             ],
                           ),
-                          Gap(20),
+                          const Gap(20),
                           CheckOutGestureDetector(
                             name: 'Pickup at store',
                             icon: Icons.keyboard_arrow_down_outlined,
                           ),
-                          Gap(30),
+                          const Gap(30),
                           Row(
                             children: [
                               TextWidget(
@@ -438,7 +442,7 @@ class _ShippingAddressCaseCheckoutState
                               ),
                             ],
                           ),
-                          Gap(20),
+                          const Gap(20),
                           CheckOutGestureDetector(
                             name: 'Select payment method',
                             icon: Icons.keyboard_arrow_down_outlined,
@@ -449,7 +453,7 @@ class _ShippingAddressCaseCheckoutState
                   ),
                 ),
               ),
-              Gap(30),
+              const Gap(30),
               Column(
                 children: [
                   Padding(
@@ -472,8 +476,8 @@ class _ShippingAddressCaseCheckoutState
                       ],
                     ),
                   ),
-                  Gap(20),
-                  GestureDetector(
+                  const Gap(20),
+                  RandomGestureDetector(
                     onTap: () {
                       if (cart.isEmpty) {
                         toastBasicRed('Cart is Empty');
@@ -481,28 +485,142 @@ class _ShippingAddressCaseCheckoutState
                         widget.onProceed();
                       }
                     },
-                    child: RandomGestureDetector(
-                      icon: Icons.shopping_bag_outlined,
-                      name: 'CHECKOUT',
-                    ),
+                    icon: Icons.shopping_bag_outlined,
+                    name: 'PLACE ORDER',
                   ),
                 ],
               ),
             ],
           );
         },
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: const CircularProgressIndicator()),
         error: (e, stack) => Center(child: Text('Error: $e')),
       ),
     );
   }
 }
 
-class final_checkout_case_checkout extends StatelessWidget {
+class final_checkout_case_checkout extends ConsumerStatefulWidget {
   const final_checkout_case_checkout({super.key});
 
   @override
+  ConsumerState<final_checkout_case_checkout> createState() =>
+      _final_checkout_case_checkoutState();
+}
+
+class _final_checkout_case_checkoutState
+    extends ConsumerState<final_checkout_case_checkout> {
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final userAsyncValue = ref.watch(userProvider);
+
+    // Listen to the cartProvider for cart data
+    final cart = ref.watch(cartProvider);
+    final totalPrice = ref
+        .watch(cartProvider.notifier.select((notifier) => notifier.totalPrice));
+
+    return Scaffold(
+      body: userAsyncValue.when(
+        data: (user) {
+          String formattedAddress = [
+            user.addresses,
+          ]
+              .where((element) => element != null && element.isNotEmpty)
+              .join(', ');
+
+          return Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // // Center vertically
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // // Center horizontally
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Gap(40),
+                              TextWidget(
+                                size: 24,
+                                text: 'Checkout',
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                                fontFamily: 'TenorSans',
+                              ),
+                              CustomPaint(
+                                size: const Size(200, 50),
+                                // Adjust size as needed
+                                painter: LineWithDiamondPainter(
+                                  lineColor: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${user.name}',
+                                      style: TextStyle(
+                                        fontFamily: 'TenorSans',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      formattedAddress.isEmpty
+                                          ? 'No address available'
+                                          : formattedAddress,
+                                      style: TextStyle(
+                                        fontFamily: 'TenorSans',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.visible,
+                                      softWrap: true, // Allow text to wrap
+                                    ),
+                                    Text(
+                                      '${user.phoneNo ?? 'N/A'}',
+                                      style: TextStyle(
+                                        fontFamily: 'TenorSans',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, stack) => Center(child: Text('Error: $e')),
+      ),
+    );
   }
 }
