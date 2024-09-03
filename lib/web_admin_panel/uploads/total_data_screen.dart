@@ -84,15 +84,15 @@ class _TotalDataScreenState extends State<TotalDataScreen> {
                                   .toList()
                                   .indexOf(entry.key);
                               final isHovered = index == _hoveredIndex;
-                              final double radius = 60;
-                              final double fontSize = 13;
+                              const double radius = 60;
+                              const double fontSize = 13;
 
                               return PieChartSectionData(
                                 color: _getColor(index),
                                 value: entry.value.toDouble(),
                                 title: '${entry.key}\n${entry.value}',
                                 radius: radius,
-                                titleStyle: TextStyle(
+                                titleStyle: const TextStyle(
                                   fontFamily: 'TenorSans',
                                   fontSize: fontSize,
                                   color: Colors.black,
@@ -110,7 +110,6 @@ class _TotalDataScreenState extends State<TotalDataScreen> {
                                     padding: const EdgeInsets.all(16.0),
                                     child: Column(
                                       children: [
-
                                         SizedBox(
                                           height: 200,
                                           child: PieChart(
@@ -125,7 +124,7 @@ class _TotalDataScreenState extends State<TotalDataScreen> {
                                           ),
                                         ),
                                         const SizedBox(height: 24),
-                                  // List of collections with item counts
+                                        // List of collections with item counts
                                         ListView.builder(
                                           shrinkWrap: true,
                                           physics:
@@ -148,8 +147,7 @@ class _TotalDataScreenState extends State<TotalDataScreen> {
                                                 border: Border.all(
                                                     color: Colors.grey),
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0),
+                                                    BorderRadius.circular(8.0),
                                               ),
                                               child: Row(
                                                 mainAxisAlignment:

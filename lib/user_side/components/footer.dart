@@ -16,18 +16,18 @@ class Footer extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image(
-                image: AssetImage('assets/images/twitter.png'),
+                image: const AssetImage('assets/images/twitter.png'),
                 height: 20,
                 width: 20,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
               Image(
-                image: AssetImage('assets/images/instagram1.png'),
+                image: const AssetImage('assets/images/instagram1.png'),
                 height: 20,
                 width: 20,
                 color: Theme.of(context).colorScheme.inversePrimary,

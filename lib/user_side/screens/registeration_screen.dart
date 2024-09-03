@@ -128,7 +128,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 60),
+                  padding: const EdgeInsets.only(top: 60),
                   child: Text(
                     welcome,
                     style: TextStyle(
@@ -194,7 +194,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                           obscureText: false,
                           keyboardType: TextInputType.text,
                         ),
-                        Gap(20),
+                        const Gap(20),
                         Row(
                           children: [
                             Text(
@@ -220,7 +220,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        Gap(20),
+                        const Gap(20),
                         Row(
                           children: [
                             Text(
@@ -263,7 +263,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                     ),
                   ),
                 ),
-                Gap(20),
+                const Gap(20),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(

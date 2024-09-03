@@ -88,8 +88,8 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: myAppbar(),
-      drawer: MyTabbedDrawer(),
+      appBar: const myAppbar(),
+      drawer: const MyTabbedDrawer(),
       body: Center(
         child: Column(
           children: [
@@ -97,7 +97,7 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 children: [
-                  Gap(40),
+                  const Gap(40),
                   TextWidget(
                     size: 24,
                     text: 'ADD SHIPPING ADDRESS',
@@ -110,7 +110,8 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
                       lineColor: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
-                  Gap(20), // Add some spacing between the title and the form
+                  const Gap(20),
+                  // Add some spacing between the title and the form
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -118,12 +119,12 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
                         controller: _addressController,
                         hintText: 'Address',
                       ),
-                      Gap(20),
+                      const Gap(20),
                       CustomTextField2(
                         controller: _cityController,
                         hintText: 'City',
                       ),
-                      Gap(20),
+                      const Gap(20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -132,7 +133,7 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
                             controller: _stateController,
                             hintText: 'State',
                           )),
-                          Gap(10),
+                          const Gap(10),
                           Expanded(
                               child: CustomTextField2(
                             controller: _zipController,
@@ -146,7 +147,7 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
                 ],
               ),
             ),
-            Spacer(), // Pushes the RandomGestureDetector to the bottom
+            const Spacer(), // Pushes the RandomGestureDetector to the bottom
             RandomGestureDetector(
               onTap: () {
                 addAddressToUser(

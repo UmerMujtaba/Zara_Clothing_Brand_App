@@ -36,7 +36,7 @@ void showPaymentSuccessDialog(BuildContext context) {
               const SizedBox(height: 10),
 
               // Payment Success Heading
-              Text(
+              const Text(
                 'PAYMENT SUCCESS',
                 style: TextStyle(
                     fontSize: 22,
@@ -46,7 +46,7 @@ void showPaymentSuccessDialog(BuildContext context) {
               const SizedBox(height: 20),
 
               // Tick Icon
-              Icon(
+              const Icon(
                 Icons.check_circle,
                 color: Colors.green,
                 size: 60,
@@ -54,7 +54,7 @@ void showPaymentSuccessDialog(BuildContext context) {
               const SizedBox(height: 20),
 
               // Payment Done Message
-              Text(
+              const Text(
                 'Your payment has been done',
                 style: TextStyle(fontSize: 18, fontFamily: 'TenorSans'),
               ),
@@ -63,13 +63,13 @@ void showPaymentSuccessDialog(BuildContext context) {
               // Payment ID
               Text(
                 'Payment ID: $paymentId',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 16, color: Colors.grey, fontFamily: 'TenorSans'),
               ),
               const SizedBox(height: 20),
 
               // Rate Your Purchase Heading
-              Text(
+              const Text(
                 'Rate your purchase',
                 style: TextStyle(
                     fontSize: 18,
@@ -79,7 +79,7 @@ void showPaymentSuccessDialog(BuildContext context) {
               const SizedBox(height: 10),
 
               // Smiley Icons
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Icon(Icons.sentiment_very_dissatisfied, size: 36),
@@ -102,7 +102,7 @@ void showPaymentSuccessDialog(BuildContext context) {
                         MaterialPageRoute(builder: (context) => MyHomePage()),
                       ); // Go back to home
                     },
-                    child: Text(
+                    child: const Text(
                       'Submit',
                       style: TextStyle(fontFamily: 'TenorSans'),
                     ),
@@ -111,13 +111,13 @@ void showPaymentSuccessDialog(BuildContext context) {
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
                     },
-                    child: Text(
-                      'Back to Home',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Theme.of(context).colorScheme.tertiary),
+                    child: const Text(
+                      'Back to Home',
+                      style: TextStyle(fontFamily: 'TenorSans'),
+                    ),
                   ),
                 ],
               ),

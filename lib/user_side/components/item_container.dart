@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../model/cart.dart';
 import '../../model/product.dart';
 import '../screens/product_page.dart';
 
 class ItemContainer extends ConsumerWidget {
   final Product item;
 
-  const ItemContainer({Key? key, required this.item}) : super(key: key);
+  const ItemContainer({super.key, required this.item});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,7 +57,7 @@ class ItemContainer extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 'Rs ${item.price.toString()}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.orangeAccent,
                   fontSize: 14,
                   fontFamily: 'TenorSans',

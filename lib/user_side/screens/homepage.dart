@@ -22,7 +22,7 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: myAppbar(),
+      appBar: const myAppbar(),
       body: Stack(
         children: <Widget>[
           SizedBox(
@@ -35,7 +35,7 @@ class MyHomePage extends ConsumerWidget {
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: Opacity(
                 opacity: 0.7,
                 child: TextWidget(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
-
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
@@ -13,7 +11,7 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
 
   const CustomTextField(
-      {Key? key,
+      {super.key,
       required this.controller,
       this.hintText,
       this.prefixIcon,
@@ -21,8 +19,7 @@ class CustomTextField extends StatelessWidget {
       this.obscureText = false,
       this.suffixIcon, // Default value is false
       this.readOnly = false,
-      this.textCapitalization = TextCapitalization.none})
-      : super(key: key);
+      this.textCapitalization = TextCapitalization.none});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +73,7 @@ class CustomTextField2 extends StatelessWidget {
   final TextCapitalization? textCapitalization;
 
   const CustomTextField2(
-      {Key? key,
+      {super.key,
       required this.controller,
       this.hintText,
       this.prefixIcon,
@@ -84,8 +81,7 @@ class CustomTextField2 extends StatelessWidget {
       this.obscureText = false,
       this.suffixIcon, // Default value is false
       this.readOnly = false,
-      this.textCapitalization = TextCapitalization.none})
-      : super(key: key);
+      this.textCapitalization = TextCapitalization.none});
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +97,8 @@ class CustomTextField2 extends StatelessWidget {
           fillColor: Theme.of(context).colorScheme.inversePrimary,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
-          border: UnderlineInputBorder(
-            borderSide: const BorderSide(color: Colors.white, width: 1.0),
+          border: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.0),
             //borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: UnderlineInputBorder(
@@ -111,8 +107,8 @@ class CustomTextField2 extends StatelessWidget {
                 width: 1.0),
             //borderRadius: BorderRadius.circular(10.0),
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueGrey, width: 1.0),
             //borderRadius: BorderRadius.circular(10.0),
           ),
           hintText: hintText,

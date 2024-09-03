@@ -146,10 +146,11 @@ class MyTabbedDrawer extends StatelessWidget {
               fontFamily: 'TenorSans',
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
+            // ignore: prefer_const_literals_to_create_immutables
             tabs: [
-              Tab(text: 'WOMEN'),
-              Tab(text: 'MAN'),
-              Tab(text: 'KIDS'),
+              const Tab(text: 'WOMEN'),
+              const Tab(text: 'MAN'),
+              const Tab(text: 'KIDS'),
             ],
           ),
         ),

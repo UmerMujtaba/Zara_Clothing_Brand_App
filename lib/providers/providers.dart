@@ -6,9 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../classes/classes.dart';
-import '../model/cart.dart';
 import '../model/product.dart';
 import '../model/user.dart';
 import '../web_admin_panel/panels_scaffolds/desktop_scaffold.dart';

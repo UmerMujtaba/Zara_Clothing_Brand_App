@@ -6,13 +6,10 @@ import 'package:zara/user_side/components/constants.dart';
 import 'package:zara/user_side/components/drawer.dart';
 import 'package:zara/user_side/components/textss.dart';
 import 'package:zara/user_side/screens/new_arrival.dart';
-import 'package:zara/user_side/screens/payment_screen.dart';
-
 import '../../model/cart.dart';
 import '../components/gesture_detector.dart';
 import '../components/cart_tile.dart';
 import '../components/line.dart';
-import '../components/toasts.dart';
 import 'check_out_screen.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -25,7 +22,7 @@ class CartScreen extends ConsumerWidget {
         .watch(cartProvider.notifier.select((notifier) => notifier.totalPrice));
 
     return Scaffold(
-      appBar: myAppbar(),
+      appBar: const myAppbar(),
       drawer: const MyTabbedDrawer(),
       body: Column(
         children: [

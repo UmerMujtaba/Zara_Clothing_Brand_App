@@ -11,14 +11,11 @@ import 'package:zara/model/card.dart';
 import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/drawer.dart';
 import '../../model/cart.dart';
-import '../../model/encryption.dart';
 import '../../providers/providers.dart';
 import '../components/button.dart';
-import '../components/constants.dart';
 import '../components/line.dart';
 import '../components/my_receipt.dart';
 import '../components/textss.dart';
-import 'check_out_screen.dart';
 import 'delivery_progress_screen.dart';
 
 class PaymentPage extends ConsumerStatefulWidget {
@@ -175,11 +172,11 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: myAppbar(),
-        drawer: MyTabbedDrawer(),
+        appBar: const myAppbar(),
+        drawer: const MyTabbedDrawer(),
         body: Column(
           children: [
-            Gap(20),
+            const Gap(20),
             TextWidget(
               size: 24,
               text: 'PAYMENT METHOD',
@@ -192,7 +189,7 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                 lineColor: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
-            Gap(20),
+            const Gap(20),
             CreditCardWidget(
               cardNumber: cardNumber,
               expiryDate: expiryDate,

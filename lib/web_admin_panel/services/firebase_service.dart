@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../model/blog.dart';
 import '../../model/product.dart';
-import '../../model/user.dart';
-import 'package:http/http.dart' as http;
 
 Future<void> addProduct(String collectionName, Product product) async {
   dynamic res = await FirebaseFirestore.instance

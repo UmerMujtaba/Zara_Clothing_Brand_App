@@ -5,7 +5,7 @@ class RandomGestureDetector extends StatelessWidget {
   final IconData? icon;
   final Function()? onTap;
 
-  RandomGestureDetector({
+  const RandomGestureDetector({
     super.key,
     this.name,
     this.icon,
@@ -22,7 +22,7 @@ class RandomGestureDetector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Icon(
                   icon,
                   color: Theme.of(context).colorScheme.inversePrimary,
@@ -48,7 +48,7 @@ class CheckOutGestureDetector extends StatelessWidget {
   final List<String>? options;
   final ValueChanged<String?>? onOptionChanged;
 
-  CheckOutGestureDetector({
+  const CheckOutGestureDetector({
     super.key,
     this.name,
     this.icon,
@@ -79,7 +79,7 @@ class CheckOutGestureDetector extends StatelessWidget {
                   )),
             ),
             Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: DropdownButton<String>(
                 value: selectedOption,
                 icon: Icon(
@@ -105,7 +105,7 @@ class AddAddressGestureDetector extends StatelessWidget {
   final IconData? icon;
   final Function()? onTap;
 
-  AddAddressGestureDetector({
+  const AddAddressGestureDetector({
     super.key,
     this.name,
     this.icon,
@@ -119,7 +119,7 @@ class AddAddressGestureDetector extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-            padding: EdgeInsets.all(40),
+            padding: const EdgeInsets.all(40),
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10)),

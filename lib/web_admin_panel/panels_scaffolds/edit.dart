@@ -5,11 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class EditProductScreen extends StatelessWidget {
   final Product product;
 
-  EditProductScreen({required this.product});
+  const EditProductScreen({super.key, required this.product});
 
   Future<void> saveProduct(Product product) async {
     try {
-      DocumentReference productRef = FirebaseFirestore.instance.collection('products').doc(product.id);
+      DocumentReference productRef =
+          FirebaseFirestore.instance.collection('products').doc(product.id);
 
       await productRef.update({
         'name': product.name,
@@ -26,10 +27,14 @@ class EditProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController(text: product.name);
-    TextEditingController priceController = TextEditingController(text: product.price.toString());
-    TextEditingController tagController = TextEditingController(text: product.tag);
-    TextEditingController descriptionController = TextEditingController(text: product.description);
+    TextEditingController nameController =
+        TextEditingController(text: product.name);
+    TextEditingController priceController =
+        TextEditingController(text: product.price.toString());
+    TextEditingController tagController =
+        TextEditingController(text: product.tag);
+    TextEditingController descriptionController =
+        TextEditingController(text: product.description);
 
     return Scaffold(
       appBar: AppBar(

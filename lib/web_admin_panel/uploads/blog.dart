@@ -4,13 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+
 // Import for Uint8List
 import 'dart:io';
 
 import '../../model/blog.dart';
 import '../services/firebase_service.dart';
-
-
 
 class BlogUpload extends StatefulWidget {
   final String itemName;
@@ -35,7 +34,7 @@ class _BlogUploadState extends State<BlogUpload> {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? pickedImage =
-      await picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
         if (kIsWeb) {
           // For web, read image as bytes
@@ -103,7 +102,6 @@ class _BlogUploadState extends State<BlogUpload> {
         setState(() {
           _image = null;
           _imageBytes = null;
-
         });
       } catch (e) {
         print('Error: $e'); // Log the error
@@ -134,16 +132,19 @@ class _BlogUploadState extends State<BlogUpload> {
   @override
   Widget build(BuildContext context) {
     return Column(
-
       children: [
-        const Text('A D D B L O G',style: TextStyle(fontFamily: 'TenorSans',fontSize: 30),),
-        const SizedBox(height: 30,),
+        const Text(
+          'A D D B L O G',
+          style: TextStyle(fontFamily: 'TenorSans', fontSize: 30),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
         Expanded(
           child: Form(
             key: _formKey,
             child: ListView(
               children: [
-
                 TextFormField(
                   controller: _tagController,
                   decoration: const InputDecoration(labelText: 'Tag'),
@@ -170,34 +171,42 @@ class _BlogUploadState extends State<BlogUpload> {
                   children: [
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all<Color>(Colors.blue), // Set background color
-                        foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Set text color
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.blue),
+                        // Set background color
+                        foregroundColor:
+                            WidgetStateProperty.all<Color>(Colors.white),
+                        // Set text color
                         padding: WidgetStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                        ), // Set padding
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          const EdgeInsets.symmetric(
+                              horizontal: 24.0, vertical: 12.0),
+                        ),
+                        // Set padding
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0), // Set border radius
+                            borderRadius:
+                                BorderRadius.circular(8.0), // Set border radius
                           ),
                         ),
-                        elevation: WidgetStateProperty.all<double>(4.0), // Set elevation
+                        elevation: WidgetStateProperty.all<double>(
+                            4.0), // Set elevation
                       ),
                       onPressed: _isSubmitting ? null : _submitForm,
                       child: _isSubmitting
                           ? const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      )
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            )
                           : const Text(
-                        'Submit',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                              'Submit',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ],
                 )
-
               ],
             ),
           ),

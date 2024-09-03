@@ -95,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: myAppbar(),
+      appBar: const myAppbar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 0, 30, 25),
         child: Center(
@@ -131,7 +131,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ],
                 ),
-                Gap(20),
+                const Gap(20),
                 CustomTextField(
                   controller: _emailController,
                   hintText: hintText,

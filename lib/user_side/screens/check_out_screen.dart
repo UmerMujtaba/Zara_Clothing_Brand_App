@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -8,10 +6,7 @@ import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/textss.dart';
 import 'package:zara/user_side/screens/payment_screen.dart';
 
-import '../../model/user.dart';
-
 import '../../providers/providers.dart';
-import '../../web_admin_panel/constants.dart';
 import '../components/constants.dart';
 import '../components/gesture_detector.dart';
 import '../components/cart_tile.dart';
@@ -269,7 +264,7 @@ class _cart_items_case_checkoutState extends State<cart_items_case_checkout> {
                   widget.onProceed();
                 }
               },
-              child: RandomGestureDetector(
+              child: const RandomGestureDetector(
                 icon: Icons.shopping_bag_outlined,
                 name: 'CHECKOUT',
               ),
@@ -425,7 +420,7 @@ class _ShippingAddressCaseCheckoutState
                             ],
                           ),
                           const Gap(20),
-                          CheckOutGestureDetector(
+                          const CheckOutGestureDetector(
                             name: 'Pickup at store',
                             icon: Icons.keyboard_arrow_down_outlined,
                           ),

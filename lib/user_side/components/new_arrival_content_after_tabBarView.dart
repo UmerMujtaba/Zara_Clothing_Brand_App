@@ -20,6 +20,7 @@ class New_arrival_content_after_tabBarView extends StatelessWidget {
         ),
         const SizedBox(height: 10.0),
         Image(
+          // ignore: prefer_const_constructors
           image: AssetImage('assets/images/instagram.png'),
           height: 30,
           width: 30,

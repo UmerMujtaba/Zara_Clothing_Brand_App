@@ -62,7 +62,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: themeData,
       home: kIsWeb
-          ? AdminPanel(
+          ? const AdminPanel(
               mobileScaffold: MobileScaffold(),
               tabletScaffold: TabletScaffold(),
               desktopScaffold: DesktopScaffold(),
@@ -83,7 +83,7 @@ class _MyAppState extends ConsumerState<MyApp> {
                   return MyHomePage(); // Navigate to home page
                 } else {
                   // User is not logged in
-                  return RegistrationScreen(); // Show registration screen
+                  return const RegistrationScreen(); // Show registration screen
                 }
               },
             ),

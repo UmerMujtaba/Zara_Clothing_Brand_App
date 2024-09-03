@@ -2,17 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../providers/providers.dart';
-import '../components/constants.dart';
 import '../components/footer.dart';
-import '../components/footer_row.dart';
-import '../components/hash_tags_container.dart';
-import '../components/image_container.dart';
 import '../components/item_container.dart';
-import '../components/line.dart';
 import '../components/new_arrival_content_after_tabBarView.dart';
-import '../components/textss.dart';
 import 'first_tab_content_after_grid.dart';
 
 class SecondAndThirdTab extends ConsumerWidget {

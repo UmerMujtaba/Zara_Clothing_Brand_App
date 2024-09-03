@@ -12,7 +12,7 @@ import '../components/line.dart';
 import '../components/textss.dart';
 
 class BlogList extends StatefulWidget {
-  BlogList({super.key});
+  const BlogList({super.key});
 
   @override
   State<BlogList> createState() => _BlogListState();

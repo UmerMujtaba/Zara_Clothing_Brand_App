@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../user_side/components/app_bar.dart';
 import '../constants.dart';
 import '../uploads/blog.dart';
 import '../uploads/form.dart';
@@ -18,6 +17,7 @@ class TabletScaffold extends StatefulWidget {
 class _TabletScaffoldState extends State<TabletScaffold> {
   AdminPanelScreen _currentScreen = AdminPanelScreen.welcome;
   String _selectedItemName = '';
+
   void _selectScreen(AdminPanelScreen screen, [String itemName = '']) {
     setState(() {
       _currentScreen = screen;
@@ -40,7 +40,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
 
     for (String collection in collections) {
       QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection(collection).get();
+          await FirebaseFirestore.instance.collection(collection).get();
       collectionCounts[collection] = querySnapshot.size;
     }
 
@@ -55,7 +55,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
       case AdminPanelScreen.blogUpload:
         return BlogUpload(itemName: _selectedItemName);
 
-    // New case for total data screen
+      // New case for total data screen
       case AdminPanelScreen.totalDataScreen: // New case for total data screen
         return FutureBuilder<Map<String, int>>(
           future: _fetchCollectionCounts(),
@@ -70,23 +70,22 @@ class _TabletScaffoldState extends State<TabletScaffold> {
 
               // Function to assign different colors
 
-
-              List<PieChartSectionData> pieSections = collectionCounts.entries.map((entry) {
+              List<PieChartSectionData> pieSections =
+                  collectionCounts.entries.map((entry) {
                 int index = collectionCounts.keys.toList().indexOf(entry.key);
                 final isHovered = index == _hoveredIndex;
-                final double radius =  60;
-                final double fontSize = 13;
+                const double radius = 60;
+                const double fontSize = 13;
 
                 return PieChartSectionData(
                   color: _getColor(index),
                   value: entry.value.toDouble(),
                   title: '${entry.key}\n${entry.value}',
                   radius: radius,
-                  titleStyle: TextStyle(
+                  titleStyle: const TextStyle(
                     fontFamily: 'TenorSans',
                     fontSize: fontSize,
                     color: Colors.black,
-
                   ),
                 );
               }).toList();
@@ -133,17 +132,21 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: collectionCounts.length,
                               itemBuilder: (context, index) {
-                                String collectionName = collectionCounts.keys.elementAt(index);
-                                int itemCount = collectionCounts.values.elementAt(index);
+                                String collectionName =
+                                    collectionCounts.keys.elementAt(index);
+                                int itemCount =
+                                    collectionCounts.values.elementAt(index);
                                 return Container(
                                   padding: const EdgeInsets.all(8.0),
-                                  margin: const EdgeInsets.symmetric(vertical: 4.0),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 4.0),
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         collectionName,
@@ -178,9 +181,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
           },
         );
 
-
-
-
       case AdminPanelScreen.welcome:
       default:
         return const Center(
@@ -192,7 +192,6 @@ class _TabletScaffoldState extends State<TabletScaffold> {
         );
     }
   }
-
 
   Color _getColor(int index) {
     List<Color> colors = [
@@ -208,178 +207,166 @@ class _TabletScaffoldState extends State<TabletScaffold> {
     return colors[index % colors.length];
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: myDefaultBackground,
       //appBar: myAppbar(),
       drawer: myDrawer,
-     body: Padding(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: _buildCurrentScreen(),
       ),
     );
   }
 
-
-
-
-
   Widget get myDrawer => Drawer(
-    backgroundColor: Colors.grey.shade500,
-    child: SingleChildScrollView(
-      child: Column(
-        children: [
-          const DrawerHeader(
-              child: Image(image: AssetImage('assets/images/logo.png'))),
-          ListTile(
-            title: const Text('Welcome'),
-            onTap: () => _selectScreen(AdminPanelScreen.welcome),
-          ),
-          ExpansionTile(
-            leading: const Icon(Icons.add_box_outlined),
-            title: const Text(
-              'A D D',
-              style: TextStyle(fontFamily: 'TenorSans'),
-            ),
+        backgroundColor: Colors.grey.shade500,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
+              const DrawerHeader(
+                  child: Image(image: AssetImage('assets/images/logo.png'))),
+              ListTile(
+                title: const Text('Welcome'),
+                onTap: () => _selectScreen(AdminPanelScreen.welcome),
+              ),
               ExpansionTile(
+                leading: const Icon(Icons.add_box_outlined),
                 title: const Text(
-                  'B A G',
+                  'A D D',
                   style: TextStyle(fontFamily: 'TenorSans'),
                 ),
                 children: [
-                  ListTile(
+                  ExpansionTile(
                     title: const Text(
-                      'L E A T H E R',
+                      'B A G',
                       style: TextStyle(fontFamily: 'TenorSans'),
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      _selectScreen(
-                          AdminPanelScreen.formUpload, 'Leather');
-                    }
+                    children: [
+                      ListTile(
+                          title: const Text(
+                            'L E A T H E R',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(
+                                AdminPanelScreen.formUpload, 'Leather');
+                          }),
+                      ListTile(
+                          title: const Text(
+                            'F A N C Y',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(AdminPanelScreen.formUpload, 'Fancy');
+                          }),
+                    ],
                   ),
-                  ListTile(
+                  ExpansionTile(
                     title: const Text(
-                      'F A N C Y',
+                      'A C C E S S O R I E S',
                       style: TextStyle(fontFamily: 'TenorSans'),
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      _selectScreen(AdminPanelScreen.formUpload, 'Fancy');
-                    }
+                    children: [
+                      ListTile(
+                          title: const Text(
+                            'G L A S S E S',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(
+                                AdminPanelScreen.formUpload, 'Glasses');
+                          }),
+                      ListTile(
+                          title: const Text(
+                            'H A T',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(AdminPanelScreen.formUpload, 'Hat');
+                          }),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title: const Text(
+                      'A P P A R E L',
+                      style: TextStyle(fontFamily: 'TenorSans'),
+                    ),
+                    children: [
+                      ListTile(
+                          title: const Text(
+                            'O U T E R',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(AdminPanelScreen.formUpload, 'Outer');
+                          }),
+                      ListTile(
+                          title: const Text(
+                            'T S H I R T S',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(
+                                AdminPanelScreen.formUpload, 'Tshirts');
+                          }),
+                      ListTile(
+                          title: const Text(
+                            'D R E S S',
+                            style: TextStyle(fontFamily: 'TenorSans'),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectScreen(AdminPanelScreen.formUpload, 'Dress');
+                          })
+                    ],
                   ),
                 ],
               ),
-              ExpansionTile(
-                title: const Text(
-                  'A C C E S S O R I E S',
-                  style: TextStyle(fontFamily: 'TenorSans'),
-                ),
-                children: [
-                  ListTile(
-                    title: const Text(
-                      'G L A S S E S',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      _selectScreen(
-                          AdminPanelScreen.formUpload, 'Glasses');
-                    }
+              ListTile(
+                  leading: const Icon(Icons.view_in_ar),
+                  title: const Text(
+                    'V I E W',
+                    style: TextStyle(fontFamily: 'TenorSans'),
                   ),
-                  ListTile(
-                    title: const Text(
-                      'H A T',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                        _selectScreen(AdminPanelScreen.formUpload, 'Hat');
-                    }
-                  ),
-                ],
-              ),
-              ExpansionTile(
-                title: const Text(
-                  'A P P A R E L',
-                  style: TextStyle(fontFamily: 'TenorSans'),
-                ),
-                children: [
-                  ListTile(
-                    title: const Text(
-                      'O U T E R',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      _selectScreen(AdminPanelScreen.formUpload, 'Outer');
-                    }
-                  ),
-                  ListTile(
-                    title: const Text(
-                      'T S H I R T S',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      _selectScreen(
-                          AdminPanelScreen.formUpload, 'Tshirts');
-                    }
-                  ),
-                  ListTile(
-                    title: const Text(
-                      'D R E S S',
-                      style: TextStyle(fontFamily: 'TenorSans'),
-                    ),
-                    onTap: () {
+                  onTap: () {
                     Navigator.pop(context);
-                        _selectScreen(AdminPanelScreen.formUpload, 'Dress');
-                  })
-                ],
+                    _selectScreen(AdminPanelScreen.totalDataScreen);
+                  } // Navigate to totalDataScreen
+                  ),
+              const ListTile(
+                leading: Icon(Icons.update),
+                title: Text(
+                  'U P D A T E',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
+              ),
+              ListTile(
+                  leading: const Icon(Icons.post_add_outlined),
+                  title: const Text(
+                    'A D D B L O G',
+                    style: TextStyle(fontFamily: 'TenorSans'),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _selectScreen(AdminPanelScreen.blogUpload, 'Blog');
+                  }),
+              const ListTile(
+                leading: Icon(Icons.logout),
+                title: Text(
+                  'L O G O U T',
+                  style: TextStyle(fontFamily: 'TenorSans'),
+                ),
               ),
             ],
           ),
-          ListTile(
-            leading: const Icon(Icons.view_in_ar),
-            title: const Text(
-              'V I E W',
-              style: TextStyle(fontFamily: 'TenorSans'),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              _selectScreen(AdminPanelScreen
-                  .totalDataScreen);
-            }// Navigate to totalDataScreen
-          ),
-          const ListTile(
-            leading: Icon(Icons.update),
-            title: Text(
-              'U P D A T E',
-              style: TextStyle(fontFamily: 'TenorSans'),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.post_add_outlined),
-            title: const Text(
-              'A D D B L O G',
-              style: TextStyle(fontFamily: 'TenorSans'),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              _selectScreen(AdminPanelScreen.blogUpload, 'Blog');}
-          ),
-          const ListTile(
-            leading: Icon(Icons.logout),
-            title: Text(
-              'L O G O U T',
-              style: TextStyle(fontFamily: 'TenorSans'),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 }

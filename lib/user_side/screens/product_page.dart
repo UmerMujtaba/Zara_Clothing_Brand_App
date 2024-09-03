@@ -157,7 +157,7 @@ class ProductPage extends ConsumerWidget {
             onTap: () {
               _addToCart();
             },
-            child: RandomGestureDetector(
+            child: const RandomGestureDetector(
               icon: Icons.add,
               name: 'ADD TO BASKET',
             ),
@@ -217,12 +217,12 @@ class ProductPage extends ConsumerWidget {
           Row(
             children: [
               Image(
-                image: AssetImage('assets/icons/not-bleach.png'),
+                image: const AssetImage('assets/icons/not-bleach.png'),
                 width: 18,
                 height: 18,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 doNotBleach,
                 style: TextStyle(
@@ -237,12 +237,12 @@ class ProductPage extends ConsumerWidget {
           Row(
             children: [
               Image(
-                image: AssetImage('assets/icons/quick-dry.png'),
+                image: const AssetImage('assets/icons/quick-dry.png'),
                 width: 18,
                 height: 18,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 doNotTumbleDry,
                 style: TextStyle(
@@ -257,12 +257,12 @@ class ProductPage extends ConsumerWidget {
           Row(
             children: [
               Image(
-                image: AssetImage('assets/icons/towels.png'),
+                image: const AssetImage('assets/icons/towels.png'),
                 width: 18,
                 height: 18,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 dryCleanWith,
                 style: TextStyle(
@@ -277,12 +277,12 @@ class ProductPage extends ConsumerWidget {
           Row(
             children: [
               Image(
-                image: AssetImage('assets/icons/ironing.png'),
+                image: const AssetImage('assets/icons/ironing.png'),
                 width: 18,
                 height: 18,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 ironAtMax,
                 style: TextStyle(
@@ -303,7 +303,7 @@ class ProductPage extends ConsumerWidget {
                     Icons.local_shipping_outlined,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     freeFlatRateShipping,
                     style: TextStyle(
@@ -324,14 +324,14 @@ class ProductPage extends ConsumerWidget {
             ],
           ),
           if (_isExpanded1)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                deliveryTimeDate,
-                style: TextStyle(color: Colors.grey, fontFamily: 'TenorSans'),
-              ),
-            ),
-          const SizedBox(height: 5),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(vertical: 8.0),
+            //   child: Text(
+            //     deliveryTimeDate,
+            //     style: TextStyle(color: Colors.grey, fontFamily: 'TenorSans'),
+            //   ),
+            // ),
+            const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -388,14 +388,14 @@ class ProductPage extends ConsumerWidget {
             ],
           ),
           if (_isExpanded3)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                '1 week',
-                style: TextStyle(color: Colors.grey, fontFamily: 'TenorSans'),
-              ),
-            ),
-          const SizedBox(height: 20),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(vertical: 8.0),
+            //   child: Text(
+            //     '1 week',
+            //     style: TextStyle(color: Colors.grey, fontFamily: 'TenorSans'),
+            //   ),
+            // ),
+            const SizedBox(height: 20),
           const Footer(),
         ]),
       )),

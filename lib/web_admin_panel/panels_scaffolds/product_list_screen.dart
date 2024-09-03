@@ -7,13 +7,14 @@ class ProductDetailScreen extends StatefulWidget {
   final Map<String, dynamic> productData;
 
   const ProductDetailScreen({
-    Key? key,
+    super.key,
     required this.collectionName,
     required this.productId,
     required this.productData,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
 

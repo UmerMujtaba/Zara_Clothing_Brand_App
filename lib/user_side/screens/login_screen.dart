@@ -35,8 +35,8 @@ final _auth = FirebaseAuth.instance;
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   bool _obscureText = true;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   Future<void> login() async {
     setState(() {
@@ -288,14 +288,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.blueGrey,
                 fontFamily: 'TenorSans',
               ),
-              Gap(20),
+              const Gap(20),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          RegistrationScreen(), // Replace with your home screen
+                          const RegistrationScreen(), // Replace with your home screen
                     ),
                   );
                 },

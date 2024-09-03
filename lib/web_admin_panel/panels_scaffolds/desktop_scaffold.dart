@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../user_side/components/app_bar.dart';
 import '../constants.dart';
 import '../uploads/blog.dart';
 import '../uploads/form.dart';
 import '../uploads/total_data_screen.dart';
 import '../uploads/update.dart';
 
-enum AdminPanelScreen { welcome, formUpload, blogUpload, totalDataScreen,update }
+enum AdminPanelScreen {
+  welcome,
+  formUpload,
+  blogUpload,
+  totalDataScreen,
+  update
+}
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({super.key});
@@ -20,7 +25,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   String _selectedItemName = '';
   int touchedIndex = -1;
 
-
   void _selectScreen(AdminPanelScreen screen, [String itemName = '']) {
     setState(() {
       _currentScreen = screen;
@@ -28,8 +32,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     });
     print(_selectedItemName);
   }
-
-
 
   Widget _buildCurrentScreen() {
     switch (_currentScreen) {
@@ -41,13 +43,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
       // New case for total data screen
       case AdminPanelScreen.totalDataScreen: // New case for total data screen
-        return TotalDataScreen();
+        return const TotalDataScreen();
 
       case AdminPanelScreen.update:
-      return Update();
-
-
-
+        return const Update();
 
       case AdminPanelScreen.welcome:
       default:
@@ -58,11 +57,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
             textAlign: TextAlign.center,
           ),
         );
-
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -192,14 +188,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                 onTap: () => _selectScreen(AdminPanelScreen
                     .totalDataScreen), // Navigate to totalDataScreen
               ),
-               ListTile(
+              ListTile(
                 leading: const Icon(Icons.update),
                 title: const Text(
                   'U P D A T E',
                   style: TextStyle(fontFamily: 'TenorSans'),
                 ),
-                onTap: () => _selectScreen(AdminPanelScreen
-                    .update),
+                onTap: () => _selectScreen(AdminPanelScreen.update),
               ),
               ListTile(
                 leading: const Icon(Icons.post_add_outlined),

@@ -3,11 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:zara/user_side/components/app_bar.dart';
 import 'package:zara/user_side/components/drawer.dart';
-import 'package:zara/user_side/components/textss.dart';
 import '../../providers/providers.dart';
 import '../components/gesture_detector.dart';
 import 'add_shipping_address.dart';
-import 'check_out_screen.dart';
 
 class ShowAddressScreen extends ConsumerStatefulWidget {
   const ShowAddressScreen({super.key});
@@ -24,8 +22,8 @@ class _ShowAddressScreenState extends ConsumerState<ShowAddressScreen> {
     final userAsyncValue = ref.watch(userProvider);
 
     return Scaffold(
-      appBar: myAppbar(),
-      drawer: MyTabbedDrawer(),
+      appBar: const myAppbar(),
+      drawer: const MyTabbedDrawer(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: userAsyncValue.when(
         data: (user) {
@@ -45,7 +43,7 @@ class _ShowAddressScreenState extends ConsumerState<ShowAddressScreen> {
                     );
                   },
                 ),
-                Gap(30),
+                const Gap(30),
                 Expanded(
                   child: ListView.builder(
                     itemCount: addresses.length,
